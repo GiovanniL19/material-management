@@ -2,6 +2,8 @@
 
 $menuColour: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
 $secondColour: #15bebf;
+$red: #bf1537;
+$green: #15bf57;
 
 body{
   background:#f7f7f7;
@@ -9,6 +11,19 @@ body{
   -moz-transition: ease-in-out 1s;
   -ms-transition: ease-in-out 1s;
   -o-transition: ease-in-out 1s;
+}
+
+.alert-danger {
+  background-color: $red;
+  color: #ffffff;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  text-align:center;
 }
 
 button{
@@ -39,7 +54,8 @@ a{
   .side-menu {
     background: $menuColour;
     height: 100vh;
-    width: 100%;
+    width: 16.5%;
+    position:fixed;
     color: white;
     padding-top: 1em;
     text-align: left;
@@ -89,6 +105,7 @@ a{
     border-radius:0;
     border:none;
     color:white;
+    text-transform: uppercase;
   }
   .order-btn{
     height:4em;
@@ -103,12 +120,23 @@ a{
   .rowCard{
     color:#444;
     font-size:0.9em;
-    padding:1em 0;
+    padding:1em;
+    margin:15px 0;
+    border: 1px solid #f1f1f1 !important;
     .details{
       padding:1em 0;
       margin:0;
     }
-    border-bottom:1px solid #888;
+    .options{
+      padding:1em 0;
+      a{
+        padding:1em;
+        &:last-child{
+          padding-right:0;
+          color:$red;
+        }
+      }
+    }
     &:last-child{
       border:none;
     }
@@ -141,6 +169,17 @@ a{
         border-radius:0;
         border:none;
       }
+    }
+  }
+  form{
+    .green > .form-control{
+      border-color:$green !important;
+    }
+    .red > .form-control{
+      border-color:$red !important;
+    }
+    .form-control{
+      border:5px solid #f9f9f9 !important;
     }
   }
 }

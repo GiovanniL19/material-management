@@ -10,4 +10,5 @@ const {
 export default Model.extend({
   type: DS.attr("string", {defaultValue: 'Item'}),
   rev: DS.attr("string"),
+  barcode: DS.attr("string")
 });

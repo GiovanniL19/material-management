@@ -11,5 +11,6 @@ const {
 export default Model.extend({
   type: DS.attr("string", {defaultValue: 'Transaction'}),
   rev: DS.attr("string"),
-  lines: MF.fragmentArray('line', {async: true})
+  lines: MF.fragmentArray('line', {async: true}),
+  transactionID: DS.attr("string")
 });

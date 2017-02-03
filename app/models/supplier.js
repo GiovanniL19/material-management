@@ -17,6 +17,6 @@ export default Model.extend({
   tradingAddress: DS.attr("string"),
   returnsAddress: DS.attr("string"),
   contact: DS.attr("string"),
-  status: DS.attr("string"),
+  status: DS.attr("string", {defaultValue: 'OK'}),
   transactionHistory: DS.hasMany("transactions", {async: true, defaultValue: []})
 });
