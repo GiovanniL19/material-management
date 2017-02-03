@@ -19,6 +19,10 @@ export default Ember.Controller.extend({
   },
 
   actions:{
+    updateStatus: function(status){
+      this.set("supplier.status", status);
+      this.get("supplier").save();
+    },
     new: function(){
       this.set("supplier", this.store.createRecord("supplier"));
       this.set("view", false);

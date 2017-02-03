@@ -36,7 +36,11 @@
                 <strong>{{supplier.status}}</strong>
               </div>
               <div class="col-sm-3 options text-right">
-                <a>{{fa-icon "send"}}</a>
+                {{#unless supplier.bard}}
+                  {{#unless supplier.onHold}}
+                    <a>{{fa-icon "send"}}</a>
+                  {{/unless}}
+                {{/unless}}
                 <a {{action "select" supplier}}>{{fa-icon "pencil"}}</a>
                 <a {{action "delete" supplier}}>{{fa-icon "times"}}</a>
               </div>
@@ -63,6 +67,11 @@
             Trading Address: <strong>{{supplier.tradingAddress}}</strong><br>
             Returns Address: <strong>{{supplier.returnsAddress}}</strong><br>
           </p>
+          <div class="col-sm-12">
+            <button class="btn btn-default {{if supplier.isOk "selected"}}" {{action "updateStatus" "OK"}}>OK</button>
+            <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON HOLD</button>
+            <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD</button>
+          </div>
         {{else}}
           <p>
             When adding a new supplier, you need to fill in all the reqiured fields. The returns address is optional, if you leave it blank the default returns address will be the same as the trading address.

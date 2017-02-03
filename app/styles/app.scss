@@ -10,7 +10,7 @@ $red: #ff5656;
 $green: rgba(23, 179, 98, 0.37);
 $grey: rgba(255, 255, 255, 0.4);
 
-a, button, .btn{
+a, button, .btn, .form-control, .input-group-addon{
   -webkit-transition: ease 0.4s;
 }
 body{
@@ -32,7 +32,11 @@ hr{
   text-align:center;
 }
 
-button{
+button.btn.btn-default.selected {
+  background: white;
+  color: #353741;
+}
+button, .btn{
   &:hover{
     outline:0;
   }
@@ -124,6 +128,20 @@ a{
   background: white !important;
   border: none;
   margin-bottom: 1em;
+  color: $primary !important;
+
+  .form-control:focus + .input-group-addon, .form-control:active + .input-group-addon{
+    color:white !important;
+    background: $primary !important;
+  }
+
+  .form-control {
+    color: $primary !important;
+    &:focus, &:active{
+      color:white !important;
+      background: $primary !important;
+    }
+  }
 }
 .content{
   .btn{
@@ -240,6 +258,11 @@ a{
   height: 20em;
   margin: -1em;
   margin-bottom: -5em;
-
+}
+.dashboard{
+  .rowCard{
+    padding:0;
+    padding-right:1em;
+  }
 }
 

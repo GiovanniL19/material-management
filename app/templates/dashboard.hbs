@@ -1,6 +1,6 @@
 <div class="header">
 </div>
-<div class="row sections">
+<div class="row sections dashboard">
   <div class="col-sm-6">
     <div class="col-sm-12 card">
       <h5>Recent Activity</h5>
@@ -35,7 +35,11 @@
             {{supplier.name}}
           </div>
           <div class="col-sm-2 details text-right">
-            <a>{{fa-icon "send"}}</a>
+            {{#unless supplier.bard}}
+              {{#unless supplier.onHold}}
+                <a>{{fa-icon "send"}}</a>
+              {{/unless}}
+            {{/unless}}
           </div>
         </div>
       {{else}}
