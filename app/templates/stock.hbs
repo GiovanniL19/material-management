@@ -4,24 +4,24 @@
       <div class="col-sm-12 card">
         <div class="col-sm-8"><h5>Stock</h5></div>
         <div class="col-sm-4 right text-right">
-          <button class="btn btn-primary" {{action "new"}}>New</button>
+          <button class="btn btn-primary" {{action "new"}}>New Item</button>
         </div>
         <div class="col-xs-12">
           {{#if model}}
             <div class="rowCard row">
-              <div class="col-sm-3 details">
+              <div class="col-sm-4 details">
                 <strong>Item</strong>
               </div>
-              <div class="col-sm-3 details">
+              <div class="col-sm-4 details">
                 <strong>Supplier</strong>
               </div>
-              <div class="col-sm-2 details">
+              <div class="col-sm-1 details">
                 <strong>Quantity</strong>
               </div>
               <div class="col-sm-2 details text-center">
                 <strong>Group</strong>
               </div>
-              <div class="col-sm-2 options text-right">
+              <div class="col-sm-1 options text-right">
                 <strong>Options</strong>
               </div>
             </div>
@@ -29,13 +29,13 @@
 
           {{#each model as |item|}}
             <div class="rowCard row">
-              <div class="col-sm-3 details">
-                <strong>{{item.name}}</strong>
+              <div class="col-sm-4 details">
+                <strong><a {{action "select" item}}>{{item.name}}</a></strong>
               </div>
-              <div class="col-sm-3 details">
+              <div class="col-sm-4 details">
                 {{item.supplier.tradingName}}
               </div>
-              <div class="col-sm-2 details">
+              <div class="col-sm-1 details">
                 {{item.quantity}}
               </div>
               <div class="col-sm-2 details text-center">
@@ -45,8 +45,7 @@
                   N/A
                 {{/if}}
               </div>
-              <div class="col-sm-2 options text-right">
-                <a {{action "select" item}}>{{fa-icon "pencil"}}</a>
+              <div class="col-sm-1 options text-right">
                 <a {{action "delete" item}}>{{fa-icon "times"}}</a>
               </div>
             </div>

@@ -4,7 +4,7 @@
       <div class="col-sm-12 card">
         <div class="col-sm-8"><h5>Suppliers</h5></div>
         <div class="col-sm-4 right text-right">
-          <button class="btn btn-primary" {{action "new"}}>New</button>
+          <button class="btn btn-primary" {{action "new"}}>New Supplier</button>
         </div>
         <div class="col-xs-12">
           {{#if model}}
@@ -12,14 +12,17 @@
               <div class="col-sm-3 details">
                 <strong>Name</strong>
               </div>
-              <div class="col-sm-5 details">
+              <div class="col-sm-4 details">
                 <strong>Trading Name</strong>
               </div>
-              <div class="col-sm-1 details text-center">
+              <div class="col-sm-2 details">
                 <strong>Status</strong>
               </div>
-              <div class="col-sm-3 options text-right">
-                <strong>Options</strong>
+              <div class="col-sm-2 options">
+                <strong>Place Order</strong>
+              </div>
+              <div class="col-sm-1 options text-right">
+                <strong>Delete</strong>
               </div>
             </div>
           {{/if}}
@@ -27,21 +30,22 @@
           {{#each model as |supplier|}}
             <div class="rowCard row">
               <div class="col-sm-3 details">
-                <strong>{{supplier.name}}</strong>
+                <strong><a {{action "select" supplier}}>{{supplier.name}}</a></strong>
               </div>
-              <div class="col-sm-5 details">
+              <div class="col-sm-4 details">
                 {{supplier.tradingAddress}}
               </div>
-              <div class="col-sm-1 details text-center">
+              <div class="col-sm-2 details">
                 <strong>{{supplier.status}}</strong>
               </div>
-              <div class="col-sm-3 options text-right">
+              <div class="col-sm-2">
                 {{#unless supplier.bard}}
                   {{#unless supplier.onHold}}
-                    <a>{{fa-icon "send"}}</a>
+                    <button class="btn btn-primary">Order</button>
                   {{/unless}}
                 {{/unless}}
-                <a {{action "select" supplier}}>{{fa-icon "pencil"}}</a>
+              </div>
+              <div class="col-sm-1 options text-right">
                 <a {{action "delete" supplier}}>{{fa-icon "times"}}</a>
               </div>
             </div>

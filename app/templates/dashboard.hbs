@@ -31,13 +31,13 @@
       <h5>Top Suppliers</h5>
       {{#each suppliers as |supplier|}}
         <div class="rowCard row">
-          <div class="col-sm-10 details">
+          <div class="col-sm-8 details">
             {{supplier.name}}
           </div>
-          <div class="col-sm-2 details text-right">
+          <div class="col-sm-4 details text-right">
             {{#unless supplier.bard}}
               {{#unless supplier.onHold}}
-                <a>{{fa-icon "send"}}</a>
+                <button class="btn btn-primary">Place Order</button>
               {{/unless}}
             {{/unless}}
           </div>
