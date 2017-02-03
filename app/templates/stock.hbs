@@ -63,8 +63,8 @@
 {{else}}
   <div class="row sections">
     <div class="col-sm-4 hidden-xs col-md-4">
-      <div class="col-sm-8">{{#unless editMode}}<h3>New Item</h3>{{else}}<h3>{{item.name}}</h3>{{/unless}}</div>
-      <div class="col-sm-12">
+      <div class="col-sm-12 card">{{#unless editMode}}<h3>New Item</h3>{{else}}<h3>{{item.name}}</h3>{{/unless}}</div>
+      <div class="col-sm-12 card">
       {{#if editMode}}
         <p>
           Barcode: <strong>{{item.barcode}}</strong><br>
@@ -73,7 +73,7 @@
         </p>
       {{else}}
         <p>
-          In order to add an item, you need to first fill in all the information on the left. You need to provide a name, its supplier, the quantiy and minimum quantity. The group is optional. To create a group click the "Add Group" text.
+          To add an item, you need to fill in all the information on the left. You need to provide a name, its supplier, the quantiy and minimum quantity. The group is optional. To create a group click the "Add Group" text.
         </p>
       {{/if}}
       </div>

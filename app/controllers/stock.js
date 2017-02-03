@@ -24,6 +24,11 @@ export default Ember.Controller.extend({
     return barcode;
   }.property(),
 
+  selectedItem: function(item){
+    this.set("item", item);
+    this.set("editMode", true);
+    this.load();
+  },
   clear: function(){
     if(this.get("item")) {
       if (!this.get("item.id")) {
@@ -153,9 +158,7 @@ export default Ember.Controller.extend({
     },
 
     select: function(item){
-      this.set("editMode", true);
-      this.set("item", item);
-      this.load();
+      this.selectedItem(item);
     },
 
     update: function() {

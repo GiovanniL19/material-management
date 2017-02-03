@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('dashboard');
   this.route('suppliers');
   this.route('stock');
+  this.route('orders');
 });
 
 export default Router;

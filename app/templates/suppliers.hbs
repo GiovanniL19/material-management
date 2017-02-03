@@ -63,8 +63,8 @@
 {{else}}
   <div class="row sections">
     <div class="col-sm-4 hidden-xs col-md-4">
-      <div class="col-sm-8">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}</div>
-      <div class="col-sm-12">
+      <div class="col-sm-12 card">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}</div>
+      <div class="col-sm-12 card">
         {{#if editMode}}
           <p>
             Trading Name: <strong>{{supplier.tradingName}}</strong><br>

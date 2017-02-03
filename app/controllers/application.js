@@ -6,7 +6,8 @@ export default Ember.Controller.extend({
     orders: false,
     suppliers: false,
     deliveries: false,
-    stock: false
+    stock: false,
+    orders: false
   },
   message: "",
   messageObserver: function(){

@@ -116,6 +116,9 @@ a{
             text-decoration: none;
             color: white;
           }
+          &:focus, &:active{
+            text-decoration: none;
+          }
         }
       }
       li.active {
@@ -234,9 +237,6 @@ a{
     padding: 1em;
   }
   form{
-    label{
-      color:white;
-    }
     .green > .form-control{
       border: none !important;
       border-bottom: 4px solid rgba(23, 179, 98, 0.37) !important;
@@ -251,6 +251,10 @@ a{
     }
   }
 }
+label{
+  padding-left:0.5em;
+  color:white !important;
+}
 .buttons{
   margin: 0;
   padding: 0;
@@ -261,7 +265,7 @@ a{
   width: 104%;
   height: 20em;
   margin: -1em;
-  margin-bottom: -5em;
+  margin-bottom: -8em;
 }
 .dashboard{
   .rowCard{
@@ -269,5 +273,55 @@ a{
     padding-right: 1em;
     line-height: 3em;
   }
+  .lowStock{
+    margin-bottom:1em;
+    padding:0 1em;
+    background: $red;
+    h5{
+      color:white;
+    }
+    .rowCard{
+      padding: 0;
+      line-height: 0em;
+      a{
+        color:white;
+        &:hover{opacity:0.7;}
+        &:focus, &:active{
+          color:white;
+          opacity:0.7;
+        }
+      }
+    }
+  }
 }
+.orders{
+  .nonScroll{
+    height:45em;
+    overflow-y:scroll;
+    color:white;
+    .options{
+      padding:0;
+    }
+  }
+  .buttons{
+    margin-top:2em;
+  }
+  .stockList{
+    .rowCard{
+      line-height:2em;
+      margin-top:0;
+      cursor:pointer;
+    }
+    .checked{
+      background: #494c56;
+    }
+    .details{
+      padding:0;
+    }
+    .qty{
+      margin-top:-1em;
+      width:70%;
+    }
+  }
 
+}
