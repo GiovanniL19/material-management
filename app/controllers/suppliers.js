@@ -54,7 +54,6 @@ export default Ember.Controller.extend({
       if(controller.get("supplier.name") && controller.get("supplier.tradingName") && controller.get("supplier.tradingAddress") && controller.get("supplier.contact")) {
         this.get("supplier").save().then(function () {
           controller.set("application.message", "Updated Supplier");
-          controller.set("editMode", false);
           controller.get("activityController").set("Updated " + controller.get("supplier.name"));
         });
       }else{
