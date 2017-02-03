@@ -2,14 +2,22 @@
   <div class="col-sm-6">
     <div class="col-sm-12 card">
       <h5>Recent Activity</h5>
-      <div class="rowCard row">
-        <div class="col-sm-10 details">
-          Brake Kit from Pier One Imports
+      {{#each activity as |activity|}}
+        <div class="rowCard row">
+          <div class="col-sm-3 details">
+            <strong>{{activity.timeFormatted}}</strong>
+          </div>
+          <div class="col-sm-9 details">
+            {{activity.result}}
+          </div>
         </div>
-        <div class="col-sm-2 details text-right">
-          <strong>8</strong>
+      {{else}}
+        <div class="rowCard row">
+          <div class="col-sm-12 details">
+            No Activity
+          </div>
         </div>
-      </div>
+      {{/each}}
     </div>
   </div>
 

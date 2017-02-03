@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
+  activityController: Ember.inject.controller(),
   view: true,
   editMode: false,
   supplier: null,
@@ -25,6 +26,7 @@ export default Ember.Controller.extend({
 
         this.get("supplier").save().then(function(){
           controller.set("application.message", "Success!");
+          controller.get("activityController").set("Added " + controller.get("supplier.name"));
           controller.set("view", true);
         });
       }
@@ -35,6 +37,7 @@ export default Ember.Controller.extend({
     delete: function(supplier){
       if(confirm("You are about to remove "+ supplier.get("name"))){
         let controller = this;
+        controller.get("activityController").set("Deleted " + controller.get("supplier.name"));
         supplier.destroyRecord().then(function(){
           controller.set("application.message", "Supplier Removed");
         });
@@ -47,10 +50,12 @@ export default Ember.Controller.extend({
     },
     update: function(){
       let controller = this;
+
       if(controller.get("supplier.name") && controller.get("supplier.tradingName") && controller.get("supplier.tradingAddress") && controller.get("supplier.contact")) {
         this.get("supplier").save().then(function () {
           controller.set("application.message", "Updated Supplier");
           controller.set("editMode", false);
+          controller.get("activityController").set("Updated " + controller.get("supplier.name"));
         });
       }else{
         controller.set("application.message", "Please fill in all required fields");
