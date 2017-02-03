@@ -4,6 +4,7 @@ $menuColour: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
 $secondColour: #15bebf;
 $red: #bf1537;
 $green: #15bf57;
+$grey: #f9f9f9;
 
 body{
   background:#f7f7f7;
@@ -36,6 +37,9 @@ button{
   &:hover{
     opacity:0.7;
   }
+}
+.btn-danger{
+  background:$red !important;
 }
 h5{
   color:#333;
@@ -122,7 +126,10 @@ a{
     font-size:0.9em;
     padding:1em;
     margin:15px 0;
-    border: 1px solid #f1f1f1 !important;
+    &:first-child{
+      margin-bottom:0;
+      border-bottom:2px solid $grey;
+    }
     .details{
       padding:1em 0;
       margin:0;
@@ -153,7 +160,7 @@ a{
     }
     .form-control{
       margin:0;
-      border:5px solid #f9f9f9;
+      border:5px solid $grey;
       border-right: none;
       border-radius:1em;
       border-radius:0;
@@ -162,7 +169,7 @@ a{
     }
     .input-group-addon{
       background:white;
-      border:5px solid #f9f9f9;
+      border:5px solid $grey;
       border-left:none;
       .btn-search{
         background:none;
@@ -179,7 +186,7 @@ a{
       border-color:$red !important;
     }
     .form-control{
-      border:5px solid #f9f9f9 !important;
+      border:5px solid $grey !important;
     }
   }
 }

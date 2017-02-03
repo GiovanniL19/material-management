@@ -7,6 +7,23 @@
           <button class="btn btn-primary" {{action "new"}}>New</button>
         </div>
         <div class="col-xs-12">
+          {{#if model}}
+            <div class="rowCard row">
+              <div class="col-sm-3 details">
+                <strong>Name</strong>
+              </div>
+              <div class="col-sm-5 details">
+                <strong>Trading Name</strong>
+              </div>
+              <div class="col-sm-2 details text-center">
+                <strong>Status</strong>
+              </div>
+              <div class="col-sm-2 options text-right">
+                <strong>Options</strong>
+              </div>
+            </div>
+          {{/if}}
+
           {{#each model as |supplier|}}
             <div class="rowCard row">
               <div class="col-sm-3 details">
@@ -15,7 +32,7 @@
               <div class="col-sm-5 details">
                 {{supplier.tradingAddress}}
               </div>
-              <div class="col-sm-2 details text-right">
+              <div class="col-sm-2 details text-center">
                 <strong>{{supplier.status}}</strong>
               </div>
               <div class="col-sm-2 options text-right">

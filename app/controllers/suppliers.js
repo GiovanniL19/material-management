@@ -6,15 +6,25 @@ export default Ember.Controller.extend({
   view: true,
   editMode: false,
   supplier: null,
+
+  clear: function(){
+    if(this.get("supplier")) {
+      if (!this.get("supplier.id")) {
+        this.get("supplier").deleteRecord();
+      }
+    }
+    this.set("view", true);
+    this.set("supplier", null);
+    this.set("editMode", false);
+  },
+
   actions:{
     new: function(){
       this.set("supplier", this.store.createRecord("supplier"));
       this.set("view", false);
     },
     back: function(){
-      this.get("supplier").deleteRecord();
-      this.set("editMode", false);
-      this.set("view", true);
+      this.clear();
     },
     save: function(){
       let controller = this;
@@ -27,7 +37,7 @@ export default Ember.Controller.extend({
         this.get("supplier").save().then(function(){
           controller.set("application.message", "Success!");
           controller.get("activityController").set("Added " + controller.get("supplier.name"));
-          controller.set("view", true);
+          controller.clear();
         });
       }
       else{

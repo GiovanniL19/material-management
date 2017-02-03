@@ -10,5 +10,11 @@ const {
 export default Model.extend({
   type: DS.attr("string", {defaultValue: 'Item'}),
   rev: DS.attr("string"),
-  barcode: DS.attr("string")
+  barcode: DS.attr("string"),
+  name: DS.attr("string"),
+  quantity: DS.attr("number"),
+  minQuantity: DS.attr("number"),
+  quantityOnHold: DS.attr("number"),
+  group: DS.belongsTo("group", {async: true}),
+  supplier: DS.belongsTo("supplier", {async: true})
 });

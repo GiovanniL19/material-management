@@ -1,8 +1,6 @@
 import Model from 'ember-pouch/model';
 import DS from 'ember-data';
 
-PouchDB.debug.enable('*');
-
 const {
   attr,
   hasMany,
@@ -18,5 +16,6 @@ export default Model.extend({
   returnsAddress: DS.attr("string"),
   contact: DS.attr("string"),
   status: DS.attr("string", {defaultValue: 'OK'}),
-  transactionHistory: DS.hasMany("transactions", {async: true, defaultValue: []})
+  transactionHistory: DS.hasMany("transactions", {async: true, defaultValue: []}),
+  stock: DS.hasMany("item", {async: true, defaultValue: []})
 });
