@@ -4,8 +4,12 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'material-management',
     environment: environment,
-    rootURL: '/',
-    locationType: 'auto',
+    rootURL: null,
+    locationType: 'hash',
+    emberPouch: {
+      localDb: 'bikesystem',
+      remoteDb: 'http://localhost:5984/bikesystem'
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -19,6 +23,10 @@ module.exports = function(environment) {
     }
   };
 
+  ENV.contentSecurityPolicy = {
+    "connect-src": "'self' http://localhost:3002"
+  };
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
@@ -29,6 +37,7 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
+
     ENV.locationType = 'none';
 
     // keep test console output quieter
@@ -39,7 +48,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
   }
 
   return ENV;

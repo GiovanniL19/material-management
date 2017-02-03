@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MaterialManagement</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+<meta name="material-management/config/environment" content="%7B%22modulePrefix%22%3A%22material-management%22%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3Anull%2C%22locationType%22%3A%22hash%22%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%7D%2C%22APP%22%3A%7B%22name%22%3A%22material-management%22%2C%22version%22%3A%220.0.0+3e31a7f9%22%7D%2C%22exportApplicationGlobal%22%3Afalse%7D" />
+<script>
+/* jshint browser: true */
+;(function (window) {
+  if (window && window.process && window.process.type) {
+    window.ELECTRON = true
+  }
+
+  window.requireNode = window.require
+  window.moduleNode = window.module
+  window.processNode = window.process
+
+  delete window.process
+  delete window.require
+  delete window.module
+})(this)
+
+</script>
+
+    <link rel="stylesheet" href="assets/vendor-045a666e4a8dd115ef4b919501a15212.css" integrity="sha256-MvaE9sI4MnK7OOuX1A2jOzxRQWLwSlcXo4zO3yDqoZA= sha512-GYMAGxngKt1nZvYC1tTqXywBxIqzyk5QfU91EkbxILOrL5gMUJMWemwheM0sPYN8GzKSw/UniNk8td/d/+ZvxA==" >
+    <link rel="stylesheet" href="assets/material-management-13c03e54c50cf908779feba95f9a287d.css" integrity="sha256-+ggvUj/0GgzspK9xAS4Gy08n/egC0oh7dW53VXXrWdY= sha512-8hTHGPBJNQnnw6OL/lyDuaxKdxLqexHb45J4t2Ad5yL5mt+lR1DvjtE3KWVFYm7lbz/wdq1/7m464x/t9BnzeQ==" >
+
+    
+  </head>
+  <body>
+    
+
+    <script src="assets/vendor-5f676c4679875412a1aa48a6d7f59ac6.js" integrity="sha256-SYtNPCm0/4Flt6zhzmiA9mELZF2Zwr1kACIqG7svcZI= sha512-0T34d/Foc3BUv2wSeQnm6e5St11xDScw00VYITFH9xQo2+BGNjnJMgXHRAxGw4GOZdqYVWA7lJKzfJiFfNZIsQ==" ></script>
+    <script src="assets/material-management-7fc6da9fb16cdfae722b795c0cb3192b.js" integrity="sha256-68Bzc/TogQxqAJU/aXcm9I/3aj8hrhdHlTvzBoccGOo= sha512-0l5Ld/YscXPVi/v4AY0wFXHlCQPTWD2s5vJrYGfUEDWPe0VBl1BzwBXBAClUVi/VQkc3hu4VqYdUOh18H1vanQ==" ></script>
+
+    <script>
+/* jshint browser: true */
+;(function (window) {
+  if (!window.ELECTRON) {
+    return
+  }
+
+  // Restore Electron variables.
+  window.process = window.processNode
+
+  // Redefine a global `require` function that can satisfy both
+  // Node and AMD module systems.
+  const requireAMD = window.require
+  const requireNode = window.requireNode
+
+  if (requireAMD) {
+    window.require = function () {
+      try {
+        return requireAMD.apply(null, arguments)
+      } catch (e) {
+        if (e.toString().includes('Error: Could not find module')) {
+          return requireNode.apply(null, arguments)
+        } else {
+          return console.error(e)
+        }
+      }
+    }
+  } else {
+    window.require = requireNode
+  }
+})(this)
+
+</script>
+  </body>
+</html>
