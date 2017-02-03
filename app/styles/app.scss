@@ -1,19 +1,25 @@
 @import "bootstrap";
 
-$menuColour: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+//$menuColour: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+$menuColour: #2a2d35;
+$primary: #353741;
+$primaryS: #3b3d46;
+
 $secondColour: #15bebf;
-$red: #bf1537;
-$green: #15bf57;
-$grey: #f9f9f9;
+$red: #ff5656;
+$green: rgba(23, 179, 98, 0.37);
+$grey: rgba(255, 255, 255, 0.4);
 
 body{
-  background:#f7f7f7;
+  background:$primary;
   -webkit-transition: ease-in-out 1s;
   -moz-transition: ease-in-out 1s;
   -ms-transition: ease-in-out 1s;
   -o-transition: ease-in-out 1s;
 }
-
+hr{
+  border:none;
+}
 .alert-danger {
   background-color: $red;
   color: #ffffff;
@@ -42,7 +48,7 @@ button{
   background:$red !important;
 }
 h5{
-  color:#333;
+  color:white;
   padding-bottom:0;
   margin-bottom:0;
 }
@@ -67,15 +73,24 @@ a{
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     h3 {
       padding-left: 0.5em;
-      margin: 1em 0 3em 0;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
+      color: white;
       font-weight: 200;
+      background: #15bebf;
+      top: 0;
+      width: 101%;
+      position: absolute;
+      margin: 0;
+      border: none;
+      padding: 1.2em;
+      text-align: center;
+      margin-bottom: 2em;
     }
     ul {
       margin: 0;
       padding: 0;
       list-style: none;
+      margin-top:10em;
       li {
         margin-bottom: 1em;
         padding-right: 1em;
@@ -93,9 +108,8 @@ a{
         }
       }
       li.active {
-        background: rgba(255, 255, 255, 0.57);
         a {
-          color: black;
+          color: white;
         }
       }
     }
@@ -103,6 +117,11 @@ a{
 }
 
 //Content
+.search{
+  background: white !important;
+  border: none;
+  margin-bottom: 1em;
+}
 .content{
   .btn{
     background:$secondColour;
@@ -122,7 +141,7 @@ a{
     }
   }
   .rowCard{
-    color:#444;
+    color:white;
     font-size:0.9em;
     padding:1em;
     margin:15px 0;
@@ -152,7 +171,7 @@ a{
     padding:1em;
   }
   .card{
-    background: white;
+    background: $primaryS;
     padding:1em;
     .search{
       margin:0;
@@ -161,6 +180,8 @@ a{
     .form-control{
       margin:0;
       border:5px solid $grey;
+      color:white;
+      background: transparent;
       border-right: none;
       border-radius:1em;
       border-radius:0;
@@ -178,15 +199,34 @@ a{
       }
     }
   }
+  h3{
+    color:white;
+    padding:0.5em;
+  }
+  p{
+    color: white;
+    font-weight: 200;
+    padding: 1em;
+  }
   form{
+    label{
+      color:white;
+    }
     .green > .form-control{
-      border-color:$green !important;
+      border: none !important;
+      border-bottom: 4px solid rgba(23, 179, 98, 0.37) !important;
     }
     .red > .form-control{
-      border-color:$red !important;
+      border: none !important;
+      border-bottom: 4px solid $red !important;
     }
     .form-control{
-      border:5px solid $grey !important;
+      border: none !important;
+      border-bottom: 4px solid $grey !important
     }
   }
+}
+.buttons{
+  margin: 0;
+  padding: 0;
 }

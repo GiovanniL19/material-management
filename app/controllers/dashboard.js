@@ -10,10 +10,9 @@ export default Ember.Controller.extend({
 
     this.store.findAll("supplier").then(function(suppliers){
       controller.set("suppliers", suppliers.toArray().reverse());
-    });
-
-    this.store.findAll("activity").then(function(activities){
-      controller.set("activities", activities.toArray().reverse());
+      controller.store.findAll("activity").then(function(activities){
+        controller.set("activities", activities.toArray().reverse());
+      });
     });
   },
   actions: {

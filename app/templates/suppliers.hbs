@@ -15,10 +15,10 @@
               <div class="col-sm-5 details">
                 <strong>Trading Name</strong>
               </div>
-              <div class="col-sm-2 details text-center">
+              <div class="col-sm-1 details text-center">
                 <strong>Status</strong>
               </div>
-              <div class="col-sm-2 options text-right">
+              <div class="col-sm-3 options text-right">
                 <strong>Options</strong>
               </div>
             </div>
@@ -32,10 +32,10 @@
               <div class="col-sm-5 details">
                 {{supplier.tradingAddress}}
               </div>
-              <div class="col-sm-2 details text-center">
+              <div class="col-sm-1 details text-center">
                 <strong>{{supplier.status}}</strong>
               </div>
-              <div class="col-sm-2 options text-right">
+              <div class="col-sm-3 options text-right">
                 <a>{{fa-icon "send"}}</a>
                 <a {{action "select" supplier}}>{{fa-icon "pencil"}}</a>
                 <a {{action "delete" supplier}}>{{fa-icon "times"}}</a>
@@ -54,10 +54,26 @@
   </div>
 {{else}}
   <div class="row sections">
-    <div class="col-sm-12">
+    <div class="col-sm-4 hidden-xs col-md-4">
+      <div class="col-sm-8">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}</div>
+      <div class="col-sm-12">
+        {{#if editMode}}
+          <p>
+            Trading Name: <strong>{{supplier.tradingName}}</strong><br>
+            Trading Address: <strong>{{supplier.tradingAddress}}</strong><br>
+            Returns Address: <strong>{{supplier.returnsAddress}}</strong><br>
+          </p>
+        {{else}}
+          <p>
+            When adding a new supplier, you need to fill in all the reqiured fields. The returns address is optional, if you leave it blank the default returns address will be the same as the trading address.
+          </p>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="col-sm-8 col-md-8">
       <div class="col-sm-12 card">
-        <div class="col-sm-8"><h5>New Supplier</h5></div>
-        <div class="col-sm-4 right text-right">
+        <div class="col-sm-12 right text-right">
           <button class="btn btn-primary" {{action "back"}}>Back</button>
         </div>
         <div class="col-xs-12">
@@ -89,11 +105,13 @@
               <label for="contact">Contact Number*</label>
               {{input type="number" class="form-control" id="contact" placeholder="Contact Number" value=supplier.contact}}
             </div>
-            {{#if editMode}}
-              <button class="btn btn-default" {{action "update"}}>Update</button>
-            {{else}}
-              <button class="btn btn-default" {{action "save"}}>Add Supplier</button>
-            {{/if}}
+            <div class="col-sm-12 text-right buttons">
+              {{#if editMode}}
+                <button class="btn btn-default" {{action "update"}}>Update</button>
+              {{else}}
+                <button class="btn btn-default" {{action "save"}}>Add Supplier</button>
+              {{/if}}
+            </div>
           </form>
         </div>
       </div>

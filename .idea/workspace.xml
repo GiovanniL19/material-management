@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cb652ee-ce22-410c-8e32-c38cb0bcfe89" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/serializers/group.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/serializers/item.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/serializers/supplier.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/suppliers.js" afterPath="$PROJECT_DIR$/app/controllers/suppliers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/item.js" afterPath="$PROJECT_DIR$/app/models/item.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/line.js" afterPath="$PROJECT_DIR$/app/models/line.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/supplier.js" afterPath="$PROJECT_DIR$/app/models/supplier.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/transaction.js" afterPath="$PROJECT_DIR$/app/models/transaction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/router.js" afterPath="$PROJECT_DIR$/app/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/suppliers.js" afterPath="$PROJECT_DIR$/app/routes/suppliers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/dashboard.js" afterPath="$PROJECT_DIR$/app/controllers/dashboard.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/app.scss" afterPath="$PROJECT_DIR$/app/styles/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/dashboard.hbs" afterPath="$PROJECT_DIR$/app/templates/dashboard.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/menu.hbs" afterPath="$PROJECT_DIR$/app/templates/menu.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/application.hbs" afterPath="$PROJECT_DIR$/app/templates/application.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/stock.hbs" afterPath="$PROJECT_DIR$/app/templates/stock.hbs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/suppliers.hbs" afterPath="$PROJECT_DIR$/app/templates/suppliers.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -37,28 +28,18 @@
       <file leaf-file-name="app.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/styles/app.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+            <state relative-caret-position="576">
+              <caret line="230" column="7" lean-forward="false" selection-start-line="229" selection-start-column="7" selection-end-line="230" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/dashboard.hbs">
+      <file leaf-file-name="application.hbs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/templates/application.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="30" lean-forward="false" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="supplier.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/serializers/supplier.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+            <state relative-caret-position="195">
+              <caret line="13" column="47" lean-forward="false" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -74,17 +55,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="suppliers.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes/suppliers.js">
+      <file leaf-file-name="menu.hbs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/menu.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+            <state relative-caret-position="105">
+              <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="suppliers.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="suppliers.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/routes/suppliers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+              <folding>
+                <marker date="1486145290000" expanded="true" signature="62:450" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="suppliers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/suppliers.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -94,11 +87,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="item.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/item.js">
+      <file leaf-file-name="dashboard.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="390">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="suppliers.hbs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/suppliers.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="107" column="52" lean-forward="false" selection-start-line="107" selection-start-column="52" selection-end-line="107" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -107,8 +110,8 @@
       <file leaf-file-name="stock.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/stock.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="67" column="76" lean-forward="false" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
+            <state relative-caret-position="303">
+              <caret line="80" column="10" lean-forward="true" selection-start-line="65" selection-start-column="4" selection-end-line="80" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -117,18 +120,8 @@
       <file leaf-file-name="stock.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/stock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="line.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/line.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+            <state relative-caret-position="555">
+              <caret line="52" column="8" lean-forward="false" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -158,9 +151,14 @@
       <find>form-xon</find>
       <find>alert</find>
       <find>#f9f9f9</find>
-      <find>card</find>
       <find>PouchDB.debug.enable('*');</find>
       <find>btn-danger</find>
+      <find>card</find>
+      <find>h3</find>
+      <find>h5</find>
+      <find>form</find>
+      <find>form-con</find>
+      <find>search</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,15 +172,12 @@
         <option value="$PROJECT_DIR$/config/environment.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app/routes/application.js" />
-        <option value="$PROJECT_DIR$/app/templates/application.hbs" />
         <option value="$PROJECT_DIR$/app/controllers/application.js" />
         <option value="$PROJECT_DIR$/app/routes/dashboard.js" />
         <option value="$PROJECT_DIR$/app/models/activity.js" />
         <option value="$PROJECT_DIR$/app/controllers/activity-controller.js" />
-        <option value="$PROJECT_DIR$/app/controllers/dashboard.js" />
         <option value="$PROJECT_DIR$/app/templates/menu.hbs" />
         <option value="$PROJECT_DIR$/app/models/line.js" />
-        <option value="$PROJECT_DIR$/app/templates/suppliers.hbs" />
         <option value="$PROJECT_DIR$/app/models/transaction.js" />
         <option value="$PROJECT_DIR$/app/models/supplier.js" />
         <option value="$PROJECT_DIR$/app/models/group.js" />
@@ -191,13 +186,16 @@
         <option value="$PROJECT_DIR$/app/serializers/group.js" />
         <option value="$PROJECT_DIR$/app/serializers/supplier.js" />
         <option value="$PROJECT_DIR$/app/serializers/item.js" />
-        <option value="$PROJECT_DIR$/app/styles/app.scss" />
         <option value="$PROJECT_DIR$/app/templates/dashboard.hbs" />
-        <option value="$PROJECT_DIR$/app/templates/stock.hbs" />
         <option value="$PROJECT_DIR$/app/routes/stock.js" />
         <option value="$PROJECT_DIR$/app/routes/suppliers.js" />
-        <option value="$PROJECT_DIR$/app/controllers/stock.js" />
         <option value="$PROJECT_DIR$/app/controllers/suppliers.js" />
+        <option value="$PROJECT_DIR$/app/controllers/dashboard.js" />
+        <option value="$PROJECT_DIR$/app/controllers/stock.js" />
+        <option value="$PROJECT_DIR$/app/styles/app.scss" />
+        <option value="$PROJECT_DIR$/app/templates/stock.hbs" />
+        <option value="$PROJECT_DIR$/app/templates/suppliers.hbs" />
+        <option value="$PROJECT_DIR$/app/templates/application.hbs" />
       </list>
     </option>
   </component>
@@ -496,12 +494,12 @@
       <workItem from="1485875342373" duration="58000" />
       <workItem from="1486071958617" duration="48000" />
       <workItem from="1486079915525" duration="57000" />
-      <workItem from="1486113834902" duration="23918000" />
+      <workItem from="1486113834902" duration="26528000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30034000" />
+    <option name="totallyTimeSpent" value="32644000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="833" extended-state="6" />
@@ -691,16 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/application.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-          <folding>
-            <element signature="e#760#767#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -723,22 +711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="54" lean-forward="false" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/menu.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -774,14 +746,6 @@
           <folding>
             <element signature="e#0#38#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/suppliers.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="54" lean-forward="false" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -851,14 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/styles/app.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/dashboard.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -875,14 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/stock.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="67" column="76" lean-forward="false" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/stock.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -895,15 +843,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/stock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="26" />
-          <folding />
+          <folding>
+            <marker date="1486145290000" expanded="true" signature="62:450" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -911,6 +853,62 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/menu.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/stock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="52" column="8" lean-forward="false" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="230" column="7" lean-forward="false" selection-start-line="229" selection-start-column="7" selection-end-line="230" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/stock.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="80" column="10" lean-forward="true" selection-start-line="65" selection-start-column="4" selection-end-line="80" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/suppliers.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="107" column="52" lean-forward="false" selection-start-line="107" selection-start-column="52" selection-end-line="107" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/application.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="47" lean-forward="false" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
           <folding />
         </state>
       </provider>
