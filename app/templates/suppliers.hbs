@@ -39,11 +39,9 @@
                 <strong>{{supplier.status}}</strong>
               </div>
               <div class="col-sm-2">
-                {{#unless supplier.bard}}
-                  {{#unless supplier.onHold}}
-                    <button class="btn btn-primary">Order</button>
-                  {{/unless}}
-                {{/unless}}
+                {{#if supplier.canOrder}}
+                  <button class="btn btn-primary" {{action "order" supplier}}>Order</button>
+                {{/if}}
               </div>
               <div class="col-sm-1 options text-right">
                 <a {{action "delete" supplier}}>{{fa-icon "times"}}</a>

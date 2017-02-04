@@ -11,19 +11,22 @@
             {{#if model}}
               <div class="rowCard row">
                 <div class="col-sm-3 details">
-                  <strong>Order Number</strong>
+                  <strong>Transaction ID</strong>
                 </div>
-                <div class="col-sm-3 details">
-                  <strong>Order Date</strong>
+                <div class="col-sm-2 details">
+                  <strong>Created</strong>
+                </div>
+                <div class="col-sm-2 details">
+                  <strong>ETA</strong>
                 </div>
                 <div class="col-sm-3 details">
                   <strong>Supplier</strong>
                 </div>
-                <div class="col-sm-2 details text-center">
-                  <strong>No. Lines</strong>
+                <div class="col-sm-1 details text-center">
+                  <strong>Lines</strong>
                 </div>
                 <div class="col-sm-1 options text-right">
-                  <strong>Options</strong>
+                  <strong>Cancel</strong>
                 </div>
               </div>
             {{/if}}
@@ -31,19 +34,24 @@
             {{#each model as |transaction|}}
               <div class="rowCard row">
                 <div class="col-sm-3 details">
-                  {{transaction.orderNo}}
+                  <a {{action "select" transaction}}>{{transaction.transactionID}}</a>
+                </div>
+                <div class="col-sm-2 details">
+                  {{transaction.orderDateFormatted}}
+                </div>
+                <div class="col-sm-2 details">
+                  {{transaction.etaFormatted}}
                 </div>
                 <div class="col-sm-3 details">
-                  {{transaction.orderDate}}
-                </div>
-                <div class="col-sm-3 details text-center">
                   {{transaction.supplier.name}}
                 </div>
-                <div class="col-sm-2 details text-center">
+                <div class="col-sm-1 details text-center">
                   {{transaction.lines.length}}
                 </div>
                 <div class="col-sm-1 options text-right">
-                  <a {{action "delete" transaction}}>{{fa-icon "times"}}</a>
+                  {{#if transaction.canCancel}}
+                    <a {{action "delete" transaction}}>{{fa-icon "times"}}</a>
+                  {{/if}}
                 </div>
               </div>
             {{else}}
@@ -60,12 +68,23 @@
   {{else}}
     <div class="row sections">
       <div class="col-sm-4 hidden-xs col-md-4">
-        <div class="col-sm-12 card">{{#unless editMode}}<h3>New Order</h3>{{else}}<h3>{{transaction.name}}</h3>{{/unless}}</div>
+        <div class="col-sm-12 card">{{#unless editMode}}<h3>New Order</h3>{{else}}<h3>{{transaction.transactionID}}</h3>{{/unless}}</div>
         <div class="col-sm-12 card">
           {{#if editMode}}
-            Supplier: {{transaction.supplier.name}}<br>
-            Supplier Contact: {{transaction.supplier.contact}}<br>
-            Number Of Order Lines: {{transaction.lines.length}}<br>
+            <p>
+              Supplier: {{transaction.supplier.name}}<br>
+              Contact: {{transaction.supplier.contact}}<br>
+              Order Lines: {{transaction.lines.length}}<br><br>
+              ETA: {{transaction.etaHuman}}
+            </p>
+            {{#if transaction.canCancel}}
+              <div class="col-sm-6 text-left buttons">
+                <button class="btn btn-danger" {{action "delete" transaction}}>Cancel</button>
+              </div>
+              <div class="col-sm-6 text-right buttons">
+                <button class="btn btn-default" {{action "update"}}>Update</button>
+              </div>
+            {{/if}}
           {{else}}
             <p>
               You first need to select a supplier to order from. Once you have chosen a supplier, the list on the right will show all stock from that supplier. You can select the items you would like to order with a quantity. Once you have completed adding lines and quantities, click the place order button to complete the process.
@@ -76,28 +95,24 @@
               <label>Supplier*</label>
               <form>
                 <select class="form-control" onchange={{action 'selectSupplier' value="target.value"}}>
-                  {{#if item.supplier}}
-                    <option value={{item.supplier.id}}>{{item.supplier.name}}</option>
+                  {{#if selectedSupplier}}
+                    <option value={{selectedSupplier.id}}>{{selectedSupplier.name}}</option>
                   {{/if}}
 
                   {{#each suppliers as |supplier|}}
-                    <option value={{supplier.id}}>{{supplier.name}}</option>
+                    {{#if supplier.canOrder}}
+                      <option value={{supplier.id}}>{{supplier.name}}</option>
+                    {{/if}}
                   {{/each}}
                 </select>
               </form>
+              <div class="col-sm-6 text-left buttons">
+                <button class="btn btn-default text-left" {{action "addItem"}}>Add Item</button>
+              </div>
 
-              {{#if editMode}}
-                <div class="col-sm-6 text-left buttons">
-                  <button class="btn btn-danger" {{action "delete" item}}>Delete</button>
-                </div>
-                <div class="col-sm-6 text-right buttons">
-                  <button class="btn btn-default" {{action "update"}}>Update</button>
-                </div>
-              {{else}}
-                <div class="col-sm-12 text-right buttons">
-                  <button class="btn btn-default" {{action "save"}}>Place Order</button>
-                </div>
-              {{/if}}
+              <div class="col-sm-6 text-right buttons">
+                <button class="btn btn-default" {{action "placeOrder"}}>Place Order</button>
+              </div>
             </div>
           {{/if}}
         </div>
@@ -110,48 +125,89 @@
           </div>
           <div class="col-xs-12">
             <form class="cards">
-              {{#if selectedSupplier.stock}}
+              {{#if transaction.lines}}
                 <h5>{{selectedSupplier.name}}</h5>
                 <div class="rowCard row">
-                  <div class="col-sm-3 details">
+                  <div class="col-sm-5 details">
                     <strong>Name</strong>
                   </div>
-                  <div class="col-sm-4 details">
+                  <div class="col-sm-5 details">
                     <strong>Order Quantity</strong>
                   </div>
-                  <div class="col-sm-4 details">
-                    <strong>Current Quantity</strong>
-                  </div>
-                  <div class="col-sm-1 options text-right">
+                  <div class="col-sm-2 options text-right">
                     <strong>Selected</strong>
                   </div>
                 </div>
+              {{else}}
+                {{#unless editMode}}
+                  {{#if selectedSupplier.stock}}
+                    <h5>{{selectedSupplier.name}}</h5>
+                    <div class="rowCard row">
+                      <div class="col-sm-5 details">
+                        <strong>Name</strong>
+                      </div>
+                      <div class="col-sm-5 details">
+                        <strong>Order Quantity</strong>
+                      </div>
+                      <div class="col-sm-2 options text-right">
+                        <strong>Selected</strong>
+                      </div>
+                    </div>
+                  {{/if}}
+                {{/unless}}
               {{/if}}
               <div class="stockList">
-                {{#each selectedSupplier.stock as |item|}}
-                  <div class="rowCard row {{if item.checked "checked"}}">
-                    <div class="col-sm-3 details" {{action "selectLine" item}}>
-                      {{item.name}}
+                {{#if editMode}}
+                  {{#each transaction.lines as |item|}}
+                    <div class="rowCard row {{if item.checked "checked"}}">
+                      <div class="col-sm-5 details" {{action "selectLine" item}}>
+                        {{item.name}}
+                      </div>
+                      <div class="col-sm-5 details">
+                        <small>Ordered Quantity: <strong>{{item.quantity}}</strong></small>
+                        {{#if transaction.canCancel}}
+                          {{input type="number" class="form-control newQty" value=item.newQuantity placeholder="0"}}
+                        {{/if}}
+                      </div>
+                      <div class="col-sm-2 options text-right" {{action "selectLine" item}}>
+                        {{#if item.checked}}
+                          {{fa-icon "check"}}
+                        {{else}}
+                          {{fa-icon "square-o"}}
+                        {{/if}}
+                      </div>
                     </div>
-                    <div class="col-sm-4 details {{if item.orderQuantity "green"}}">
-                      {{input type="number" class="form-control qty" value=item.orderQuantity placeholder="0"}}
-                    </div>
-                    <div class="col-sm-4 details" {{action "selectLine" item}}>
-                      {{item.quantity}}
-                    </div>
-                    <div class="col-sm-1 options text-right" {{action "selectLine" item}}>
-                      {{#if item.checked}}
-                        {{fa-icon "check"}}
-                      {{else}}
-                        {{fa-icon "square-o"}}
-                      {{/if}}
-                    </div>
-                  </div>
+                  {{else}}
+                    <h5>Order Will Be Canceled</h5>
+                    <br>
+                    <small>To save these changes, click the update button on the left</small>
+                  {{/each}}
                 {{else}}
-                  <h5>No Stock From This Supplier</h5>
-                  <br>
-                  <small>You need to add the items you want to order in the stock section</small>
-                {{/each}}
+                  {{#each selectedSupplier.stock as |item|}}
+                    <div class="rowCard row {{if item.checked "checked"}}">
+                      <div class="col-sm-3 details" {{action "selectLine" item}}>
+                        {{item.name}}
+                      </div>
+                      <div class="col-sm-4 details {{if item.orderQuantity "green"}}">
+                        {{input type="number" class="form-control qty" value=item.orderQuantity placeholder="0"}}
+                      </div>
+                      <div class="col-sm-4 details" {{action "selectLine" item}}>
+                        {{item.quantity}}
+                      </div>
+                      <div class="col-sm-1 options text-right" {{action "selectLine" item}}>
+                        {{#if item.checked}}
+                          {{fa-icon "check"}}
+                        {{else}}
+                          {{fa-icon "square-o"}}
+                        {{/if}}
+                      </div>
+                    </div>
+                  {{else}}
+                    <h5>No Stock From This {{selectedSupplier.name}}</h5>
+                    <br>
+                    <small>You need to add the items you want to order in the stock section</small>
+                  {{/each}}
+                {{/if}}
               </div>
             </form>
           </div>

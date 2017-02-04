@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
 
   generateBarcode: function(){
     var barcode = "";
-    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     for(var i = 0; i < 20; i++){
       barcode += characters.charAt(Math.floor(Math.random() * characters.length));

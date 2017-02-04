@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
+  orders: Ember.inject.controller(),
   stock: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
   suppliers: [],
@@ -27,6 +28,11 @@ export default Ember.Controller.extend({
     });
   },
   actions: {
+    order: function(supplier){
+      this.set("orders.sentSupplier", supplier);
+      this.get("orders").load();
+      this.transitionToRoute("orders");
+    },
     selectStockItem: function(item){
       this.get("stock").selectedItem(item);
       this.transitionToRoute("stock");

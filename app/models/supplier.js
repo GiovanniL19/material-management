@@ -42,4 +42,12 @@ export default Model.extend({
       return false
     }
   }.property("status"),
+
+  canOrder: function(){
+    if(this.get("status") === "BARD" || this.get("status") === "ON HOLD"){
+      return false;
+    }else{
+      return true;
+    }
+  }.property("status"),
 });

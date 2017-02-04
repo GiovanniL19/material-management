@@ -300,7 +300,7 @@ label{
     overflow-y:scroll;
     color:white;
     .options{
-      padding:0;
+      padding:1em 0;
     }
   }
   .buttons{
@@ -309,7 +309,6 @@ label{
   .stockList{
     .rowCard{
       line-height:2em;
-      margin-top:0;
       cursor:pointer;
     }
     .checked{
@@ -321,6 +320,9 @@ label{
     .qty{
       margin-top:-1em;
       width:70%;
+    }
+    .newQty{
+      margin-top:1em;
     }
   }
 

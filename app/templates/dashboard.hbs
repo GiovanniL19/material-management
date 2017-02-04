@@ -66,11 +66,9 @@
             {{supplier.name}}
           </div>
           <div class="col-sm-4 details text-right">
-            {{#unless supplier.bard}}
-              {{#unless supplier.onHold}}
-                <button class="btn btn-primary">Place Order</button>
-              {{/unless}}
-            {{/unless}}
+            {{#if supplier.canOrder}}
+                <button class="btn btn-primary" {{action "order" supplier}}>Place Order</button>
+            {{/if}}
           </div>
         </div>
       {{else}}
