@@ -10,14 +10,14 @@ export default Ember.Controller.extend({
   suppliers: [],
   sentSupplier: null,
   generateTransactionID: function(){
-    var barcode = "";
+    var id = "";
     let characters = moment.unix() + this.get("selectedSupplier.name");
 
     for(var i = 0; i < 10; i++){
-      barcode += characters.charAt(Math.floor(Math.random() * characters.length));
+      id += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 
-    return "UK" + barcode;
+    return ("UK" + id).replace(/\s/g, '').toUpperCase();
   }.property(),
 
   load: function(){
@@ -108,6 +108,7 @@ export default Ember.Controller.extend({
           supplier.save().then(function(){
             transaction.destroyRecord().then(function(){
               controller.set("application.message", "Order has been canceled");
+              controller.clear();
             });
           });
         });

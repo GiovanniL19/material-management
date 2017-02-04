@@ -75,7 +75,8 @@
               Supplier: {{transaction.supplier.name}}<br>
               Contact: {{transaction.supplier.contact}}<br>
               Order Lines: {{transaction.lines.length}}<br><br>
-              ETA: {{transaction.etaHuman}}
+              ETA: {{transaction.etaHuman}}<br><br>
+              Note:<br>{{transaction.note}}
             </p>
             {{#if transaction.canCancel}}
               <div class="col-sm-6 text-left buttons">
@@ -88,7 +89,6 @@
           {{else}}
             <p>
               You first need to select a supplier to order from. Once you have chosen a supplier, the list on the right will show all stock from that supplier. You can select the items you would like to order with a quantity. Once you have completed adding lines and quantities, click the place order button to complete the process.
-              <br><br>Once an order has been made, you cannot make changes. If changes need to be made, contact the supplier directly via the phone number below.
             </p>
 
             <div class="form-group {{if selectedSupplier 'green'}} {{unless selectedSupplier 'red'}}">
@@ -105,6 +105,11 @@
                     {{/if}}
                   {{/each}}
                 </select>
+                <br>
+                <div class="form-group {{if transaction.note "green"}}">
+                  <label>Note</label>
+                  {{input type="text" class="form-control note" value=transaction.note}}
+                </div>
               </form>
               <div class="col-sm-6 text-left buttons">
                 <button class="btn btn-default text-left" {{action "addItem"}}>Add Item</button>

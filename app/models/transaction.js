@@ -17,6 +17,7 @@ export default Model.extend({
   dateCreated: DS.attr("number"),
   eta: DS.attr("number"),
   status: DS.attr("string", {defaultValue: "PROCESSING"}),
+  note: DS.attr("string"),
   orderDateFormatted: function () {
     return moment.unix(this.get("dateCreated")).format("DD/MM/YYYY");
   }.property("dateCreated"),

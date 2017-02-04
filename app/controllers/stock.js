@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
       barcode += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 
-    return barcode;
+    return barcode.replace(/\s/g, '').toUpperCase();
   }.property(),
 
   selectedItem: function(item){
