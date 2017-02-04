@@ -23,7 +23,7 @@
                   <strong>Supplier</strong>
                 </div>
                 <div class="col-sm-1 details text-center">
-                  <strong>Lines</strong>
+                  <strong>Total</strong>
                 </div>
                 <div class="col-sm-1 options text-right">
                   <strong>Cancel</strong>
@@ -46,7 +46,7 @@
                   {{transaction.supplier.name}}
                 </div>
                 <div class="col-sm-1 details text-center">
-                  {{transaction.lines.length}}
+                  {{transaction.totalHuman}}
                 </div>
                 <div class="col-sm-1 options text-right">
                   {{#if transaction.canCancel}}
@@ -68,9 +68,10 @@
   {{else}}
     <div class="row sections">
       <div class="col-sm-4 hidden-xs col-md-4">
-        <div class="col-sm-12 card">{{#unless editMode}}<h3>New Order</h3>{{else}}<h3>{{transaction.transactionID}}</h3>{{/unless}}</div>
         <div class="col-sm-12 card">
+          {{#unless editMode}}<h3>New Order</h3>{{else}}<h3>{{transaction.transactionID}}</h3>{{/unless}}
           {{#if editMode}}
+            <h3>{{transaction.formattedTotal}}</h3>
             <p>
               Supplier: {{transaction.supplier.name}}<br>
               Contact: {{transaction.supplier.contact}}<br>
@@ -87,6 +88,7 @@
               </div>
             {{/if}}
           {{else}}
+            <h3>{{total}}</h3>
             <p>
               You first need to select a supplier to order from. Once you have chosen a supplier, the list on the right will show all stock from that supplier. You can select the items you would like to order with a quantity. Once you have completed adding lines and quantities, click the place order button to complete the process.
             </p>
@@ -138,11 +140,17 @@
                     <div class="col-sm-3 details">
                       <strong>Name</strong>
                     </div>
-                    <div class="col-sm-4 details">
-                      <strong>Order Quantity</strong>
+                    <div class="col-sm-2 details">
+                      <strong>Trade Price</strong>
                     </div>
-                    <div class="col-sm-4 details">
-                      <strong>Current Stock</strong>
+                    <div class="col-sm-2 details">
+                      <strong>Order</strong>
+                    </div>
+                    <div class="col-sm-2 details">
+                      <strong>Total</strong>
+                    </div>
+                    <div class="col-sm-2 details">
+                      <strong>Stock</strong>
                     </div>
                     <div class="col-sm-1 options text-right">
                       <strong>Selected</strong>
@@ -156,10 +164,16 @@
                     <div class="col-sm-4 details">
                       <strong>Name</strong>
                     </div>
-                    <div class="col-sm-6 details">
-                      <strong>Order Quantity</strong>
+                    <div class="col-sm-2 details">
+                      <strong>Trade Price</strong>
                     </div>
-                    <div class="col-sm-2 options text-right">
+                    <div class="col-sm-3 details">
+                      <strong>Ordered</strong>
+                    </div>
+                    <div class="col-sm-2 details">
+                      <strong>Total</strong>
+                    </div>
+                    <div class="col-sm-1 options text-right">
                       <strong>Selected</strong>
                     </div>
                   </div>
@@ -172,13 +186,19 @@
                     <div class="col-sm-4 details" {{action "selectLine" item}}>
                       {{item.name}}
                     </div>
-                    <div class="col-sm-6 details">
+                    <div class="col-sm-2 details" {{action "selectLine" item}}>
+                      {{item.formattedPrice}}
+                    </div>
+                    <div class="col-sm-3 details">
                       <small>Ordered Quantity: <strong>{{item.quantity}}</strong></small>
                       {{#if transaction.canCancel}}
                         {{input type="number" class="form-control newQty" value=item.newQuantity placeholder="0"}}
                       {{/if}}
                     </div>
-                    <div class="col-sm-2 options text-right" {{action "selectLine" item}}>
+                    <div class="col-sm-2 details">
+                      {{item.formattedTotal}}
+                    </div>
+                    <div class="col-sm-1 options text-right" {{action "selectLine" item}}>
                       {{#if item.checked}}
                         {{fa-icon "check"}}
                       {{else}}
@@ -197,10 +217,16 @@
                     <div class="col-sm-3 details" {{action "selectLine" item}}>
                       {{item.name}}
                     </div>
-                    <div class="col-sm-4 details {{if item.orderQuantity "green"}}">
+                    <div class="col-sm-2 details">
+                      {{item.formattedTrade}}
+                    </div>
+                    <div class="col-sm-2 details {{if item.orderQuantity "green"}}">
                       {{input type="number" class="form-control qty" value=item.orderQuantity placeholder="0"}}
                     </div>
-                    <div class="col-sm-4 details" {{action "selectLine" item}}>
+                    <div class="col-sm-2 details" {{action "selectLine" item}}>
+                      {{item.formattedTotal}}
+                    </div>
+                    <div class="col-sm-2 details" {{action "selectLine" item}}>
                       {{item.quantity}}
                     </div>
                     <div class="col-sm-1 options text-right" {{action "selectLine" item}}>

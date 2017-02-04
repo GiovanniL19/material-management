@@ -9,14 +9,20 @@
         <div class="col-xs-12">
           {{#if sortedModel}}
             <div class="rowCard row">
-              <div class="col-sm-4 details">
+              <div class="col-sm-3 details">
                 <strong>Item</strong>
               </div>
-              <div class="col-sm-4 details">
+              <div class="col-sm-3 details">
                 <strong>Supplier</strong>
               </div>
               <div class="col-sm-1 details">
                 <strong>Quantity</strong>
+              </div>
+              <div class="col-sm-1 details">
+                <strong>Trade</strong>
+              </div>
+              <div class="col-sm-1 details">
+                <strong>Retail</strong>
               </div>
               <div class="col-sm-2 details text-center">
                 <strong>Group</strong>
@@ -29,14 +35,20 @@
 
           {{#each sortedModel as |item|}}
             <div class="rowCard row">
-              <div class="col-sm-4 details">
+              <div class="col-sm-3 details">
                 <strong><a {{action "select" item}}>{{item.name}}</a></strong>
               </div>
-              <div class="col-sm-4 details">
+              <div class="col-sm-3 details">
                 {{item.supplier.tradingName}}
               </div>
               <div class="col-sm-1 details">
                 {{item.quantity}}
+              </div>
+              <div class="col-sm-1 details">
+                {{item.formattedTrade}}
+              </div>
+              <div class="col-sm-1 details">
+                {{item.formattedRetail}}
               </div>
               <div class="col-sm-2 details text-center">
                 {{#if item.group}}
@@ -69,7 +81,10 @@
         <p>
           Barcode: <strong>{{item.barcode}}</strong><br>
           Group: <strong>{{item.group.name}}</strong><br>
-          Suplier: <strong>{{item.supplier.name}}</strong><br>
+          Supplier: <strong>{{item.supplier.name}}</strong><br><br>
+
+          Trade: <strong>{{item.formattedTrade}}</strong><br>
+          Retail: <strong>{{item.formattedRetail}}</strong><br>
         </p>
       {{else}}
         <p>
@@ -86,70 +101,93 @@
         </div>
         <div class="col-xs-12">
           <form>
-            <div class="form-group {{if item.name 'green'}} {{unless item.name 'red'}}">
-              <label for="name">Name*</label>
-              {{input type="text" class="form-control" id="name" placeholder="Name" value=item.name}}
-            </div>
-
-            <div class="form-group {{if item.quantity 'green'}} {{unless item.quantity 'red'}}">
-              <label for="qty">Quantity*</label>
-              {{input type="number" class="form-control" id="qty" placeholder="Quantity" value=item.quantity}}
-            </div>
-
-            <div class="form-group {{if item.minQuantity 'green'}} {{unless item.minQuantity 'red'}}">
-              <label for="mQty">Minimum Quantity*</label>
-              {{input type="number" class="form-control" id="mQty" placeholder="Minimum Quantity" value=item.minQuantity}}
-            </div>
-
-            <div class="form-group {{if selectedSupplier 'green'}} {{unless selectedSupplier 'red'}}">
-              <label>Supplier*</label>
-              <select class="form-control" onchange={{action 'selectSupplier' value="target.value"}}>
-                {{#if item.supplier}}
-                  <option value={{item.supplier.id}}>{{item.supplier.name}}</option>
-                {{/if}}
-
-                {{#each suppliers as |supplier|}}
-                  <option value={{supplier.id}}>{{supplier.name}}</option>
-                {{/each}}
-              </select>
-            </div>
-
-            <div class="form-group">
+            <div class="col-sm-12">
+              <div class="form-group {{if item.name 'green'}} {{unless item.name 'red'}}">
+                <label for="name">Name*</label>
+                {{input type="text" class="form-control" id="name" placeholder="Name" value=item.name}}
+              </div>
               <br>
-              {{#if newGroup}}
-                <div class="form-group {{if groupName 'green'}}">
-                  <label>Item Group Name</label> <a {{action "toggleNewGroup"}}>Select Group</a>
-                  {{input type="text" class="form-control" placeholder="Group Name" value=groupName}}
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group {{if item.quantity 'green'}} {{unless item.quantity 'red'}}">
+                <label for="qty">Quantity*</label>
+                {{input type="number" class="form-control" id="qty" placeholder="Quantity" value=item.quantity}}
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group {{if item.minQuantity 'green'}} {{unless item.minQuantity 'red'}}">
+                <label for="mQty">Minimum Quantity*</label>
+                {{input type="number" class="form-control" id="mQty" placeholder="Minimum Quantity" value=item.minQuantity}}
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group {{if item.trade 'green'}} {{unless item.trade 'red'}}">
+                <label for="tP">Trade Price*</label>
+                {{input type="number" class="form-control" id="tP" placeholder="Trade" value=item.trade}}
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group {{if item.retail 'green'}} {{unless item.retail 'red'}}">
+                <label for="retail">Retail Price*</label>
+                {{input type="number" class="form-control" id="retail" placeholder="Retail" value=item.retail}}
+              </div>
+            </div>
+
+            <div class="col-sm-12">
+              <br>
+              <div class="form-group {{if selectedSupplier 'green'}} {{unless selectedSupplier 'red'}}">
+                <label>Supplier*</label>
+                <select class="form-control" onchange={{action 'selectSupplier' value="target.value"}}>
+                  {{#if item.supplier}}
+                    <option value={{item.supplier.id}}>{{item.supplier.name}}</option>
+                  {{/if}}
+
+                  {{#each suppliers as |supplier|}}
+                    <option value={{supplier.id}}>{{supplier.name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+
+              <div class="form-group">
+                <br>
+                {{#if newGroup}}
+                  <div class="form-group {{if groupName 'green'}}">
+                    <label>Item Group Name</label> <a {{action "toggleNewGroup"}}>Select Group</a>
+                    {{input type="text" class="form-control" placeholder="Group Name" value=groupName}}
+                  </div>
+                {{else}}
+                  <div class="form-group {{if selectedGroup 'green'}}">
+                    <label>Item Group (Leave blank if no group for item)</label> <a {{action "toggleNewGroup"}}>Add Group</a>
+                    <select class="form-control" onchange={{action 'selectGroup' value="target.value"}}>
+                      {{#if item.group}}
+                        <option value={{item.group.id}}>{{item.group.name}}</option>
+                      {{/if}}
+
+                      {{#each groups as |group|}}
+                        <option value={{group.id}}>{{group.name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                {{/if}}
+              </div>
+
+              {{#if editMode}}
+                <div class="col-sm-6 text-left buttons">
+                  <button class="btn btn-danger" {{action "delete" item}}>Delete</button>
+                </div>
+                <div class="col-sm-6 text-right buttons">
+                  <button class="btn btn-default" {{action "update"}}>Update</button>
                 </div>
               {{else}}
-                <div class="form-group {{if selectedGroup 'green'}}">
-                  <label>Item Group (Leave blank if no group for item)</label> <a {{action "toggleNewGroup"}}>Add Group</a>
-                  <select class="form-control" onchange={{action 'selectGroup' value="target.value"}}>
-                    {{#if item.group}}
-                      <option value={{item.group.id}}>{{item.group.name}}</option>
-                    {{/if}}
-
-                    {{#each groups as |group|}}
-                      <option value={{group.id}}>{{group.name}}</option>
-                    {{/each}}
-                  </select>
+                <div class="col-sm-12 text-right buttons">
+                  <button class="btn btn-default" {{action "save"}}>Add Item</button>
                 </div>
               {{/if}}
-              <br>
             </div>
-
-            {{#if editMode}}
-              <div class="col-sm-6 text-left buttons">
-                <button class="btn btn-danger" {{action "delete" item}}>Delete</button>
-              </div>
-              <div class="col-sm-6 text-right buttons">
-                <button class="btn btn-default" {{action "update"}}>Update</button>
-              </div>
-            {{else}}
-              <div class="col-sm-12 text-right buttons">
-                <button class="btn btn-default" {{action "save"}}>Add Item</button>
-              </div>
-            {{/if}}
           </form>
         </div>
       </div>

@@ -23,7 +23,26 @@ export default Ember.Controller.extend({
 
     return ("UK" + id).replace(/\s/g, '').toUpperCase();
   }.property(),
-
+  total: function(){
+    var total = 0;
+    if(this.get("selectedSupplier") && this.get("transaction")) {
+      let controller = this;
+      this.get("selectedSupplier.stock").forEach(function (item) {
+        if (item.get("checked")) {
+          controller.get("transaction.lines").forEach(function (line) {
+            if (item.get("name") === line.get("name")) {
+              line.set("quantity", item.get("orderQuantity"));
+              var cost = line.get("quantity") * line.get("price");
+              line.set("total", cost);
+              total += cost;
+            }
+          });
+        }
+      });
+      this.set("transaction.totalCost",total);
+    }
+    return '£' + parseFloat(total).toFixed(2);
+  }.property("transaction.lines.length", "selectedSupplier.stock.@each.orderQuantity"),
   load: function(){
     let controller = this;
 
@@ -85,14 +104,24 @@ export default Ember.Controller.extend({
     update: function(){
       let controller = this;
       var updatedLines = [];
-      if(this.get("transaction.lines.length")){
+
+      var containLines = false;
+      this.get("transaction.lines").forEach(function(line) {
+        if (line.get("checked") === true) {
+          containLines = true;
+        }
+      });
+
+      if(!containLines) {
         this.deleteTransaction(this.get("transaction"));
       }else{
+        var total = 0;
         this.get("transaction.lines").forEach(function(line){
           if(line.get("checked") === true){
             var newLine = controller.store.createFragment("line",{
               name: line.get("name"),
               item: line.get("item"),
+              price: line.get("price")
             });
 
             if(line.get("newQuantity") !== 0){
@@ -101,17 +130,19 @@ export default Ember.Controller.extend({
               newLine.set("quantity", line.get("quantity"));
             }
 
+            newLine.set("total", line.get("price") * newLine.get("quantity"));
             updatedLines.pushObject(newLine);
+            total += newLine.get("total");
           }
         });
-
+        this.set("transaction.totalCost", total);
         this.set("transaction.lines", updatedLines);
         this.get("transaction").save().then(function(){
           controller.get("transaction.lines").forEach(function(line) {
             line.set("checked", true);
           });
 
-          controller.get("activityController").set("Order " + savedTransaction.get("transactionID") + " has been updated");
+          controller.get("activityController").set("Order " + controller.get("transaction.transactionID") + " has been updated");
           controller.set("application.message", "Order has been updated");
 
         });
@@ -119,19 +150,22 @@ export default Ember.Controller.extend({
     },
     placeOrder: function(){
       let controller = this;
-      this.set("transaction.supplier", controller.get("selectedSupplier"));
-      this.set("transaction.transactionID", this.get("generateTransactionID"));
-      this.set("transaction.dateCreated", moment().unix());
-      this.set("transaction.eta", moment().add(5, "days").unix());
-
-      this.get("transaction").save().then(function(savedTransaction){
-        controller.get("selectedSupplier.transactionHistory").pushObject(savedTransaction);
-        controller.get("selectedSupplier").save().then(function(){
-          controller.set("application.message", "Order has been placed");
-          controller.get("activityController").set("Order " + savedTransaction.get("transactionID") + " created");
-          controller.clear();
+      if(this.get("transaction.lines.length") !== 0){
+        this.set("transaction.supplier", controller.get("selectedSupplier"));
+        this.set("transaction.transactionID", this.get("generateTransactionID"));
+        this.set("transaction.dateCreated", moment().unix());
+        this.set("transaction.eta", moment().add(5, "days").unix());
+        this.get("transaction").save().then(function(savedTransaction){
+          controller.get("selectedSupplier.transactionHistory").pushObject(savedTransaction);
+          controller.get("selectedSupplier").save().then(function(){
+            controller.set("application.message", "Order has been placed");
+            controller.get("activityController").set("Order " + savedTransaction.get("transactionID") + " created");
+            controller.clear();
+          });
         });
-      });
+      }else{
+        this.set("application.message", "To create an order, you need to add at least one line");
+      }
     },
     delete: function(transaction){
       this.deleteTransaction(transaction);
@@ -155,7 +189,8 @@ export default Ember.Controller.extend({
           let newFragmentLine = this.store.createFragment("line", {
             name: item.get("name"),
             quantity: item.get("orderQuantity"),
-            item: item
+            item: item,
+            price: item.get("trade")
           });
 
           this.get("transaction.lines").pushObject(newFragmentLine);
