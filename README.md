@@ -1,6 +1,6 @@
 # Material-management
 
-The material management is designed for a bike company, it stores and manages suppliers, stock and deliveries. Users can also create orders to suppliers.
+University Assignment: The materials management is designed for a bike company, it stores and manages suppliers, stock and deliveries.
 
 ## Prerequisites
 
