@@ -1,7 +1,6 @@
 # Material-management
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+The material management is designed for a bike company, it stores and manages suppliers, stock and deliveries. Users can also create orders to suppliers.
 
 ## Prerequisites
 
