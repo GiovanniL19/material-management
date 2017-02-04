@@ -1,6 +1,7 @@
 <div class="header">
 </div>
 <div class="row sections dashboard">
+  <h3>Material<strong>Management</strong> <small>for BikeIt Ltd</small></h3>
     <div class="col-sm-6">
       {{#if lowStock}}
         <div class="col-sm-12 card lowStock">
@@ -10,11 +11,14 @@
                 <div class="col-sm-3 details">
                   <strong>{{item.name}}</strong>
                 </div>
-                <div class="col-sm-4 details">
+                <div class="col-sm-3 details">
                   Stock: <strong>{{item.quantity}}</strong>
                 </div>
-                <div class="col-sm-5 details">
+                <div class="col-sm-4 details">
                   <strong>{{item.supplier.name}}</strong>
+                </div>
+                <div class="col-sm-2 options text-right">
+                  {{fa-icon "ellipsis-h"}}
                 </div>
               </a>
             </div>
@@ -30,7 +34,7 @@
 
     <div class="col-sm-12 card activity">
       <h5>Recent Activity</h5>
-      {{#each activities as |activity|}}
+      {{#each sortedActivities as |activity|}}
         <div class="rowCard row">
           <div class="col-sm-4 details">
             <strong>{{activity.timeFormatted}}</strong>
