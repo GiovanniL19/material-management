@@ -2,22 +2,18 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model() {
-    return this.store.findAll('supplier');
+    return this.store.findAll('transaction');
   },
-  setupController: function(controller, model){
-    document.title = "Suppliers";
-
+  setupController: function(controller, model) {
+    document.title = "Orders";
     controller.set("model", model);
     controller.set("application.page",{
       dashboard: false,
       orders: false,
-      suppliers: true,
+      suppliers: false,
       deliveries: false,
       stock: false,
-      orders: false
+      orders: true
     });
-  },
-  deactivate: function(){
-    this.controllerFor("suppliers").clear();
   }
 });

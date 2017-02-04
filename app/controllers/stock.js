@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
 
   generateBarcode: function(){
     var barcode = "";
-    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     for(var i = 0; i < 20; i++){
       barcode += characters.charAt(Math.floor(Math.random() * characters.length));
@@ -24,6 +24,11 @@ export default Ember.Controller.extend({
     return barcode;
   }.property(),
 
+  selectedItem: function(item){
+    this.set("item", item);
+    this.set("editMode", true);
+    this.load();
+  },
   clear: function(){
     if(this.get("item")) {
       if (!this.get("item.id")) {
@@ -153,9 +158,7 @@ export default Ember.Controller.extend({
     },
 
     select: function(item){
-      this.set("editMode", true);
-      this.set("item", item);
-      this.load();
+      this.selectedItem(item);
     },
 
     update: function() {

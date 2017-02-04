@@ -4,7 +4,7 @@
       <div class="col-sm-12 card">
         <div class="col-sm-8"><h5>Suppliers</h5></div>
         <div class="col-sm-4 right text-right">
-          <button class="btn btn-primary" {{action "new"}}>New</button>
+          <button class="btn btn-primary" {{action "new"}}>New Supplier</button>
         </div>
         <div class="col-xs-12">
           {{#if model}}
@@ -12,14 +12,17 @@
               <div class="col-sm-3 details">
                 <strong>Name</strong>
               </div>
-              <div class="col-sm-5 details">
+              <div class="col-sm-4 details">
                 <strong>Trading Name</strong>
               </div>
-              <div class="col-sm-1 details text-center">
+              <div class="col-sm-2 details">
                 <strong>Status</strong>
               </div>
-              <div class="col-sm-3 options text-right">
-                <strong>Options</strong>
+              <div class="col-sm-2 options">
+                <strong>Place Order</strong>
+              </div>
+              <div class="col-sm-1 options text-right">
+                <strong>Delete</strong>
               </div>
             </div>
           {{/if}}
@@ -27,17 +30,20 @@
           {{#each model as |supplier|}}
             <div class="rowCard row">
               <div class="col-sm-3 details">
-                <strong>{{supplier.name}}</strong>
+                <strong><a {{action "select" supplier}}>{{supplier.name}}</a></strong>
               </div>
-              <div class="col-sm-5 details">
+              <div class="col-sm-4 details">
                 {{supplier.tradingAddress}}
               </div>
-              <div class="col-sm-1 details text-center">
+              <div class="col-sm-2 details">
                 <strong>{{supplier.status}}</strong>
               </div>
-              <div class="col-sm-3 options text-right">
-                <a>{{fa-icon "send"}}</a>
-                <a {{action "select" supplier}}>{{fa-icon "pencil"}}</a>
+              <div class="col-sm-2">
+                {{#if supplier.canOrder}}
+                  <button class="btn btn-primary" {{action "order" supplier}}>Order</button>
+                {{/if}}
+              </div>
+              <div class="col-sm-1 options text-right">
                 <a {{action "delete" supplier}}>{{fa-icon "times"}}</a>
               </div>
             </div>
@@ -55,14 +61,19 @@
 {{else}}
   <div class="row sections">
     <div class="col-sm-4 hidden-xs col-md-4">
-      <div class="col-sm-8">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}</div>
-      <div class="col-sm-12">
+      <div class="col-sm-12 card">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}</div>
+      <div class="col-sm-12 card">
         {{#if editMode}}
           <p>
             Trading Name: <strong>{{supplier.tradingName}}</strong><br>
             Trading Address: <strong>{{supplier.tradingAddress}}</strong><br>
             Returns Address: <strong>{{supplier.returnsAddress}}</strong><br>
           </p>
+          <div class="col-sm-12">
+            <button class="btn btn-default {{if supplier.isOk "selected"}}" {{action "updateStatus" "OK"}}>OK</button>
+            <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON HOLD</button>
+            <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD</button>
+          </div>
         {{else}}
           <p>
             When adding a new supplier, you need to fill in all the reqiured fields. The returns address is optional, if you leave it blank the default returns address will be the same as the trading address.

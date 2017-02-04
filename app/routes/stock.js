@@ -5,14 +5,16 @@ export default Ember.Route.extend({
     return this.store.findAll('item');
   },
   setupController: function(controller, model) {
-    controller.set("model", model);
+    document.title = "Stock";
 
+    controller.set("model", model);
     controller.set("application.page", {
       dashboard: false,
       orders: false,
       suppliers: false,
       deliveries: false,
-      stock: true
+      stock: true,
+      orders: false
     });
   },
   deactivate: function(){

@@ -16,5 +16,14 @@ export default Model.extend({
   minQuantity: DS.attr("number"),
   quantityOnHold: DS.attr("number"),
   group: DS.belongsTo("group", {async: true}),
-  supplier: DS.belongsTo("supplier", {async: true})
+  supplier: DS.belongsTo("supplier", {async: true}),
+
+  lowStock: function(){
+    let min = this.get('minQuantity') + 5;
+    if(this.get('quantity') < min){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("minQuantity", "quantity")
 });

@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
+  orders: Ember.inject.controller(),
   view: true,
   editMode: false,
   supplier: null,
@@ -19,6 +20,15 @@ export default Ember.Controller.extend({
   },
 
   actions:{
+    order: function(supplier){
+      this.set("orders.sentSupplier", supplier);
+      this.get("orders").load();
+      this.transitionToRoute("orders");
+    },
+    updateStatus: function(status){
+      this.set("supplier.status", status);
+      this.get("supplier").save();
+    },
     new: function(){
       this.set("supplier", this.store.createRecord("supplier"));
       this.set("view", false);

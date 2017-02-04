@@ -10,7 +10,7 @@ $red: #ff5656;
 $green: rgba(23, 179, 98, 0.37);
 $grey: rgba(255, 255, 255, 0.4);
 
-a, button, .btn{
+a, button, .btn, .form-control, .input-group-addon{
   -webkit-transition: ease 0.4s;
 }
 body{
@@ -32,7 +32,11 @@ hr{
   text-align:center;
 }
 
-button{
+button.btn.btn-default.selected {
+  background: white;
+  color: #353741;
+}
+button, .btn{
   &:hover{
     outline:0;
   }
@@ -73,6 +77,10 @@ a{
     text-align: left;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    .bottomLink{
+      position:absolute;
+      bottom:0;
+    }
     h3 {
       padding-left: 0.5em;
       text-transform: uppercase;
@@ -108,6 +116,9 @@ a{
             text-decoration: none;
             color: white;
           }
+          &:focus, &:active{
+            text-decoration: none;
+          }
         }
       }
       li.active {
@@ -124,6 +135,20 @@ a{
   background: white !important;
   border: none;
   margin-bottom: 1em;
+  color: $primary !important;
+
+  .form-control:focus + .input-group-addon, .form-control:active + .input-group-addon{
+    color:white !important;
+    background: $primary !important;
+  }
+
+  .form-control {
+    color: $primary !important;
+    &:focus, &:active{
+      color:white !important;
+      background: $primary !important;
+    }
+  }
 }
 .content{
   .btn{
@@ -212,9 +237,6 @@ a{
     padding: 1em;
   }
   form{
-    label{
-      color:white;
-    }
     .green > .form-control{
       border: none !important;
       border-bottom: 4px solid rgba(23, 179, 98, 0.37) !important;
@@ -229,6 +251,10 @@ a{
     }
   }
 }
+label{
+  padding-left:0.5em;
+  color:white !important;
+}
 .buttons{
   margin: 0;
   padding: 0;
@@ -239,7 +265,65 @@ a{
   width: 104%;
   height: 20em;
   margin: -1em;
-  margin-bottom: -5em;
+  margin-bottom: -8em;
+}
+.dashboard{
+  .rowCard{
+    padding: 0;
+    padding-right: 1em;
+    line-height: 3em;
+  }
+  .lowStock{
+    margin-bottom:1em;
+    padding:0 1em;
+    background: $red;
+    h5{
+      color:white;
+    }
+    .rowCard{
+      padding: 0;
+      line-height: 0em;
+      a{
+        color:white;
+        &:hover{opacity:0.7;}
+        &:focus, &:active{
+          color:white;
+          opacity:0.7;
+        }
+      }
+    }
+  }
+}
+.orders{
+  .nonScroll{
+    height:45em;
+    overflow-y:scroll;
+    color:white;
+    .options{
+      padding:1em 0;
+    }
+  }
+  .buttons{
+    margin-top:2em;
+  }
+  .stockList{
+    .rowCard{
+      line-height:2em;
+      cursor:pointer;
+    }
+    .checked{
+      background: #494c56;
+    }
+    .details{
+      padding:0;
+    }
+    .qty{
+      margin-top:-1em;
+      width:70%;
+    }
+    .newQty{
+      margin-top:1em;
+    }
+  }
 
 }
-
