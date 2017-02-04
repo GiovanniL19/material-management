@@ -10,6 +10,9 @@ export default Ember.Controller.extend({
   selectedSupplier: null,
   suppliers: [],
   sentSupplier: null,
+  sortDesc: ['dateCreated:desc'],
+  sortedModel: Ember.computed.sort('model', 'sortDesc'),
+
   generateTransactionID: function(){
     var id = "";
     let characters = moment.unix() + this.get("selectedSupplier.name");
@@ -35,7 +38,6 @@ export default Ember.Controller.extend({
           }
         });
       }
-
       controller.set("view", false);
     });
   },
@@ -43,55 +45,77 @@ export default Ember.Controller.extend({
     if(this.get("transaction")) {
       if (!this.get("transaction.id")) {
         this.get("transaction").deleteRecord();
-      }else{
-
       }
+      this.get("selectedSupplier.stock").forEach(function(item){
+        item.set("checked", false);
+        item.set("orderQuantity", "");
+      });
     }
     this.set("view", true);
     this.set("transaction", null);
     this.set("editMode", false);
+    this.set("suppliers", []);
   },
   selectedItem: function(transaction){
     this.set("transaction", transaction);
     this.get("transaction.lines").forEach(function(item){
       item.set("checked", true);
-      item.set("newQuantity", 0);
+      item.set("newQuantity", "");
     });
     this.set("view", false);
     this.set("editMode", true);
     this.load();
   },
+  deleteTransaction: function(transaction){
+    let controller = this;
+    if(confirm("You are about to cancel order " + transaction.get("transactionID"))){
+      this.store.findRecord('supplier', transaction.get("supplier.id")).then(function(supplier) {
+        supplier.get("transactionHistory").removeObject(transaction);
+        supplier.save().then(function(){
+          controller.get("activityController").set("Order " + transaction.get("transactionID") + " canceled");
+          transaction.destroyRecord().then(function(){
+            controller.set("application.message", "Order has been canceled");
+            controller.clear();
+          });
+        });
+      });
+    }
+  },
   actions:{
     update: function(){
       let controller = this;
       var updatedLines = [];
-      this.get("transaction.lines").forEach(function(line){
-        if(line.get("checked") === true){
-          var newLine = controller.store.createFragment("line",{
-            name: line.get("name"),
-            item: line.get("item"),
-          });
+      if(this.get("transaction.lines.length")){
+        this.deleteTransaction(this.get("transaction"));
+      }else{
+        this.get("transaction.lines").forEach(function(line){
+          if(line.get("checked") === true){
+            var newLine = controller.store.createFragment("line",{
+              name: line.get("name"),
+              item: line.get("item"),
+            });
 
-          if(line.get("newQuantity") !== 0){
-            newLine.set("quantity", line.get("newQuantity"));
-          }else{
-            newLine.set("quantity", line.get("quantity"));
+            if(line.get("newQuantity") !== 0){
+              newLine.set("quantity", line.get("newQuantity"));
+            }else{
+              newLine.set("quantity", line.get("quantity"));
+            }
+
+            updatedLines.pushObject(newLine);
           }
-
-          updatedLines.pushObject(newLine);
-        }
-      });
-
-      this.set("transaction.lines", updatedLines);
-      this.get("transaction").save().then(function(){
-        controller.get("transaction.lines").forEach(function(line) {
-          line.set("checked", true);
         });
 
-        controller.get("activityController").set("Order " + savedTransaction.get("transactionID") + " has been updated");
-        controller.set("application.message", "Order has been updated");
+        this.set("transaction.lines", updatedLines);
+        this.get("transaction").save().then(function(){
+          controller.get("transaction.lines").forEach(function(line) {
+            line.set("checked", true);
+          });
 
-      });
+          controller.get("activityController").set("Order " + savedTransaction.get("transactionID") + " has been updated");
+          controller.set("application.message", "Order has been updated");
+
+        });
+      }
     },
     placeOrder: function(){
       let controller = this;
@@ -110,19 +134,7 @@ export default Ember.Controller.extend({
       });
     },
     delete: function(transaction){
-      let controller = this;
-      if(confirm("You are about to cancel order " + transaction.get("transactionID"))){
-        this.store.findRecord('supplier', transaction.get("supplier.id")).then(function(supplier) {
-          supplier.get("transactionHistory").removeObject(transaction);
-          supplier.save().then(function(){
-            controller.get("activityController").set("Order " + transaction.get("transactionID") + " canceled");
-            transaction.destroyRecord().then(function(){
-              controller.set("application.message", "Order has been canceled");
-              controller.clear();
-            });
-          });
-        });
-      }
+      this.deleteTransaction(transaction);
     },
     addItem: function(){
       this.get("stock").load();
@@ -156,7 +168,12 @@ export default Ember.Controller.extend({
     selectSupplier: function(supplier){
       let controller = this;
       this.get("suppliers").forEach(function(item){
-        if(item.get("id") == supplier){
+        if(item.get("id") === supplier){
+          item.get("stock").forEach(function(line){
+            line.set("checked", false);
+            line.set("orderQuantity", "");
+          });
+
           controller.set("selectedSupplier", item);
         }
       });

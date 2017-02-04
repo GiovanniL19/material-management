@@ -7,7 +7,7 @@
           <button class="btn btn-primary" {{action "new"}}>New Supplier</button>
         </div>
         <div class="col-xs-12">
-          {{#if model}}
+          {{#if sortedModel}}
             <div class="rowCard row">
               <div class="col-sm-3 details">
                 <strong>Name</strong>
@@ -27,7 +27,7 @@
             </div>
           {{/if}}
 
-          {{#each model as |supplier|}}
+          {{#each sortedModel as |supplier|}}
             <div class="rowCard row">
               <div class="col-sm-3 details">
                 <strong><a {{action "select" supplier}}>{{supplier.name}}</a></strong>

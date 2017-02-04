@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
   view: true,
   editMode: false,
   supplier: null,
+  sortAsc: ['name:asc'],
+  sortedModel: Ember.computed.sort('model', 'sortAsc'),
 
   clear: function(){
     if(this.get("supplier")) {

@@ -12,7 +12,8 @@ export default Ember.Controller.extend({
   newGroup: false,
   selectedGroup: null,
   selectedSupplier: null,
-
+  sortAsc: ['name:asc'],
+  sortedModel: Ember.computed.sort('model', 'sortAsc'),
   generateBarcode: function(){
     var barcode = "";
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

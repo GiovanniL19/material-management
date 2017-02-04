@@ -8,7 +8,7 @@
             <button class="btn btn-primary" {{action "new"}}>New Order</button>
           </div>
           <div class="col-xs-12">
-            {{#if model}}
+            {{#if sortedModel}}
               <div class="rowCard row">
                 <div class="col-sm-3 details">
                   <strong>Transaction ID</strong>
@@ -31,7 +31,7 @@
               </div>
             {{/if}}
 
-            {{#each model as |transaction|}}
+            {{#each sortedModel as |transaction|}}
               <div class="rowCard row">
                 <div class="col-sm-3 details">
                   <a {{action "select" transaction}}>{{transaction.transactionID}}</a>
