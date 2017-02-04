@@ -4,12 +4,26 @@
 $menuColour: #2a2d35;
 $primary: #353741;
 $primaryS: #3b3d46;
-
+$evenColour: #40424c;
 $secondColour: #15bebf;
 $red: #ff5656;
 $green: rgba(23, 179, 98, 0.37);
 $grey: rgba(255, 255, 255, 0.4);
 
+/*
+// 1: GENERAL
+//  1.1: MENU
+//  1.2: SEARCH
+//  1.3: HEADER
+// 2: CONTENT
+// 3: DASHBOARD
+// 6: ORDERS
+// 5: SUPPLIERS
+// 6: STOCK
+*/
+
+
+//1. GENERAL
 a, button, .btn, .form-control, .input-group-addon{
   -webkit-transition: ease 0.4s;
 }
@@ -62,7 +76,18 @@ a{
     color:white;
   }
 }
-//Menu
+
+label{
+  padding-left:0.5em;
+  color:white !important;
+}
+.buttons{
+  margin: 0;
+  padding: 0;
+}
+
+
+//1.1. MENU
 .menu {
   margin: 0;
   padding: 0;
@@ -130,7 +155,7 @@ a{
   }
 }
 
-//Content
+//1.2. SEARCH
 .search{
   background: white !important;
   border: none;
@@ -150,6 +175,20 @@ a{
     }
   }
 }
+
+//1.3 HEADER
+.header{
+  //background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
+  //background:url('https://static.pexels.com/photos/132695/pexels-photo-132695.jpeg') center no-repeat;
+  background:url('https://static.pexels.com/photos/145397/pexels-photo-145397.jpeg') center no-repeat;
+  background-size: cover;
+  width: 104%;
+  height: 25em;
+  margin: -1em;
+  margin-bottom: -15em;
+}
+
+//2. CONTENT
 .content{
   .btn{
     background:$secondColour;
@@ -175,7 +214,7 @@ a{
     margin:15px 0;
     &:first-child{
       margin-bottom:0;
-      border-bottom:2px solid $grey;
+      //border-bottom:2px solid $grey;
     }
     .details{
       padding:1em 0;
@@ -251,22 +290,8 @@ a{
     }
   }
 }
-label{
-  padding-left:0.5em;
-  color:white !important;
-}
-.buttons{
-  margin: 0;
-  padding: 0;
-}
-.header{
-  background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
-  background-size: cover;
-  width: 104%;
-  height: 20em;
-  margin: -1em;
-  margin-bottom: -8em;
-}
+
+//3. DASHBOARD
 .dashboard{
   .rowCard{
     padding: 0;
@@ -277,53 +302,102 @@ label{
     margin-bottom:1em;
     padding:0 1em;
     background: $red;
+    max-height:9em;
+    overflow-y:scroll;
     h5{
       color:white;
     }
     .rowCard{
-      padding: 0;
+      padding: 0.5em 1em;
       line-height: 0em;
+      &:nth-child(even){
+        background: #f15050;
+      }
       a{
         color:white;
-        &:hover{opacity:0.7;}
+        &:hover{
+          opacity:0.6;
+        }
         &:focus, &:active{
-          color:white;
+          color: white;
           opacity:0.7;
         }
       }
     }
   }
+  .activity{
+    height:20em;
+    overflow-y:scroll;
+    .rowCard{
+      padding:0 1em;
+      &:nth-child(even){
+        background: $evenColour;
+      }
+      .details{
+        padding:0;
+      }
+    }
+  }
+  .suppliers{
+    .rowCard{
+      padding:0 1em;
+      &:nth-child(even){
+        background: $evenColour;
+      }
+    }
+  }
 }
+
+//4. ORDERS
 .orders{
+  .rowCard {
+    padding: 0 1em;
+    &:nth-child(even) {
+      background: $evenColour;
+    }
+  }
   .nonScroll{
     height:45em;
     overflow-y:scroll;
     color:white;
     .options{
       padding:1em 0;
+      cursor:pointer;
     }
   }
   .buttons{
     margin-top:2em;
   }
-  .stockList{
-    .rowCard{
-      line-height:2em;
-      cursor:pointer;
-    }
-    .checked{
-      background: #494c56;
-    }
-    .details{
-      padding:0;
-    }
-    .qty{
-      margin-top:-1em;
-      width:70%;
-    }
-    .newQty{
-      margin-top:1em;
+  .checked {
+    //background: #494c56;
+  }
+  .details {
+    padding: 0;
+  }
+  .qty {
+    margin-top: -2em !important;
+    width: 60%;
+  }
+  .newQty {
+    margin-top: 1em;
+  }
+}
+
+
+//4. SUPPLIERS
+.suppliersList {
+  .rowCard{
+    &:nth-child(even){
+      background: #40424c;
     }
   }
+}
 
+//5. STOCK
+.stockList {
+  .rowCard{
+    &:nth-child(even){
+      background: #40424c;
+    }
+  }
 }

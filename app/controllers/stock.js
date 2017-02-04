@@ -111,6 +111,8 @@ export default Ember.Controller.extend({
               supplier.get("stock").pushObject(savedItem);
               supplier.save().then(function(){
                 controller.set("application.message", "Item Saved & Group Added");
+                controller.get("activityController").set(savedItem.get("name") + " added to stock");
+                controller.get("activityController").set("Group " + savedGroup.get("name") + " has been created");
                 controller.clear();
               });
             });
@@ -128,6 +130,7 @@ export default Ember.Controller.extend({
             supplier.get("stock").pushObject(savedItem);
             supplier.save().then(function(){
               controller.set("application.message", "Item Saved");
+              controller.get("activityController").set(savedItem.get("name") + " added to stock");
               controller.clear();
             });
           });
@@ -147,7 +150,7 @@ export default Ember.Controller.extend({
               oldGroup.save().then(function () {
                 item.destroyRecord().then(function(){
                   controller.set("application.message", "Item Removed From Stock");
-                  controller.get("activityController").set("Deleted " + item.get("name"));
+                  controller.get("activityController").set("Item " + item.get("name") + " deleted from stock");
                   controller.clear();
                 });
               });
@@ -195,7 +198,9 @@ export default Ember.Controller.extend({
                         supplier.get("stock").pushObject(savedItem);
                         supplier.save().then(function () {
                           controller.clear();
-                          controller.set("application.message", "Item Saved & Group Added");
+                          controller.get("activityController").set(savedItem.get("name") + " updated");
+                          controller.get("activityController").set("Group " + savedGroup.get("name") + " has been created");
+                          controller.set("application.message", "Item Saved & Group Updated");
                         });
                       });
                     });
@@ -216,6 +221,7 @@ export default Ember.Controller.extend({
                         supplier.get("stock").pushObject(savedItem);
                         supplier.save().then(function(){
                           controller.clear();
+                          controller.get("activityController").set(savedItem.get("name") + " updated");
                           controller.set("application.message", "Item Saved");
                         });
                       });

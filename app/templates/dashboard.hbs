@@ -1,39 +1,34 @@
 <div class="header">
 </div>
 <div class="row sections dashboard">
-
-  <div class="col-sm-12">
-    <div class="col-sm-12 card lowStock">
-      <h5>Low Stock</h5>
-      {{#each lowStock as |item|}}
-        <div class="rowCard row">
-          <a {{action "selectStockItem" item}}>
-            <div class="col-sm-3 details">
-              Item: <strong>{{item.name}}</strong>
+    <div class="col-sm-6">
+      {{#if lowStock}}
+        <div class="col-sm-12 card lowStock">
+          {{#each lowStock as |item|}}
+            <div class="rowCard row">
+              <a {{action "selectStockItem" item}}>
+                <div class="col-sm-3 details">
+                  <strong>{{item.name}}</strong>
+                </div>
+                <div class="col-sm-4 details">
+                  Stock: <strong>{{item.quantity}}</strong>
+                </div>
+                <div class="col-sm-5 details">
+                  <strong>{{item.supplier.name}}</strong>
+                </div>
+              </a>
             </div>
-            <div class="col-sm-3 details text-right">
-              In Stock: <strong>{{item.quantity}}</strong>
+          {{else}}
+            <div class="rowCard">
+              <div class="col-sm-10 details">
+                <strong>Stock Not Low</strong>
+              </div>
             </div>
-            <div class="col-sm-3 details text-right">
-              Minimum Stock: <strong>{{item.minQuantity}}</strong>
-            </div>
-            <div class="col-sm-3 details text-right">
-              Supplier: <strong>{{item.supplier.name}}</strong>
-            </div>
-          </a>
+          {{/each}}
         </div>
-      {{else}}
-        <div class="rowCard">
-          <div class="col-sm-10 details">
-            <strong>Stock Not Low</strong>
-          </div>
-        </div>
-      {{/each}}
-    </div>
-  </div>
+      {{/if}}
 
-  <div class="col-sm-6">
-    <div class="col-sm-12 card">
+    <div class="col-sm-12 card activity">
       <h5>Recent Activity</h5>
       {{#each activities as |activity|}}
         <div class="rowCard row">
@@ -58,14 +53,14 @@
   </div>
 
   <div class="col-sm-6">
-    <div class="col-sm-12 card">
+    <div class="col-sm-12 card suppliers">
       <h5>Top Suppliers</h5>
       {{#each suppliers as |supplier|}}
         <div class="rowCard row">
-          <div class="col-sm-8 details">
+          <div class="col-sm-7 details">
             {{supplier.name}}
           </div>
-          <div class="col-sm-4 details text-right">
+          <div class="col-sm-5 details text-right">
             {{#if supplier.canOrder}}
                 <button class="btn btn-primary" {{action "order" supplier}}>Place Order</button>
             {{/if}}

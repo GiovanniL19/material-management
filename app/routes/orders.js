@@ -15,5 +15,8 @@ export default Ember.Route.extend({
       stock: false,
       orders: true
     });
+  },
+  deactivate: function(){
+    this.controllerFor("orders").clear();
   }
 });

@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   stock: Ember.inject.controller(),
+  activityController: Ember.inject.controller(),
   view: true,
   editMode: false,
   transaction: null,
@@ -23,12 +24,16 @@ export default Ember.Controller.extend({
   load: function(){
     let controller = this;
 
-    this.store.findAll("supplier"). then(function(suppliers){
+    this.store.findAll("supplier").then(function(suppliers){
       controller.set("suppliers", suppliers);
-      if(controller.get("sentSupplier")){
+      if(controller.get("sentSupplier") !== null){
         controller.set("selectedSupplier", controller.get('sentSupplier'));
       }else{
-        controller.set("selectedSupplier", controller.get('suppliers.firstObject'));
+        suppliers.forEach(function(supplier){
+          if(supplier.get("canOrder") === true){
+            controller.set("selectedSupplier", supplier);
+          }
+        });
       }
 
       controller.set("view", false);
@@ -82,7 +87,10 @@ export default Ember.Controller.extend({
         controller.get("transaction.lines").forEach(function(line) {
           line.set("checked", true);
         });
-        controller.set("application.message", "Order has been saved");
+
+        controller.get("activityController").set("Order " + savedTransaction.get("transactionID") + " has been updated");
+        controller.set("application.message", "Order has been updated");
+
       });
     },
     placeOrder: function(){
@@ -96,6 +104,7 @@ export default Ember.Controller.extend({
         controller.get("selectedSupplier.transactionHistory").pushObject(savedTransaction);
         controller.get("selectedSupplier").save().then(function(){
           controller.set("application.message", "Order has been placed");
+          controller.get("activityController").set("Order " + savedTransaction.get("transactionID") + " created");
           controller.clear();
         });
       });
@@ -106,6 +115,7 @@ export default Ember.Controller.extend({
         this.store.findRecord('supplier', transaction.get("supplier.id")).then(function(supplier) {
           supplier.get("transactionHistory").removeObject(transaction);
           supplier.save().then(function(){
+            controller.get("activityController").set("Order " + transaction.get("transactionID") + " canceled");
             transaction.destroyRecord().then(function(){
               controller.set("application.message", "Order has been canceled");
               controller.clear();
