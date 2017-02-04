@@ -7,6 +7,10 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     supplier: {
       serialize: 'ids',
       deserialize: 'ids'
+    },
+    bikes: {
+      serialize: 'ids',
+      deserialize: 'ids'
     }
   }
 });

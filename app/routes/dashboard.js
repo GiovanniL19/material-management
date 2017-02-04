@@ -12,7 +12,8 @@ export default Ember.Route.extend({
       suppliers: false,
       deliveries: false,
       stock: false,
-      orders: false
+      orders: false,
+      bikes: false
     });
   }
 });
