@@ -148,13 +148,20 @@
               {{input type="number" class="form-control" id="contact" placeholder="Contact Number"
                       value=supplier.contact}}
             </div>
-            <div class="col-sm-12 text-right buttons">
-              {{#if editMode}}
+
+            {{#if editMode}}
+              <div class="col-sm-6 buttons">
+                <button class="btn btn-danger" {{action "delete" supplier}}>Delete</button>
+              </div>
+
+              <div class="col-sm-6 text-right  buttons">
                 <button class="btn btn-default" {{action "update"}}>Update</button>
-              {{else}}
+              </div>
+            {{else}}
+              <div class="col-sm-12 text-right buttons">
                 <button class="btn btn-default" {{action "save"}}>Add Supplier</button>
-              {{/if}}
-            </div>
+              </div>
+            {{/if}}
           </form>
         </div>
       </div>

@@ -71,6 +71,7 @@ export default Ember.Controller.extend({
         controller.get("activityController").set("Deleted " + controller.get("supplier.name"));
         supplier.destroyRecord().then(function(){
           controller.set("application.message", "Supplier Removed");
+          controller.clear();
         });
       }
     },
