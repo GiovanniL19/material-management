@@ -11,13 +11,17 @@ export default Ember.Controller.extend({
   itemResults: [],
   orderResults: [],
   bikeResults: [],
+
   close: function(){
-    this.set("searchInput", "");
-    this.set("searchMode", false);
-    this.set("supplierResults", []);
-    this.set("itemResults", []);
-    this.set("orderResults", []);
-    this.set("bikeResults", []);
+    let controller = this;
+    setTimeout(function(){
+      controller .set("searchInput", "");
+      controller .set("searchMode", false);
+      controller .set("supplierResults", []);
+      controller .set("itemResults", []);
+      controller .set("orderResults", []);
+      controller .set("bikeResults", []);
+    },500);
   },
   search: function(){
     let controller = this;
@@ -78,27 +82,27 @@ export default Ember.Controller.extend({
       controller.get("bikeResults").addObjects(bikeResults);
     });
 
-
   }.observes("searchInput"),
   actions:{
     goTo: function(option, object){
       this.close();
+      let controller = this;
       switch(option){
         case "supplier":
-          this.get("suppliers").selectedItem(object);
           this.transitionToRoute("suppliers");
+          controller.get("suppliers").selectedItem(object);
           break;
         case "item":
-          this.get("stock").selectedItem(object);
           this.transitionToRoute("stock");
+          this.get("stock").selectedItem(object);
           break;
         case "order":
-          this.get("orders").selectedItem(object);
           this.transitionToRoute("orders");
+          this.get("orders").selectedItem(object);
           break;
         case "bike":
-          this.get("bikes").selectedItem(object);
           this.transitionToRoute("bikes");
+          this.get("bikes").selectedItem(object);
           break;
       }
     },

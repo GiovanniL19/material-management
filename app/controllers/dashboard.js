@@ -10,14 +10,16 @@ export default Ember.Controller.extend({
   lowStock: [],
   sortDesc: ['time:desc'],
   sortedActivities: Ember.computed.sort('activities', 'sortDesc'),
+  sortDescSup: ['name:desc'],
+  sortedSuppliers: Ember.computed.sort('suppliers', 'sortDescSup'),
 
   setUp: function(){
     let controller = this;
 
     this.store.findAll("supplier").then(function(suppliers){
-      controller.set("suppliers", suppliers.toArray().reverse());
+      controller.set("suppliers", suppliers);
       controller.store.findAll("activity").then(function(activities){
-        controller.set("activities", activities.toArray().reverse());
+        controller.set("activities", activities);
 
         controller.set("lowStock", []);
         controller.store.findAll("item").then(function(stock){

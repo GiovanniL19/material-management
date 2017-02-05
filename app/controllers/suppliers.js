@@ -16,12 +16,12 @@ export default Ember.Controller.extend({
     this.set("supplier", supplier);
   },
   clear: function(){
+    this.set("view", true);
     if(this.get("supplier")) {
       if (!this.get("supplier.id")) {
         this.get("supplier").deleteRecord();
       }
     }
-    this.set("view", true);
     this.set("supplier", null);
     this.set("editMode", false);
   },
@@ -29,11 +29,7 @@ export default Ember.Controller.extend({
   actions:{
     selectOrder: function(transaction){
       this.get("orders").selectedItem(transaction);
-      this.clear();
-      let controller = this;
-      setTimeout(function(){
-        controller.transitionToRoute("orders");
-      },400);
+      this.transitionToRoute("orders");
     },
     order: function(supplier){
       this.set("orders.sentSupplier", supplier);

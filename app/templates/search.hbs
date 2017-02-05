@@ -23,10 +23,10 @@
           <div class="col-sm-4">
             <a {{action "goTo" "supplier" supplier}}>{{supplier.name}}</a>
           </div>
-          <div class="col-sm-4">
-            Address: <strong>{{supplier.tradeAddress}}</strong>
+          <div class="col-sm-4 text-center">
+            Address: <strong>{{supplier.tradingAddress}}</strong>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-4 text-right">
             Status: <strong>{{supplier.status}}</strong>
           </div>
         </div>
@@ -43,10 +43,10 @@
         <div class="col-sm-4">
           <a {{action "goTo" "item" item}}>{{item.name}}</a>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-center">
           Group: <strong>{{item.group.name}}</strong>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-right">
           Quantity: <strong>{{item.quantity}}</strong>
         </div>
       </div>
@@ -62,10 +62,10 @@
         <div class="col-sm-4">
           <a {{action "goTo" "order" order}}>{{order.transactionID}}</a>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-center">
           Supplier: <strong>{{order.supplier.name}}</strong>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-right">
           Cost: <strong>{{order.totalHuman}}</strong>
         </div>
       </div>
@@ -81,10 +81,10 @@
         <div class="col-sm-4">
           <a {{action "goTo" "bike" bike}}>{{bike.name}}</a>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-center">
           Cost To Manufacture: <strong>{{bike.formattedPrice}}</strong>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-right">
           Retail Price: <strong>{{bike.formattedRetail}}</strong>
         </div>
       </div>

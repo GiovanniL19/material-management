@@ -19,6 +19,9 @@ export default Ember.Route.extend({
     });
   },
   deactivate: function(){
-    this.controllerFor("suppliers").clear();
+    let controller = this;
+    setTimeout(function(){
+      controller.controllerFor("suppliers").clear();
+    },1000);
   }
 });

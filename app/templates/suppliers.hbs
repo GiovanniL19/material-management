@@ -67,8 +67,8 @@
         {{#if editMode}}
           <p>
             Trading Name: <strong>{{supplier.tradingName}}</strong><br>
-            Trading Address: <strong>{{supplier.tradingAddress}}</strong><br>
-            Returns Address: <strong>{{#if supplier.returnsAddress}}{{supplier.returnsAddress}}{{else}}Same As Trade Address{{/if}}</strong><br>
+            Trading Address: <br><strong>{{supplier.tradingAddress}}</strong><br><br>
+            Returns Address: <br><strong>{{#if supplier.returnsAddress}}{{supplier.returnsAddress}}{{else}}Same as trading address{{/if}}</strong><br>
           </p>
           <div class="col-sm-12">
             <button class="btn btn-default {{if supplier.isOk "selected"}}" {{action "updateStatus" "OK"}}>OK</button>

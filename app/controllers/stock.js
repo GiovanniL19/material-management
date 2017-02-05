@@ -31,12 +31,12 @@ export default Ember.Controller.extend({
     this.load();
   },
   clear: function(){
+    this.set("view", true);
     if(this.get("item")) {
       if (!this.get("item.id")) {
         this.get("item").deleteRecord();
       }
     }
-    this.set("view", true);
     this.set("item", null);
     this.set("groupName", null);
     this.set("editMode", false);

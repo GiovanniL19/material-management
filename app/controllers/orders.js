@@ -104,11 +104,7 @@ export default Ember.Controller.extend({
   actions:{
     goToSupplier: function(supplier){
       this.get("supplierController").selectedItem(supplier);
-      this.clear();
-      let controller = this;
-      setTimeout(function(){
-        controller.transitionToRoute("suppliers");
-      },400);
+      this.transitionToRoute("suppliers");
     },
     update: function(){
       let controller = this;
