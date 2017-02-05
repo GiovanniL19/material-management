@@ -27,8 +27,14 @@ $grey: rgba(255, 255, 255, 0.4);
 a, button, .btn, .form-control, .input-group-addon{
   -webkit-transition: ease 0.4s;
 }
-body{
+body, html{
   background:$primary;
+  //Hide scroll bar
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 hr{
   border:none;
@@ -312,7 +318,15 @@ label{
     padding:0 1em;
     background: $red;
     max-height:9em;
+    //Make div scrollable
     overflow-y:scroll;
+
+    //Hide scroll bar
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     h5{
       color:white;
     }
@@ -345,7 +359,16 @@ label{
   }
   .activity{
     height:25em;
+    //Make div scrollable
     overflow-y:scroll;
+
+    //Hide scroll bar
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     .rowCard{
       padding:0 1em;
       &:nth-child(even){
@@ -358,7 +381,15 @@ label{
   }
   .suppliers{
     height:34em;
+    //Make div scrollable
     overflow-y:scroll;
+
+    //Hide scroll bar
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .rowCard{
       padding:0 1em;
       &:nth-child(even){
@@ -378,7 +409,16 @@ label{
   }
   .nonScroll{
     height:45em;
+    //Make div scrollable
     overflow-y:scroll;
+
+    //Hide scroll bar
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     color:white;
     .options{
       padding:1em 0;
