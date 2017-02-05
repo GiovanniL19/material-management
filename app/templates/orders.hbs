@@ -73,7 +73,7 @@
           {{#if editMode}}
             <h3>{{transaction.formattedTotal}}</h3>
             <p>
-              Supplier: {{transaction.supplier.name}}<br>
+              Supplier: <a {{action "goToSupplier" transaction.supplier}}>{{transaction.supplier.name}}</a><br>
               Contact: {{transaction.supplier.contact}}<br>
               Order Lines: {{transaction.lines.length}}<br><br>
               ETA: <strong>{{transaction.etaHuman}}</strong><br><br>

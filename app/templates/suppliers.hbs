@@ -61,22 +61,51 @@
 {{else}}
   <div class="row sections">
     <div class="col-sm-4 hidden-xs col-md-4">
-      <div class="col-sm-12 card">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}</div>
+      <div class="col-sm-12 card">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}
+      </div>
       <div class="col-sm-12 card">
         {{#if editMode}}
           <p>
             Trading Name: <strong>{{supplier.tradingName}}</strong><br>
             Trading Address: <strong>{{supplier.tradingAddress}}</strong><br>
-            Returns Address: <strong>{{supplier.returnsAddress}}</strong><br>
+            Returns Address: <strong>{{#if supplier.returnsAddress}}{{supplier.returnsAddress}}{{else}}Same As Trade Address{{/if}}</strong><br>
           </p>
           <div class="col-sm-12">
             <button class="btn btn-default {{if supplier.isOk "selected"}}" {{action "updateStatus" "OK"}}>OK</button>
-            <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON HOLD</button>
-            <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD</button>
+            <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON
+              HOLD
+            </button>
+            <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD
+            </button>
+          </div>
+          <div class="col-sm-12 card orderList">
+            {{#if supplier.transactionHistory}}
+              <h5>Orders</h5>
+            {{/if}}
+            {{#each supplier.transactionHistory as |transaction|}}
+              <div class="rowCard row">
+                <div class="col-sm-4 details">
+                  <a {{action "selectOrder" transaction}}>{{transaction.transactionID}}</a>
+                </div>
+                <div class="col-sm-4 details">
+                  {{transaction.orderDateFormatted}}
+                </div>
+                <div class="col-sm-4 details text-center">
+                  {{transaction.totalHuman}}
+                </div>
+              </div>
+            {{else}}
+              <div class="rowCard row">
+                <div class="col-sm-12 details">
+                  <small>No Orders Found</small>
+                </div>
+              </div>
+            {{/each}}
           </div>
         {{else}}
           <p>
-            When adding a new supplier, you need to fill in all the reqiured fields. The returns address is optional, if you leave it blank the default returns address will be the same as the trading address.
+            When adding a new supplier, you need to fill in all the required fields. The returns address is optional, if
+            you leave it blank the default returns address will be the same as the trading address.
           </p>
         {{/if}}
       </div>
@@ -97,24 +126,27 @@
             <hr>
             <div class="form-group {{if supplier.tradingName 'green'}} {{unless supplier.tradingName 'red'}}">
               <label for="tName">Trading Name*</label>
-              {{input type="text" class="form-control" id="tName" placeholder="Trading Name" value=supplier.tradingName}}
+              {{input type="text" class="form-control" id="tName" placeholder="Trading Name"value=supplier.tradingName}}
             </div>
 
             <div class="form-group {{if supplier.tradingAddress 'green'}} {{unless supplier.tradingAddress 'red'}}">
               <label for="tAddress">Trading Address*</label>
-              {{input type="text" class="form-control" id="tAddress" placeholder="Trading Address" value=supplier.tradingAddress}}
+              {{input type="text" class="form-control" id="tAddress" placeholder="Trading Address"
+                      value=supplier.tradingAddress}}
             </div>
 
             <hr>
             <div class="form-group {{if supplier.returnsAddress 'green'}}">
               <label for="rAddress">Returns Address (Leave blank if same as trading address)</label>
-              {{input type="text" class="form-control" id="rAddress" placeholder="Returns Address" value=supplier.returnsAddress}}
+              {{input type="text" class="form-control" id="rAddress" placeholder="Returns Address"
+                      value=supplier.returnsAddress}}
             </div>
 
             <hr>
             <div class="form-group  {{if supplier.contact 'green'}} {{unless supplier.contact 'red'}}">
               <label for="contact">Contact Number*</label>
-              {{input type="number" class="form-control" id="contact" placeholder="Contact Number" value=supplier.contact}}
+              {{input type="number" class="form-control" id="contact" placeholder="Contact Number"
+                      value=supplier.contact}}
             </div>
             <div class="col-sm-12 text-right buttons">
               {{#if editMode}}

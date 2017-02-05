@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   stock: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
+  supplierController: Ember.inject.controller("suppliers"),
   view: true,
   editMode: false,
   transaction: null,
@@ -101,6 +102,14 @@ export default Ember.Controller.extend({
     }
   },
   actions:{
+    goToSupplier: function(supplier){
+      this.get("supplierController").selectedItem(supplier);
+      this.clear();
+      let controller = this;
+      setTimeout(function(){
+        controller.transitionToRoute("suppliers");
+      },400);
+    },
     update: function(){
       let controller = this;
       var updatedLines = [];

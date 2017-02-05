@@ -27,6 +27,14 @@ export default Ember.Controller.extend({
   },
 
   actions:{
+    selectOrder: function(transaction){
+      this.get("orders").selectedItem(transaction);
+      this.clear();
+      let controller = this;
+      setTimeout(function(){
+        controller.transitionToRoute("orders");
+      },400);
+    },
     order: function(supplier){
       this.set("orders.sentSupplier", supplier);
       this.get("orders").load();

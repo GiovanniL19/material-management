@@ -197,8 +197,8 @@ label{
 
 //1.3 HEADER
 .header{
-  //background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
-  background:url('https://static.pexels.com/photos/132695/pexels-photo-132695.jpeg') center no-repeat;
+  background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
+  //background:url('https://static.pexels.com/photos/132695/pexels-photo-132695.jpeg') center no-repeat;
   //background:url('https://static.pexels.com/photos/145397/pexels-photo-145397.jpeg') center no-repeat;
   background-size: cover;
   width: 104%;
@@ -515,5 +515,17 @@ label{
     &:nth-child(even){
       background: #40424c;
     }
+  }
+}
+//Order List
+.orderList{
+  h5{
+    margin:0;
+    margin-top:2em;
+    padding:0;
+  }
+  .rowCard {
+    padding: 0;
+    height:1em !important;
   }
 }
