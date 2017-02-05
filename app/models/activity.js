@@ -13,6 +13,6 @@ export default Model.extend({
   result: DS.attr("string"),
 
   timeFormatted: function(){
-    return moment.unix(this.get("time")).format("DD/MM/YYYY HH:mm");
+    return moment.unix(this.get("time")).fromNow();
   }.property("time")
 });

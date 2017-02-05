@@ -8,6 +8,9 @@ export default Ember.Controller.extend({
   suppliers: [],
   activities: [],
   lowStock: [],
+  sortDesc: ['time:desc'],
+  sortedActivities: Ember.computed.sort('activities', 'sortDesc'),
+
   setUp: function(){
     let controller = this;
 

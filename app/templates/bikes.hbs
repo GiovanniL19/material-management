@@ -1,0 +1,191 @@
+{{#liquid-if view class="nextPage"}}
+  <div class="row sections stockList">
+    <div class="col-sm-12">
+      <div class="col-sm-12 card">
+        <div class="col-sm-8"><h5>Bikes</h5></div>
+        <div class="col-sm-4 right text-right">
+          <button class="btn btn-primary" {{action "new"}}>New Bike</button>
+        </div>
+        <div class="col-xs-12">
+          {{#if sortedModel}}
+            <div class="rowCard row">
+              <div class="col-sm-5 details">
+                <strong>Name</strong>
+              </div>
+              <div class="col-sm-2 details">
+                <strong>Quantity</strong>
+              </div>
+              <div class="col-sm-2 details">
+                <strong>Retail</strong>
+              </div>
+              <div class="col-sm-2 details">
+                <strong>Sold</strong>
+              </div>
+              <div class="col-sm-1 options text-right">
+                <strong>Options</strong>
+              </div>
+            </div>
+          {{/if}}
+
+          {{#each sortedModel as |bike|}}
+            <div class="rowCard row">
+              <div class="col-sm-5 details">
+                <strong><a {{action "select" bike}}>{{bike.name}}</a></strong>
+              </div>
+              <div class="col-sm-2 details">
+                {{bike.quantity}}
+              </div>
+              <div class="col-sm-2 details">
+                {{bike.formattedRetail}}
+              </div>
+              <div class="col-sm-2 details">
+                <strong>{{bike.amountSold}}</strong>
+              </div>
+              <div class="col-sm-1 options text-right">
+                <a {{action "delete" bike}}>{{fa-icon "times"}}</a>
+              </div>
+            </div>
+          {{else}}
+            <div class="rowCard row">
+              <div class="col-sm-12 details">
+                <small>No Bikes Found</small>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="row sections">
+    <div class="col-sm-4 hidden-xs col-md-4">
+      <div class="col-sm-12 card">
+        {{#if editMode}}<h3>{{bike.name}}</h3>{{/if}}
+        {{#if editMode}}
+          <h3>{{bike.formattedRetail}}</h3>
+          <p>
+            Sold: <strong>{{bike.amountSold}}</strong><br>
+            Manufacturing Cost (Ex Labour): <strong>{{bike.formattedPrice}}</strong><br>
+            No. Components: <strong>{{bike.components.length}}</strong><br><br>
+            With current stock levels, <strong>{{bike.quantity}}</strong> can be produced
+            <br>
+            <br>
+            <div class="col-sm-6 text-left buttons">
+              <button class="btn btn-danger" {{action "delete" bike}}>Delete</button>
+            </div>
+            <div class="col-sm-6 text-right buttons">
+              <button class="btn btn-primary" {{action "sold" bike}}>Sold*</button>
+            </div>
+          <br><br><br>
+          <small>*When you click sold, stock levels will update across the system and can not be undone. Only click sold once the customer has collected the bike</small>
+          </p>
+        {{else}}
+          <h3>Bike Price: {{bike.formattedPrice}}</h3>
+          <p>
+            Please select all the components needed to make the bike from the right.
+          </p>
+          <form>
+            <div class="col-sm-12">
+              <div class="form-group {{if bike.name 'green'}} {{unless bike.name 'red'}}">
+                <label for="name">Name*</label>
+                {{input type="text" class="form-control" id="name" placeholder="Name" value=bike.name}}
+              </div>
+              <br>
+              <div class="form-group {{if bike.retail 'green'}} {{unless bike.retail 'red'}}">
+                <label for="rP">Retail Price*</label>
+                {{input type="number" class="form-control" id="rP" placeholder="Retail" value=bike.retail}}
+              </div>
+              <div class="col-sm-12 text-right buttons">
+                <button class="btn btn-default" {{action "createBike"}}>Create Bike</button>
+              </div>
+            </div>
+          </form>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-8 col-md-8">
+      <div class="col-sm-12 card">
+        <div class="col-sm-12 right text-right">
+          <button class="btn btn-primary" {{action "back"}}>Back</button>
+        </div>
+        <div class="col-xs-12">
+          {{#unless editMode}}
+            <div class="rowCard row">
+              <div class="col-sm-4 details">
+                <strong>Name</strong>
+              </div>
+              <div class="col-sm-3 details">
+                <strong>Trade Price</strong>
+              </div>
+              <div class="col-sm-4 details">
+                <strong>Supplier</strong>
+              </div>
+              <div class="col-sm-1 options text-right">
+                <strong>Selected</strong>
+              </div>
+            </div>
+
+            {{#each stock as |item|}}
+              <div class="rowCard row {{if item.checked "checked"}}">
+                <div class="col-sm-4 details" {{action "selectLine" item}}>
+                  {{item.name}}
+                </div>
+                <div class="col-sm-3 details" {{action "selectLine" item}}>
+                  {{item.formattedTrade}}
+                </div>
+                <div class="col-sm-4 details" {{action "selectLine" item}}>
+                  {{item.supplier.name}}
+                </div>
+                <div class="col-sm-1 options text-right" {{action "selectLine" item}}>
+                  {{#if item.checked}}
+                    {{fa-icon "check"}}
+                  {{else}}
+                    {{fa-icon "square-o"}}
+                  {{/if}}
+                </div>
+              </div>
+            {{else}}
+              <h5>No Components Found</h5>
+            {{/each}}
+
+          {{else}}
+            <div class="rowCard row">
+              <div class="col-sm-3 details">
+                <strong>Name</strong>
+              </div>
+              <div class="col-sm-3 details">
+                <strong>Trade Price</strong>
+              </div>
+              <div class="col-sm-3 details">
+                <strong>Supplier</strong>
+              </div>
+              <div class="col-sm-3 details">
+                <strong>Stock Level</strong>
+              </div>
+            </div>
+
+            {{#each bike.components as |item|}}
+              <div class="rowCard row {{if item.checked "checked"}}">
+                <div class="col-sm-3 details" {{action "selectLine" item}}>
+                  {{item.name}}
+                </div>
+                <div class="col-sm-3 details" {{action "selectLine" item}}>
+                  {{item.formattedTrade}}
+                </div>
+                <div class="col-sm-3 details" {{action "selectLine" item}}>
+                  {{item.supplier.name}}
+                </div>
+                <div class="col-sm-3 details" {{action "selectLine" item}}>
+                  {{item.quantity}}
+                </div>
+              </div>
+            {{else}}
+              <h5>No Components Found</h5>
+            {{/each}}
+          {{/unless}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{/liquid-if}}

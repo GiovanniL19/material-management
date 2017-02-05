@@ -13,7 +13,11 @@ export default Ember.Route.extend({
       suppliers: false,
       deliveries: false,
       stock: false,
-      orders: true
+      orders: true,
+      bikes: false
     });
+  },
+  deactivate: function(){
+    this.controllerFor("orders").clear();
   }
 });
