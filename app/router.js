@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('stock');
   this.route('orders');
   this.route('bikes');
+  this.route('search');
 });
 
 export default Router;

@@ -10,6 +10,11 @@ export default Ember.Controller.extend({
   sortAsc: ['name:asc'],
   sortedModel: Ember.computed.sort('model', 'sortAsc'),
 
+  selectedItem: function(supplier){
+    this.set("editMode", true);
+    this.set('view', false);
+    this.set("supplier", supplier);
+  },
   clear: function(){
     if(this.get("supplier")) {
       if (!this.get("supplier.id")) {
@@ -66,9 +71,7 @@ export default Ember.Controller.extend({
       }
     },
     select: function(supplier){
-      this.set("editMode", true);
-      this.set('view', false);
-      this.set("supplier", supplier);
+      this.selectedItem(supplier);
     },
     update: function(){
       let controller = this;

@@ -15,6 +15,7 @@ $grey: rgba(255, 255, 255, 0.4);
 //  1.1: MENU
 //  1.2: SEARCH
 //  1.3: HEADER
+//  1.4: SEARCH RESULTS
 // 2: CONTENT
 // 3: DASHBOARD
 // 6: ORDERS
@@ -168,6 +169,18 @@ label{
   margin-bottom: 1em;
   color: $primary !important;
 
+  .searchMode{
+    .input-group-addon, .form-control:active + .input-group-addon{
+      color:white !important;
+      background: $primary !important;
+    }
+
+    .form-control {
+      color:white !important;
+      background: $primary !important;
+    }
+  }
+
   .form-control:focus + .input-group-addon, .form-control:active + .input-group-addon{
     color:white !important;
     background: $primary !important;
@@ -192,6 +205,48 @@ label{
   height: 25em;
   margin: -1em;
   margin-bottom: -21em;
+}
+
+//1.4 SEARCH RESULTS
+.searchResults{
+  padding:1em 1em;
+  background: rgba(53, 55, 65, 0.97);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 99999;
+  left: 0;
+  top: 6em;
+  overflow: scroll;
+  .searchOptions{
+    padding-top:1em;
+    padding-bottom:2em;
+  }
+  //Hide scroll bar
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .result{
+    color:white;
+    padding:1em 0;
+    background:$primaryS;
+  }
+  hr{
+    padding-top:2em;
+    padding-bottom:2em;
+  }
+  h4{
+    color:white;
+  }
+  ul{
+    li{
+      color:white;
+      list-style: none;
+      margin:1em 0;
+    }
+  }
 }
 
 //2. CONTENT
