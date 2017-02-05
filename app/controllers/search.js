@@ -98,7 +98,7 @@ export default Ember.Controller.extend({
           break;
         case "bike":
           this.get("bikes").selectedItem(object);
-          this.transitionToRoute("suppliers");
+          this.transitionToRoute("bikes");
           break;
       }
     },

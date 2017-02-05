@@ -85,7 +85,7 @@ export default Ember.Controller.extend({
     },
     createBike: function(){
       let controller = this;
-      if(this.get("bike.name") && this.get("bike.retail") && this.get("bike.components.length") !== 0){
+      if(this.get("bike.name") && this.get("bike.retail") && this.get("bike.components.length") !== 0 && this.get("bike.assemblyTime")){
         this.get("bike").save().then(function(savedBike){
           savedBike.get("components").forEach(function(item){
             item.get("bikes").pushObject(savedBike);

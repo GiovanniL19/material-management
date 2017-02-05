@@ -14,7 +14,8 @@ export default Model.extend({
   components: DS.hasMany("item",  {async: true, defaultValue: []}),
   price: DS.attr("number"),
   retail: DS.attr("number"),
-  amountSold: DS.attr("number"),
+  amountSold: DS.attr("number", {defaultValue: 0}),
+  assemblyTime: DS.attr("string"),
   formattedPrice: function(){
     if(!this.get("price")){
       return '£' + parseFloat(0).toFixed(2);

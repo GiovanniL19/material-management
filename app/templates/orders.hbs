@@ -76,7 +76,7 @@
               Supplier: {{transaction.supplier.name}}<br>
               Contact: {{transaction.supplier.contact}}<br>
               Order Lines: {{transaction.lines.length}}<br><br>
-              ETA: {{transaction.etaHuman}}<br><br>
+              ETA: <strong>{{transaction.etaHuman}}</strong><br><br>
               Note:<br>{{transaction.note}}
             </p>
             {{#if transaction.canCancel}}
