@@ -60,10 +60,11 @@
     "WHAT IS THIS?": "Please see the README.md",
     "copy-files": [
       "electron.js",
-      "package.json"
+      "package.json",
+      "assets/**/*"
     ],
-    "name": null,
-    "platform": null,
+    "name": "Material Management",
+    "platform": "darwin",
     "arch": null,
     "version": null,
     "app-bundle-id": null,
@@ -78,11 +79,11 @@
     "extend-info": null,
     "extra-resource": null,
     "helper-bundle-id": null,
-    "icon": null,
+    "icon": "assets/icons/main.icns",
     "ignore": null,
     "out": null,
     "osx-sign": {
-      "identity": null,
+      "identity": "uk.co.giovannilenguito",
       "entitlements": null,
       "entitlements-inherit": null
     },

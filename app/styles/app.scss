@@ -28,14 +28,27 @@ $grey: rgba(255, 255, 255, 0.4);
 a, button, .btn, .form-control, .input-group-addon{
   -webkit-transition: ease 0.4s;
 }
-body, html{
+
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body{
   background:$primary;
+  -webkit-app-region: drag;
   //Hide scroll bar
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
   &::-webkit-scrollbar {
     display: none;
   }
+
+  height: 100%;
+  padding: 0;
+  overflow: auto;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
 }
 hr{
   border:none;
