@@ -33,6 +33,36 @@ a, button, .btn, .form-control, .input-group-addon{
   -webkit-transition: ease 0.4s;
 }
 
+textarea{
+  margin-top:1em !important;
+  height:10em !important;
+}
+
+.greenBack{
+  background: $darkGreen !important;
+  a{
+    color:white !important;
+  }
+  .btn{
+    border-color:white !important;
+  }
+}
+
+.orangeBack{
+  background:$orange !important;
+  a{
+    color:white !important;
+  }
+  .btn{
+    border-color:white !important;
+  }
+}
+
+h4{
+  color:white;
+}
+
+
 .red{
   color:$red;
 }
@@ -602,30 +632,5 @@ label{
   .newQty {
     margin-top: 1em;
     width: 60%;
-  }
-}
-
-textarea{
-  margin-top:1em !important;
-  height:10em !important;
-}
-
-.greenBack{
-  background: $darkGreen !important;
-  a{
-    color:white !important;
-  }
-  .btn{
-    border-color:white !important;
-  }
-}
-
-.orangeBack{
-  background:$orange !important;
-  a{
-    color:white !important;
-  }
-  .btn{
-    border-color:white !important;
   }
 }

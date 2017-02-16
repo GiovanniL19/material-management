@@ -14,7 +14,9 @@ export default Model.extend({
   tradingName: DS.attr("string"),
   tradingAddress: DS.attr("string"),
   returnsAddress: DS.attr("string"),
-  contact: DS.attr("string"),
+  contactName: DS.attr("string"),
+  contactEmail: DS.attr("string"),
+  contactNumber: DS.attr("string"),
   status: DS.attr("string", {defaultValue: 'OK'}),
   transactionHistory: DS.hasMany("transactions", {async: true, defaultValue: []}),
   stock: DS.hasMany("item", {async: true, defaultValue: []}),
@@ -47,7 +49,11 @@ export default Model.extend({
     if(this.get("status") === "BARD" || this.get("status") === "ON HOLD"){
       return false;
     }else{
-      return true;
+      if(this.get("terminated")){
+       return false;
+      }else{
+        return true;
+      }
     }
-  }.property("status"),
+  }.property("status", "terminated"),
 });
