@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   stock: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
   suppliersController: Ember.inject.controller("suppliers"),
+  receivedGoods: Ember.inject.controller(),
   view: true,
   editMode: false,
   transaction: null,
@@ -102,6 +103,10 @@ export default Ember.Controller.extend({
     }
   },
   actions:{
+    goToDelivery: function(transaction){
+      this.get("receivedGoods").selectedItem(transaction);
+      this.transitionToRoute("received-goods");
+    },
     goToSupplier: function(supplier){
       this.get("suppliersController").selectedItem(supplier);
       this.transitionToRoute("suppliers");

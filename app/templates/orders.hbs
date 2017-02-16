@@ -77,7 +77,8 @@
               Contact: {{transaction.supplier.contact}}<br>
               Order Lines: {{transaction.lines.length}}<br><br>
               ETA: <strong>{{transaction.etaHuman}}</strong><br><br>
-              Note:<br>{{transaction.note}}
+              Note:<br>
+              {{textarea class="form-control" value=transaction.note readonly=true}}
             </p>
             {{#if transaction.canCancel}}
               <div class="col-sm-6 text-left buttons">
@@ -90,7 +91,7 @@
           {{else}}
             <h3>{{total}}</h3>
             <p>
-              You first need to select a supplier to order from. Once you have chosen a supplier, the list on the right will show all stock from that supplier. You can select the items you would like to order with a quantity. Once you have completed adding lines and quantities, click the place order button to complete the process.
+              You first need to select a supplier to order from. Once you have chosen a supplier, the list on the right will show all stock from that supplier. You can select the items you would like to order with a quantity. Once you have completed adding lines and quantities, click the send order button to send the purchase requisition to the finance department.
             </p>
 
             <div class="form-group {{if selectedSupplier 'green'}} {{unless selectedSupplier 'red'}}">
@@ -120,7 +121,7 @@
               </div>
 
               <div class="col-sm-6 text-right buttons">
-                <button class="btn btn-default" {{action "placeOrder"}}>Place Order</button>
+                <button class="btn btn-default" {{action "placeOrder"}}>Send Order</button>
               </div>
             </div>
           {{/if}}
@@ -130,7 +131,8 @@
       <div class="col-xs-12 col-sm-8 col-md-8">
         <div class="col-sm-12 card nonScroll">
           <div class="col-sm-12 right text-right">
-            <button class="btn btn-primary" {{action "back"}}>Back</button>
+            {{#if editMode}}<button class="btn btn-primary" {{action "goToDelivery" transaction}}>Go To Delivery</button>{{/if}}
+            <button class="btn btn-primary" {{action "back"}}>Orders</button>
           </div>
           <div class="col-xs-12">
             <form class="cards">

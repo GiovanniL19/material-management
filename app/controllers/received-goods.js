@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
   suppliersController: Ember.inject.controller("suppliers"),
+  orders: Ember.inject.controller(),
   sortDesc: ['dateCreated:desc'],
   sortedModel: Ember.computed.sort('model', 'sortDesc'),
   view: true,
@@ -19,6 +20,10 @@ export default Ember.Controller.extend({
   },
 
   actions:{
+    goToOrder: function(transaction){
+      this.get("orders").selectedItem(transaction);
+      this.transitionToRoute("orders");
+    },
     clearReceivedQuantity: function(line){
       line.set("receivedQuantity", 0);
     },
@@ -60,8 +65,10 @@ export default Ember.Controller.extend({
               line.set("isComplete", true);
               item.set("status", "DELIVERED");
               controller.set("transaction.status", "DELIVERED");
+              controller.get("activityController").set(controller.get("transaction.transactionID") + " has been delivered");
             }else{
               controller.set("transaction.status", "MISSING ITEMS");
+              controller.get("activityController").set(controller.get("transaction.transactionID") + " has missing items");
               item.set("status", "DELIVERED WITH MISSING ITEMS");
             }
             controller.get("transaction").save();

@@ -8,6 +8,8 @@ $evenColour: #40424c;
 $secondColour: #24a6b5;//#15bebf;
 $red: #ff5656;
 $green: rgba(23, 179, 98, 0.37);
+$darkGreen: #218264;
+$orange: #d0972e;
 $grey: rgba(255, 255, 255, 0.4);
 
 /*
@@ -600,5 +602,30 @@ label{
   .newQty {
     margin-top: 1em;
     width: 60%;
+  }
+}
+
+textarea{
+  margin-top:1em !important;
+  height:10em !important;
+}
+
+.greenBack{
+  background: $darkGreen !important;
+  a{
+    color:white !important;
+  }
+  .btn{
+    border-color:white !important;
+  }
+}
+
+.orangeBack{
+  background:$orange !important;
+  a{
+    color:white !important;
+  }
+  .btn{
+    border-color:white !important;
   }
 }

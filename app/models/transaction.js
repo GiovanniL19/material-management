@@ -65,7 +65,11 @@ export default Model.extend({
     if(moment(Date.now()).unix() > moment.unix(this.get("dateCreated")).add(2, "days").unix()){
       return false;
     }else{
-      return true;
+      if(this.get("status") === "PROCESSING"){
+        return true;
+      }else {
+        return false;
+      }
     }
   }.property("dateCreated", "eta"),
 
@@ -77,5 +81,22 @@ export default Model.extend({
     }else{
       return moment.unix(this.get("eta")).fromNow();
     }
-  }.property("eta", "status")
+  }.property("eta", "status"),
+
+  isComplete: function(){
+    if(this.get("status") === "DELIVERED") {
+      return true;
+    }else{
+      return false;
+    }
+  }.property("status"),
+
+  isMissingItems: function(){
+    if(this.get("status") === "MISSING ITEMS") {
+      return true;
+    }else{
+      return false;
+    }
+  }.property("status")
+
 });

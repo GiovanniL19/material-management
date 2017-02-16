@@ -51,7 +51,8 @@
   {{else}}
     <div class="row sections">
       <div class="col-sm-4 hidden-xs col-md-4">
-        <div class="col-sm-12 card">
+        <div class="col-sm-12 card {{if transaction.isMissingItems "orangeBack"}} {{if transaction.isComplete "greenBack"}}">
+          <h5>{{transaction.transactionID}}</h5>
           <h3>{{transaction.formattedOrderedTotal}}</h3>
           <p>
             Supplier: <a {{action "goToSupplier" transaction.supplier}}>{{transaction.supplier.name}}</a><br>
@@ -59,7 +60,7 @@
             Order Lines: {{transaction.lines.length}}<br><br>
             ETA: <strong>{{transaction.etaHuman}}</strong><br><br>
             Note:<br><br>
-            {{input type="text" class="form-control" value=transaction.note}}
+            {{textarea class="form-control" value=transaction.note}}
             <br><br>
             <button class="btn btn-primary" {{action "updateSystem"}}>Update System</button>
           </p>
@@ -68,8 +69,12 @@
 
       <div class="col-xs-12 col-sm-8 col-md-8">
         <div class="col-sm-12 card nonScroll">
-          <div class="col-sm-12 right text-right">
-            <button class="btn btn-primary" {{action "back"}}>Back</button>
+          <div class="col-sm-6 text-left">
+            <h5>Delivery Items</h5>
+          </div>
+          <div class="col-sm-6 right text-right">
+            <button class="btn btn-primary" {{action "goToOrder" transaction}}>Go To Order</button>
+            <button class="btn btn-primary" {{action "back"}}>Deliveries</button>
           </div>
           <div class="col-xs-12">
             <form class="cards">
