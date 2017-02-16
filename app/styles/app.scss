@@ -31,6 +31,10 @@ a, button, .btn, .form-control, .input-group-addon{
   -webkit-transition: ease 0.4s;
 }
 
+.red{
+  color:$red;
+}
+
 html {
   height: 100%;
   width: 100%;

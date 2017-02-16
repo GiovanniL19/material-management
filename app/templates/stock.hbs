@@ -152,7 +152,9 @@
                   {{/if}}
 
                   {{#each suppliers as |supplier|}}
-                    <option value={{supplier.id}}>{{supplier.name}}</option>
+                    {{#unless supplier.terminated}}
+                      <option value={{supplier.id}}>{{supplier.name}}</option>
+                    {{/unless}}
                   {{/each}}
                 </select>
               </div>

@@ -64,6 +64,7 @@ export default Ember.Controller.extend({
               controller.set("transaction.status", "MISSING ITEMS");
               item.set("status", "DELIVERED WITH MISSING ITEMS");
             }
+            controller.get("transaction").save();
             item.save();
           });
 
@@ -72,10 +73,7 @@ export default Ember.Controller.extend({
             line.set("addedToStock", parseInt(line.get("receivedQuantity")));
           }
         });
-
-        this.get("transaction").save().then(function () {
-          controller.set("application.message", "Saved");
-        });
+        controller.set("application.message", "Saved");
       }
     },
     goToSupplier: function(supplier){

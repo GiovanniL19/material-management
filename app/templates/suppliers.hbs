@@ -66,18 +66,22 @@
       <div class="col-sm-12 card">
         {{#if editMode}}
           <p>
+            {{#if supplier.terminated}}<strong class="red">TERMINATED (READ ONLY)</strong><br>{{/if}}
             Trading Name: <strong>{{supplier.tradingName}}</strong><br>
             Trading Address: <br><strong>{{supplier.tradingAddress}}</strong><br><br>
             Returns Address: <br><strong>{{#if supplier.returnsAddress}}{{supplier.returnsAddress}}{{else}}Same as trading address{{/if}}</strong><br>
           </p>
-          <div class="col-sm-12">
-            <button class="btn btn-default {{if supplier.isOk "selected"}}" {{action "updateStatus" "OK"}}>OK</button>
-            <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON
-              HOLD
-            </button>
-            <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD
-            </button>
-          </div>
+          {{#unless supplier.terminated}}
+            <div class="col-sm-12">
+              <button class="btn btn-default {{if supplier.isOk "selected"}}" {{action "updateStatus" "OK"}}>OK</button>
+              <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON
+                HOLD
+              </button>
+              <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD
+              </button>
+            </div>
+          {{/unless}}
+
           <div class="col-sm-12 card orderList">
             {{#if supplier.transactionHistory}}
               <h5>Orders</h5>
@@ -120,19 +124,18 @@
           <form>
             <div class="form-group {{if supplier.name 'green'}} {{unless supplier.name 'red'}}">
               <label for="name">Name*</label>
-              {{input type="text" class="form-control" id="name" placeholder="Name" value=supplier.name}}
+              {{input type="text" class="form-control" id="name" placeholder="Name" value=supplier.name readonly=supplier.terminated}}
             </div>
 
             <hr>
             <div class="form-group {{if supplier.tradingName 'green'}} {{unless supplier.tradingName 'red'}}">
               <label for="tName">Trading Name*</label>
-              {{input type="text" class="form-control" id="tName" placeholder="Trading Name"value=supplier.tradingName}}
+              {{input type="text" class="form-control" id="tName" placeholder="Trading Name"value=supplier.tradingName readonly=supplier.terminated}}
             </div>
 
             <div class="form-group {{if supplier.tradingAddress 'green'}} {{unless supplier.tradingAddress 'red'}}">
               <label for="tAddress">Trading Address*</label>
-              {{input type="text" class="form-control" id="tAddress" placeholder="Trading Address"
-                      value=supplier.tradingAddress}}
+              {{input type="text" class="form-control" id="tAddress" placeholder="Trading Address" value=supplier.tradingAddress readonly=supplier.terminated}}
             </div>
 
             <hr>
@@ -145,23 +148,24 @@
             <hr>
             <div class="form-group  {{if supplier.contact 'green'}} {{unless supplier.contact 'red'}}">
               <label for="contact">Contact Number*</label>
-              {{input type="number" class="form-control" id="contact" placeholder="Contact Number"
-                      value=supplier.contact}}
+              {{input type="number" class="form-control" id="contact" placeholder="Contact Number" value=supplier.contact readonly=supplier.terminated}}
             </div>
 
-            {{#if editMode}}
-              <div class="col-sm-6 buttons">
-                <button class="btn btn-danger" {{action "delete" supplier}}>Delete</button>
-              </div>
+            {{#unless supplier.terminated}}
+              {{#if editMode}}
+                <div class="col-sm-6 buttons">
+                  <button class="btn btn-danger" {{action "delete" supplier}}>Terminate</button>
+                </div>
 
-              <div class="col-sm-6 text-right  buttons">
-                <button class="btn btn-default" {{action "update"}}>Update</button>
-              </div>
-            {{else}}
-              <div class="col-sm-12 text-right buttons">
-                <button class="btn btn-default" {{action "save"}}>Add Supplier</button>
-              </div>
-            {{/if}}
+                <div class="col-sm-6 text-right  buttons">
+                  <button class="btn btn-default" {{action "update"}}>Update</button>
+                </div>
+              {{else}}
+                <div class="col-sm-12 text-right buttons">
+                  <button class="btn btn-default" {{action "save"}}>Add Supplier</button>
+                </div>
+              {{/if}}
+            {{/unless}}
           </form>
         </div>
       </div>

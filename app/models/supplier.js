@@ -18,7 +18,7 @@ export default Model.extend({
   status: DS.attr("string", {defaultValue: 'OK'}),
   transactionHistory: DS.hasMany("transactions", {async: true, defaultValue: []}),
   stock: DS.hasMany("item", {async: true, defaultValue: []}),
-
+  terminated: DS.attr("boolean", {defaultValue: false}),
   isOk: function(){
     if(this.get("status") === "OK"){
       return true

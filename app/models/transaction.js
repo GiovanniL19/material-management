@@ -57,7 +57,7 @@ export default Model.extend({
   }.property("dateCreated"),
 
   etaFormatted: function () {
-    return moment.unix(this.get("eta")).format("DD/MM/YYYY HH:mm");
+    return moment.unix(this.get("eta")).format("DD/MM/YYYY");
   }.property("eta"),
 
   canCancel: function(){

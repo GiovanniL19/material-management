@@ -68,11 +68,17 @@ export default Ember.Controller.extend({
     delete: function(supplier){
       if(confirm("You are about to remove "+ supplier.get("name"))){
         let controller = this;
-        controller.get("activityController").set("Deleted " + controller.get("supplier.name"));
+        supplier.set("terminated", true);
+        supplier.save().then(function(){
+          controller.get("activityController").set("Terminated " + supplier.get("name"));
+          controller.set("application.message", "Supplier Terminated");
+        });
+        /*
         supplier.destroyRecord().then(function(){
           controller.set("application.message", "Supplier Removed");
           controller.clear();
         });
+        */
       }
     },
     select: function(supplier){
