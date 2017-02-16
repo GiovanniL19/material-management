@@ -60,8 +60,9 @@ export default Model.extend({
     return moment.unix(this.get("eta")).format("DD/MM/YYYY");
   }.property("eta"),
 
+
   canCancel: function(){
-    if(moment.unix() > moment.unix(this.get("dateCreated")).add(2, "days")){
+    if(moment(Date.now()).unix() > moment.unix(this.get("dateCreated")).add(2, "days").unix()){
       return false;
     }else{
       return true;
@@ -69,8 +70,10 @@ export default Model.extend({
   }.property("dateCreated", "eta"),
 
   etaHuman: function(){
-    if(this.get("status") === "DONE") {
+    if(this.get("status") === "DELIVERED") {
       return "DELIVERED";
+    }else if(this.get("status") === "MISSING ITEMS") {
+      return "MISSING ITEMS"
     }else{
       return moment.unix(this.get("eta")).fromNow();
     }

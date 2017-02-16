@@ -21,7 +21,7 @@ export default Ember.Route.extend({
   deactivate: function(){
     let controller = this;
     setTimeout(function(){
-      controller.controllerFor("orders").clear();
+      controller.controllerFor("received-goods").clear();
     },1000);
   }
 });
