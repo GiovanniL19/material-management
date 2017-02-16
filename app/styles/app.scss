@@ -5,7 +5,7 @@ $menuColour: #2a2d35;
 $primary: #353741;
 $primaryS: #3b3d46;
 $evenColour: #40424c;
-$secondColour: #15bebf;
+$secondColour: #24a6b5;//#15bebf;
 $red: #ff5656;
 $green: rgba(23, 179, 98, 0.37);
 $grey: rgba(255, 255, 255, 0.4);
@@ -72,17 +72,22 @@ button.btn.btn-default.selected {
 }
 button, .btn{
   &:hover{
-    outline:0;
+    outline:none;
+    box-shadow:none;
   }
   &:focus{
-    outline:0;
+    outline:none !important;
+    box-shadow:none;
   }
   &:hover{
     opacity:0.7;
+    outline:none;
+    box-shadow:none;
   }
 }
 .btn-danger{
   background:$red !important;
+  border:none !important;
 }
 h5{
   color:white;
@@ -131,7 +136,7 @@ label{
       text-transform: uppercase;
       color: white;
       font-weight: 200;
-      background: #15bebf;
+      background: $secondColour;
       top: 0;
       width: 101%;
       position: absolute;
@@ -265,15 +270,18 @@ label{
 //2. CONTENT
 .content{
   .btn{
-    background:$secondColour;
-    border-radius:0;
-    border:none;
-    color:white;
+    border: 2px solid $secondColour;
+    color: white;
     text-transform: uppercase;
+    background: transparent;
+    font-size: 1em;
+    border-radius: 2em;
   }
   .order-btn{
     height:4em;
     width:100%;
+    background:$secondColour;
+    font-size:0.9em;
     &:hover{
       opacity:0.7;
     }
@@ -328,6 +336,7 @@ label{
       border-radius:0;
       box-shadow: none;
       height:4em;
+      border-right: 5px solid $grey;
     }
     .input-group-addon{
       background:white;

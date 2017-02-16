@@ -61,6 +61,16 @@ export default Ember.Controller.extend({
     });
   },
   actions:{
+    orderComplete: function(){
+      let controller = this;
+
+      this.set("item.warehouseQuantity", this.get("item.warehouseQuantity") - this.get("item.quantityOnHold"));
+      this.set("item.quantityOnHold", "");
+
+      this.get("item").save().then(function(){
+        controller.set("application.message", "Quantity changed");
+      });
+    },
     selectGroup: function(group){
       let controller = this;
       this.get("groups").forEach(function(item){

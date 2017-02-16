@@ -12,7 +12,7 @@ export default Model.extend({
   rev: DS.attr("string"),
   barcode: DS.attr("string"),
   name: DS.attr("string"),
-  quantity: DS.attr("number"),
+  warehouseQuantity: DS.attr("number"),
   minQuantity: DS.attr("number"),
   quantityOnHold: DS.attr("number"),
   trade: DS.attr("number"),
@@ -29,6 +29,10 @@ export default Model.extend({
       return false;
     }
   }.property("minQuantity", "quantity"),
+
+  quantity: function(){
+    return this.get("warehouseQuantity") - this.get("quantityOnHold");
+  }.property("quantityOnHold", "warehouseQuantity"),
 
   formattedRetail: function(){
     return '£' + parseFloat(this.get("retail")).toFixed(2);
