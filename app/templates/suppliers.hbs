@@ -84,13 +84,13 @@
             {{/if}}
             {{#each supplier.transactionHistory as |transaction|}}
               <div class="rowCard row">
-                <div class="col-sm-4 details">
+                <div class="col-sm-6 details">
                   <a {{action "selectOrder" transaction}}>{{transaction.transactionID}}</a>
                 </div>
-                <div class="col-sm-4 details">
+                <div class="col-sm-3 details">
                   {{transaction.orderDateFormatted}}
                 </div>
-                <div class="col-sm-4 details text-center">
+                <div class="col-sm-3 details text-center">
                   {{transaction.totalHuman}}
                 </div>
               </div>

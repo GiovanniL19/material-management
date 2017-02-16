@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
+  suppliersController: Ember.inject.controller("suppliers"),
   view: true,
   editMode: false,
   item: null,
@@ -61,6 +62,10 @@ export default Ember.Controller.extend({
     });
   },
   actions:{
+    goToSupplier: function(supplier){
+      this.get("suppliersController").selectedItem(supplier);
+      this.transitionToRoute("suppliers");
+    },
     orderComplete: function(){
       let controller = this;
 

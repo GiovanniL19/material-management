@@ -81,7 +81,7 @@
         <p>
           Barcode: <strong>{{item.barcode}}</strong><br>
           Group: <strong>{{item.group.name}}</strong><br>
-          Supplier: <strong>{{item.supplier.name}}</strong><br><br>
+          Supplier: <a {{action "goToSupplier" item.supplier}}>{{item.supplier.name}}</a><br><br>
 
           Trade: <strong>{{item.formattedTrade}}</strong><br>
           Retail: <strong>{{item.formattedRetail}}</strong><br><br>

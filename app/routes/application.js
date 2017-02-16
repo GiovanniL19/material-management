@@ -6,5 +6,8 @@ export default Ember.Route.extend({
     if(this.get('router.url') === "/"){
       controller.transitionToRoute("dashboard");
     }
+
+    //Get data
+    this.store.findAll("transaction");
   }
 });

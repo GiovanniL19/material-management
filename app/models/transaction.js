@@ -40,6 +40,18 @@ export default Model.extend({
     });
     return '£' + parseFloat(total).toFixed(2);
   }.property("lines.@each.newQuantity"),
+
+  formattedOrderedTotal: function(){
+    let total = 0;
+    this.get("lines").forEach(function(item) {
+      var cost = item.get("quantity") * item.get("price");
+      item.set("total", cost);
+      total += cost;
+    });
+
+    return '£' + parseFloat(total).toFixed(2);
+  }.property("lines.@each.newQuantity"),
+
   orderDateFormatted: function () {
     return moment.unix(this.get("dateCreated")).format("DD/MM/YYYY");
   }.property("dateCreated"),

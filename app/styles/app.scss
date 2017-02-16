@@ -18,9 +18,11 @@ $grey: rgba(255, 255, 255, 0.4);
 //  1.4: SEARCH RESULTS
 // 2: CONTENT
 // 3: DASHBOARD
-// 6: ORDERS
+// 4: ORDERS
 // 5: SUPPLIERS
 // 6: STOCK
+// 7: ORDER LIST
+// 8: RECEIVED GOODS
 */
 
 
@@ -522,7 +524,7 @@ label{
 }
 
 
-//4. SUPPLIERS
+//5. SUPPLIERS
 .suppliersList {
   .rowCard{
     &:nth-child(even){
@@ -531,7 +533,7 @@ label{
   }
 }
 
-//5. STOCK
+//6. STOCK
 .stockList {
   .rowCard{
     &:nth-child(even){
@@ -539,15 +541,60 @@ label{
     }
   }
 }
-//Order List
-.orderList{
-  h5{
-    margin:0;
-    margin-top:2em;
-    padding:0;
+//7. ORDER LIST
+.orderList {
+  h5 {
+    margin: 0;
+    margin-top: 2em;
+    padding: 0;
   }
   .rowCard {
     padding: 0;
-    height:1em !important;
+    height: 1em !important;
+  }
+}
+
+//8. RECEIVED GOODS
+.received-goods{
+  .rowCard {
+    padding: 0 1em;
+    &:nth-child(even) {
+      background: $evenColour;
+    }
+  }
+  .nonScroll{
+    height:45em;
+    //Make div scrollable
+    overflow-y:scroll;
+
+    //Hide scroll bar
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    color:white;
+    .options{
+      padding:1em 0;
+      cursor:pointer;
+    }
+  }
+  .buttons{
+    margin-top:2em;
+  }
+  .checked {
+    //background: #494c56;
+  }
+  .details {
+    padding: 0;
+  }
+  .qty {
+    margin-top: -2em !important;
+    width: 60%;
+  }
+  .newQty {
+    margin-top: 1em;
+    width: 60%;
   }
 }
