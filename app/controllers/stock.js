@@ -91,7 +91,7 @@ export default Ember.Controller.extend({
         let controller = this;
         this.get("item.reservedStock").removeObject(onHold);
         this.get("item").save().then(function () {
-          controller.set("application.message", "Held Stock Released");
+          controller.set("application.message", "Stock Updated");
           controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
         });
       }

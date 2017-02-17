@@ -20,6 +20,17 @@ export default Ember.Controller.extend({
   },
 
   actions:{
+    rejectDelivery: function(transaction){
+      let controller = this;
+
+      if(confirm("You are about to reject this delivery")) {
+        transaction.set("rejectDelivery", true);
+        transaction.set("status", "REJECTED");
+        transaction.save().then(function () {
+          controller.set("application.message", "Delivery was rejected");
+        });
+      }
+    },
     goToOrder: function(transaction){
       this.get("orders").selectedItem(transaction);
       this.transitionToRoute("orders");

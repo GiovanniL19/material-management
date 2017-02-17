@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cb652ee-ce22-410c-8e32-c38cb0bcfe89" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/orders.js" afterPath="$PROJECT_DIR$/app/controllers/orders.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/received-goods.js" afterPath="$PROJECT_DIR$/app/controllers/received-goods.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/stock.js" afterPath="$PROJECT_DIR$/app/controllers/stock.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/item.js" afterPath="$PROJECT_DIR$/app/models/item.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/stock.hbs" afterPath="$PROJECT_DIR$/app/templates/stock.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/transaction.js" afterPath="$PROJECT_DIR$/app/models/transaction.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/received-goods.hbs" afterPath="$PROJECT_DIR$/app/templates/received-goods.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,18 +37,50 @@
       <file leaf-file-name="orders.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/orders.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="68" column="4" lean-forward="false" selection-start-line="231" selection-start-column="80" selection-end-line="231" selection-end-column="93" />
+            <state relative-caret-position="385">
+              <caret line="79" column="17" lean-forward="false" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="orders.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/orders.js">
+      <file leaf-file-name="stock.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/stock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="66" column="33" lean-forward="false" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
+            <state relative-caret-position="237">
+              <caret line="93" column="62" lean-forward="false" selection-start-line="93" selection-start-column="62" selection-end-line="93" selection-end-column="62" />
+              <folding>
+                <element signature="e#9851#12959#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="received-goods.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/received-goods.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transaction.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/transaction.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="95" column="8" lean-forward="false" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="received-goods.hbs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/templates/received-goods.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="62" column="102" lean-forward="false" selection-start-line="62" selection-start-column="102" selection-end-line="62" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -64,8 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>primary</find>
-      <find>searchR</find>
       <find>suppliers</find>
       <find>orderLi</find>
       <find>quantity</find>
@@ -93,7 +124,9 @@
       <find>please</find>
       <find>new</find>
       <find>new:</find>
+      <find>helf</find>
       <find>orderQuantity</find>
+      <find>compet</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -135,19 +168,19 @@
         <option value="$PROJECT_DIR$/app/controllers/dashboard.js" />
         <option value="$PROJECT_DIR$/app/templates/dashboard.hbs" />
         <option value="$PROJECT_DIR$/app/routes/stock.js" />
-        <option value="$PROJECT_DIR$/app/templates/orders.hbs" />
-        <option value="$PROJECT_DIR$/app/models/transaction.js" />
         <option value="$PROJECT_DIR$/app/models/reserve.js" />
-        <option value="$PROJECT_DIR$/app/controllers/received-goods.js" />
         <option value="$PROJECT_DIR$/app/models/line.js" />
-        <option value="$PROJECT_DIR$/app/templates/received-goods.hbs" />
         <option value="$PROJECT_DIR$/app/styles/app.scss" />
         <option value="$PROJECT_DIR$/app/templates/suppliers.hbs" />
         <option value="$PROJECT_DIR$/app/models/supplier.js" />
         <option value="$PROJECT_DIR$/app/models/item.js" />
-        <option value="$PROJECT_DIR$/app/controllers/stock.js" />
         <option value="$PROJECT_DIR$/app/templates/stock.hbs" />
         <option value="$PROJECT_DIR$/app/controllers/orders.js" />
+        <option value="$PROJECT_DIR$/app/templates/orders.hbs" />
+        <option value="$PROJECT_DIR$/app/controllers/stock.js" />
+        <option value="$PROJECT_DIR$/app/models/transaction.js" />
+        <option value="$PROJECT_DIR$/app/controllers/received-goods.js" />
+        <option value="$PROJECT_DIR$/app/templates/received-goods.hbs" />
       </list>
     </option>
   </component>
@@ -495,12 +528,12 @@
       <workItem from="1487063277720" duration="496000" />
       <workItem from="1487242543218" duration="2014000" />
       <workItem from="1487258510955" duration="22828000" />
-      <workItem from="1487322364113" duration="16743000" />
+      <workItem from="1487322364113" duration="17516000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127789000" />
+    <option name="totallyTimeSpent" value="128562000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="832" extended-state="6" />
@@ -817,22 +850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/received-goods.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="32" column="63" lean-forward="false" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/transaction.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="26" column="46" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/app.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -846,24 +863,6 @@
         <state relative-caret-position="509">
           <caret line="75" column="34" lean-forward="false" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/received-goods.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="59" column="61" lean-forward="false" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/stock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="240" column="47" lean-forward="false" selection-start-line="240" selection-start-column="41" selection-end-line="240" selection-end-column="47" />
-          <folding>
-            <element signature="e#9857#12965#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -901,16 +900,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/orders.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="68" column="4" lean-forward="false" selection-start-line="231" selection-start-column="80" selection-end-line="231" selection-end-column="93" />
+        <state relative-caret-position="385">
+          <caret line="79" column="17" lean-forward="false" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/stock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="93" column="62" lean-forward="false" selection-start-line="93" selection-start-column="62" selection-end-line="93" selection-end-column="62" />
+          <folding>
+            <element signature="e#9851#12959#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/orders.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
+        <state relative-caret-position="522">
           <caret line="66" column="33" lean-forward="false" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/received-goods.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/transaction.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="95" column="8" lean-forward="false" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/received-goods.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="62" column="102" lean-forward="false" selection-start-line="62" selection-start-column="102" selection-end-line="62" selection-end-column="102" />
           <folding />
         </state>
       </provider>

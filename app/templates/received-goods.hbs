@@ -60,9 +60,12 @@
             Order Lines: {{transaction.lines.length}}<br><br>
             ETA: <strong>{{transaction.etaHuman}}</strong><br><br>
             Note:<br><br>
-            {{textarea class="form-control" value=transaction.note}}
+            {{textarea class="form-control" value=transaction.note readonly=transaction.rejectDelivery}}
             <br><br>
-            <button class="btn btn-primary" {{action "updateSystem"}}>Update System</button>
+            {{#unless transaction.rejectDelivery}}
+              <button class="btn btn-danger" {{action "rejectDelivery" transaction}}>Rejected</button>
+              <button class="btn btn-primary" {{action "updateSystem"}}>Update System</button>
+            {{/unless}}
           </p>
         </div>
       </div>
@@ -118,11 +121,15 @@
                     {{line.formattedTotal}}
                   </div>
                   <div class="col-sm-2 details">
-                    {{#if line.isFulfilled}}
-                      <a {{action "clearReceivedQuantity" line}}>Fulfilled</a>
-                    {{else}}
-                      {{input type="number" class="form-control qty" value=line.receivedQuantity placeholder="0" max=line.quantity}}
-                    {{/if}}
+                  {{#if transaction.rejectDelivery}}
+                    Rejected
+                  {{else}}
+                      {{#if line.isFulfilled}}
+                        <a {{action "clearReceivedQuantity" line}}>Fulfilled</a>
+                      {{else}}
+                        {{input type="number" class="form-control qty" value=line.receivedQuantity placeholder="0" max=line.quantity}}
+                      {{/if}}
+                  {{/if}}
                   </div>
                 </div>
               {{/each}}

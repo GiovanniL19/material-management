@@ -19,6 +19,7 @@ export default Model.extend({
   status: DS.attr("string", {defaultValue: "PROCESSING"}),
   note: DS.attr("string"),
   totalCost: DS.attr("string"),
+  rejectDelivery: DS.attr("boolean"),
   totalHuman: function(){
     return '£' + parseFloat(this.get("totalCost")).toFixed(2);
   }.property("totalCost"),
