@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cb652ee-ce22-410c-8e32-c38cb0bcfe89" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/search.hbs" afterPath="$PROJECT_DIR$/app/templates/search.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/dashboard.js" afterPath="$PROJECT_DIR$/app/controllers/dashboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/dashboard.hbs" afterPath="$PROJECT_DIR$/app/templates/dashboard.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/menu.hbs" afterPath="$PROJECT_DIR$/app/templates/menu.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/orders.hbs" afterPath="$PROJECT_DIR$/app/templates/orders.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -33,8 +36,8 @@
       <file leaf-file-name="orders.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/orders.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="250" column="68" lean-forward="false" selection-start-line="250" selection-start-column="63" selection-end-line="250" selection-end-column="68" />
+            <state relative-caret-position="105">
+              <caret line="7" column="64" lean-forward="false" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -50,7 +53,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search.hbs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="search.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/search.hbs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
@@ -63,8 +66,8 @@
       <file leaf-file-name="menu.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/menu.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="125" lean-forward="false" selection-start-line="4" selection-start-column="125" selection-end-line="4" selection-end-column="125" />
+            <state relative-caret-position="105">
+              <caret line="7" column="98" lean-forward="false" selection-start-line="7" selection-start-column="98" selection-end-line="7" selection-end-column="98" />
               <folding />
             </state>
           </provider>
@@ -73,18 +76,18 @@
       <file leaf-file-name="orders.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/orders.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-436">
-              <caret line="171" column="65" lean-forward="false" selection-start-line="171" selection-start-column="65" selection-end-line="171" selection-end-column="65" />
+            <state relative-caret-position="420">
+              <caret line="111" column="42" lean-forward="true" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.hbs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dashboard.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/templates/dashboard.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="142" lean-forward="false" selection-start-line="9" selection-start-column="142" selection-end-line="9" selection-end-column="142" />
+            <state relative-caret-position="245">
+              <caret line="53" column="49" lean-forward="false" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -105,8 +108,8 @@
       <file leaf-file-name="dashboard.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="38" />
+            <state relative-caret-position="269">
+              <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -160,9 +163,9 @@
       <find>side-menu</find>
       <find>canCan</find>
       <find>rec</find>
+      <find>dashboard</find>
       <find>order</find>
       <find>fa-</find>
-      <find>dashboard</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,7 +187,6 @@
         <option value="$PROJECT_DIR$/app/routes/search.js" />
         <option value="$PROJECT_DIR$/app/controllers/bikes.js" />
         <option value="$PROJECT_DIR$/app/models/bike.js" />
-        <option value="$PROJECT_DIR$/app/controllers/dashboard.js" />
         <option value="$PROJECT_DIR$/app/transitions.js" />
         <option value="$PROJECT_DIR$/app/controllers/search.js" />
         <option value="$PROJECT_DIR$/electron.js" />
@@ -210,12 +212,13 @@
         <option value="$PROJECT_DIR$/app/models/transaction.js" />
         <option value="$PROJECT_DIR$/app/templates/suppliers.hbs" />
         <option value="$PROJECT_DIR$/app/templates/received-goods.hbs" />
-        <option value="$PROJECT_DIR$/app/templates/menu.hbs" />
         <option value="$PROJECT_DIR$/app/controllers/orders.js" />
-        <option value="$PROJECT_DIR$/app/templates/orders.hbs" />
-        <option value="$PROJECT_DIR$/app/templates/dashboard.hbs" />
         <option value="$PROJECT_DIR$/app/styles/app.scss" />
         <option value="$PROJECT_DIR$/app/templates/search.hbs" />
+        <option value="$PROJECT_DIR$/app/templates/menu.hbs" />
+        <option value="$PROJECT_DIR$/app/templates/orders.hbs" />
+        <option value="$PROJECT_DIR$/app/controllers/dashboard.js" />
+        <option value="$PROJECT_DIR$/app/templates/dashboard.hbs" />
       </list>
     </option>
   </component>
@@ -563,12 +566,12 @@
       <workItem from="1487063277720" duration="496000" />
       <workItem from="1487242543218" duration="2014000" />
       <workItem from="1487258510955" duration="22828000" />
-      <workItem from="1487322364113" duration="5059000" />
+      <workItem from="1487322364113" duration="5352000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116105000" />
+    <option name="totallyTimeSpent" value="116398000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="832" extended-state="6" />
@@ -887,14 +890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/transaction.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
@@ -921,38 +916,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/menu.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="125" lean-forward="false" selection-start-line="4" selection-start-column="125" selection-end-line="4" selection-end-column="125" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/orders.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-436">
-          <caret line="171" column="65" lean-forward="false" selection-start-line="171" selection-start-column="65" selection-end-line="171" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/orders.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="250" column="68" lean-forward="false" selection-start-line="250" selection-start-column="63" selection-end-line="250" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/dashboard.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="142" lean-forward="false" selection-start-line="9" selection-start-column="142" selection-end-line="9" selection-end-column="142" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/app.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -965,6 +928,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="58" column="40" lean-forward="false" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/menu.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="98" lean-forward="false" selection-start-line="7" selection-start-column="98" selection-end-line="7" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/orders.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="64" lean-forward="false" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/orders.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="111" column="42" lean-forward="true" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/dashboard.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="53" column="49" lean-forward="false" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
           <folding />
         </state>
       </provider>

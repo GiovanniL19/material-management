@@ -51,7 +51,7 @@
       {{#each sortedSuppliers as |supplier|}}
         <div class="rowCard row">
           <div class="col-sm-7 details">
-            {{supplier.name}}
+            <a {{action "goToSupplier" supplier}}>{{supplier.name}}</a>
           </div>
           <div class="col-sm-5 details text-right">
             {{#if supplier.canOrder}}
