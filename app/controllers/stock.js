@@ -25,16 +25,19 @@ export default Ember.Controller.extend({
 
   onHoldCheck: function(){
     let controller = this;
-    this.get("sortedModel").forEach(function(stock){
-      stock.get("reservedQuantity").foreach(function(onHold){
-        if(onHold.get("been24Hours")){
-          stock.get("reservedQuantity").removeObject(onHold);
-          controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
+    if(this.get("model") !== undefined) {
+      this.get("model").forEach(function(item) {
+        if(item.get("reservedStock")) {
+          item.get("reservedStock").forEach(function (onHold) {
+            if (onHold.get("been24Hours")) {
+              item.get("reservedStock").removeObject(onHold);
+              controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
+              item.save();
+            }
+          });
         }
       });
-
-      stock.save();
-    });
+    }
   }.observes("sortedModel"),
   generateBarcode: function(){
     var barcode = "";

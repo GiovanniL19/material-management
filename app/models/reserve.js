@@ -7,7 +7,7 @@ export default MF.Fragment.extend({
   quantity: DS.attr("number"),
   dateReserved: DS.attr("number"),
   been24Hours: function(){
-    if(parseInt(this.get("dateReserved")) < parseInt(moment().add(1, "days").unix())){
+    if(parseInt(moment().add(1, "days").unix()) > parseInt(this.get("dateReserved"))){
       return false;
     }else{
       return true;
