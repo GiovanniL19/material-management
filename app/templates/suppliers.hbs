@@ -4,7 +4,7 @@
       <div class="col-sm-12 card">
         <div class="col-sm-8"><h5>Suppliers</h5></div>
         <div class="col-sm-4 right text-right">
-          <button class="btn btn-primary" {{action "new"}}>New Supplier</button>
+          <button class="btn btn-default" {{action "new"}}>New Supplier</button>
         </div>
         <div class="col-xs-12">
           {{#if sortedModel}}
@@ -118,7 +118,7 @@
     <div class="col-sm-8 col-md-8">
       <div class="col-sm-12 card">
         <div class="col-sm-12 right text-right">
-          <button class="btn btn-primary" {{action "back"}}>Suppliers</button>
+          <button class="btn btn-default" {{action "back"}}>Suppliers</button>
         </div>
         <div class="col-xs-12">
           <form>
@@ -166,11 +166,11 @@
                 </div>
 
                 <div class="col-sm-6 text-right  buttons">
-                  <button class="btn btn-default" {{action "update"}}>Update</button>
+                  <button class="btn btn-primary" {{action "update"}}>Update</button>
                 </div>
               {{else}}
                 <div class="col-sm-12 text-right buttons">
-                  <button class="btn btn-default" {{action "save"}}>Add Supplier</button>
+                  <button class="btn btn-primary" {{action "save"}}>Add Supplier</button>
                 </div>
               {{/if}}
             {{/unless}}

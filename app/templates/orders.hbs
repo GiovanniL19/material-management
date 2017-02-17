@@ -5,7 +5,7 @@
         <div class="col-sm-12 card">
           <div class="col-sm-8"><h5>Orders</h5></div>
           <div class="col-sm-4 right text-right">
-            <button class="btn btn-primary" {{action "new"}}>New Order</button>
+            <button class="btn btn-default" {{action "new"}}>New Order</button>
           </div>
           <div class="col-xs-12">
             {{#if sortedModel}}
@@ -85,7 +85,7 @@
                 <button class="btn btn-danger" {{action "delete" transaction}}>Cancel</button>
               </div>
               <div class="col-sm-6 text-right buttons">
-                <button class="btn btn-default" {{action "update"}}>Update</button>
+                <button class="btn btn-primary" {{action "update"}}>Update</button>
               </div>
             {{/if}}
           {{else}}
@@ -119,7 +119,7 @@
               </div>
 
               <div class="col-sm-6 text-right buttons">
-                <button class="btn btn-default" {{action "placeOrder"}}>Send Order</button>
+                <button class="btn btn-primary" {{action "placeOrder"}}>Send Order</button>
               </div>
             </div>
           {{/if}}
@@ -130,7 +130,7 @@
         <div class="col-sm-12 card nonScroll">
           <div class="col-sm-12 right text-right">
             {{#if editMode}}<button class="btn btn-primary" {{action "goToDelivery" transaction}}>Go To Delivery</button>{{/if}}
-            <button class="btn btn-primary" {{action "back"}}>Orders</button>
+            <button class="btn btn-default" {{action "back"}}>Orders</button>
           </div>
           <div class="col-xs-12">
             <form class="cards">

@@ -29,8 +29,8 @@ app.on('window-all-closed', function onWindowAllClosed() {
 app.on('ready', function onReady() {
   mainWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
-    width: 1200,
-    height: 700
+    width: 1600,
+    height: 900
   });
 
   delete mainWindow.module;

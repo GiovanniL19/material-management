@@ -3,8 +3,10 @@
 </div>
 <div class="col-xs-10 col-sm-10 col-md-10 content">
   {{render "search"}}
-
-  {{liquid-outlet class="fadeScreens"}}
+  {{#if page.dashboard}}
+    <div class="header"></div>
+  {{/if}}
+    {{liquid-outlet class="fadeScreens"}}
 </div>
 
 {{#if message}}

@@ -23,12 +23,12 @@ export default Model.extend({
 
   lowStock: function(){
     let min = this.get('minQuantity') + 5;
-    if(this.get('quantity') < min){
+    if(this.get('warehouseQuantity') < min){
       return true;
     }else{
       return false;
     }
-  }.property("minQuantity", "quantity"),
+  }.property("minQuantity", "warehouseQuantity"),
 
   quantity: function(){
     return this.get("warehouseQuantity") - this.get("quantityOnHold");

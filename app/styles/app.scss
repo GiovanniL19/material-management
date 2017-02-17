@@ -1,16 +1,40 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Arimo');
 
-//$menuColour: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+//Both
+$green: #44904d;
+$darkGreen: #218264;
+$orange: #d0972e;
+$red: #ff5656;
+$fontLight: white;
+
+
+//Light Theme
+$menuColour: white;
+$primary: #ecf0f1;
+$primaryS: white;
+$evenColour: #ecf0f1;
+$secondColour: #373f52;
+$font: #444;
+$aFont: $secondColour;
+$btnFont: $secondColour;
+$menuFont: #222;
+
+$grey: $primary;
+
+/*
+//Dark Theme
 $menuColour: #2a2d35;
 $primary: #353741;
 $primaryS: #3b3d46;
 $evenColour: #40424c;
-$secondColour: #24a6b5;//#15bebf;
-$red: #ff5656;
-$green: rgba(23, 179, 98, 0.37);
-$darkGreen: #218264;
-$orange: #d0972e;
-$grey: rgba(255, 255, 255, 0.4);
+$secondColour: #24a6b5;
+$font: white;
+$aFont: $secondColour;
+$btnFont: white;
+$menuFont: white;
+*/
+
 
 /*
 // 1: GENERAL
@@ -29,52 +53,14 @@ $grey: rgba(255, 255, 255, 0.4);
 
 
 //1. GENERAL
-a, button, .btn, .form-control, .input-group-addon{
-  -webkit-transition: ease 0.4s;
-}
-
-textarea{
-  margin-top:1em !important;
-  height:10em !important;
-}
-
-.greenBack{
-  background: $darkGreen !important;
-  a{
-    color:white !important;
-  }
-  .btn{
-    border-color:white !important;
-  }
-}
-
-.orangeBack{
-  background:$orange !important;
-  a{
-    color:white !important;
-  }
-  .btn{
-    border-color:white !important;
-  }
-}
-
-h4{
-  color:white;
-}
-
-
-.red{
-  color:$red;
-}
-
 html {
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
 body{
+  font-family: 'Arimo', sans-serif;
   background:$primary;
-  -webkit-app-region: drag;
   //Hide scroll bar
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
@@ -87,6 +73,47 @@ body{
   overflow: auto;
   margin: 0;
   -webkit-overflow-scrolling: touch;
+}
+
+a, button, .btn, .form-control, .input-group-addon{
+  -webkit-app-region: no-drag;
+  -webkit-transition: ease 0.4s;
+}
+textarea{
+  margin-top:1em !important;
+  height:10em !important;
+}
+
+.greenBack{
+  border-top: 5px solid $green !important;
+  a{
+    color:$aFont !important;
+  }
+  .btn{
+    border-color:$aFont !important;
+  }
+}
+
+.orangeBack{
+  border-top: 5px solid $orange !important;
+  a{
+    color:$aFont !important;
+  }
+  .btn{
+    border-color:$aFont !important;
+  }
+}
+
+h4{
+  color:$font;
+}
+
+.btn-primary{
+  background: $secondColour !important;
+  color:white !important;
+}
+.red{
+  color:$red;
 }
 hr{
   border:none;
@@ -105,8 +132,8 @@ hr{
 }
 
 button.btn.btn-default.selected {
-  background: white;
-  color: #353741;
+  background: $secondColour;
+  color: white;
 }
 button, .btn{
   &:hover{
@@ -125,31 +152,35 @@ button, .btn{
 }
 .btn-danger{
   background:$red !important;
+  color:white !important;
   border:none !important;
 }
 h5{
-  color:white;
+  color:$font;
   padding-bottom:0;
   margin-bottom:0;
 }
 a{
-  color:$secondColour;
+  color:$aFont;
   cursor:pointer;
   &:hover{
-    color:white;
+    color:$font;
   }
 }
 
 label{
   padding-left:0.5em;
-  color:white !important;
+  color:$font !important;
 }
 .buttons{
   margin: 0 !important;
   padding: 0 !important;
 }
 
-
+.topTaskBar{
+  -webkit-app-region: drag;
+  //border-top: 1.8em solid #2c3242;
+}
 //1.1. MENU
 .menu {
   margin: 0;
@@ -158,21 +189,25 @@ label{
   .side-menu {
     background: $menuColour;
     height: 100vh;
-    width: 16.5%;
+    width: 16.7%;
     position:fixed;
-    color: white;
     padding-top: 1em;
     text-align: left;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     .bottomLink{
       position:absolute;
       bottom:0;
     }
+    i{
+      padding-right: 1.7em;
+      font-size: 1em;
+      color: $secondColour;
+    }
     h3 {
       padding-left: 0.5em;
       text-transform: uppercase;
-      color: white;
+      color: $fontLight;
       font-weight: 200;
       background: $secondColour;
       top: 0;
@@ -197,12 +232,13 @@ label{
         a {
           text-transform: uppercase;
           font-weight: 400;
-          color: rgba(255, 255, 255, 0.7);
+          color: $menuFont;
+          opacity:0.7;
           cursor: pointer;
           font-size: 1em;
-          &:hover {
-            text-decoration: none;
-            color: white;
+          &:hover{
+            color: $primary;
+            color: $menuFont;
           }
           &:focus, &:active{
             text-decoration: none;
@@ -211,7 +247,8 @@ label{
       }
       li.active {
         a {
-          color: white;
+          opacity: 1;
+          font-weight:bold;
         }
       }
     }
@@ -220,32 +257,34 @@ label{
 
 //1.2. SEARCH
 .search{
-  background: white !important;
+  background: $secondColour !important;
   border: none;
   margin-bottom: 1em;
   color: $primary !important;
+  box-shadow: none!important;
 
   .searchMode{
     .input-group-addon, .form-control:active + .input-group-addon{
-      color:white !important;
+      color:$font !important;
       background: $primary !important;
     }
 
     .form-control {
-      color:white !important;
+      color:$font !important;
       background: $primary !important;
     }
   }
 
   .form-control:focus + .input-group-addon, .form-control:active + .input-group-addon{
-    color:white !important;
+    color:$font !important;
     background: $primary !important;
   }
 
   .form-control {
     color: $primary !important;
+    background: white !important;
     &:focus, &:active{
-      color:white !important;
+      color:$font !important;
       background: $primary !important;
     }
   }
@@ -253,20 +292,22 @@ label{
 
 //1.3 HEADER
 .header{
-  background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
+  //background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
   //background:url('https://static.pexels.com/photos/132695/pexels-photo-132695.jpeg') center no-repeat;
   //background:url('https://static.pexels.com/photos/145397/pexels-photo-145397.jpeg') center no-repeat;
+  background:url('https://images.pexels.com/photos/24325/pexels-photo-24325.jpg?w=1260&h=750&auto=compress&cs=tinysrgb') center no-repeat;
   background-size: cover;
   width: 104%;
   height: 25em;
   margin: -1em;
   margin-bottom: -21em;
+  margin-left: -1.1em;
 }
 
 //1.4 SEARCH RESULTS
 .searchResults{
   padding:1em 1em;
-  background: rgba(53, 55, 65, 0.97);
+  background: rgb(40, 46, 60);
   height: 100%;
   width: 100%;
   position: fixed;
@@ -285,20 +326,21 @@ label{
     display: none;
   }
   .result{
-    color:white;
+    color:$font;
     padding:1em 0;
     background:$primaryS;
+    border-radius:1em;
   }
   hr{
     padding-top:2em;
     padding-bottom:2em;
   }
-  h4{
-    color:white;
+  h4, h5{
+    color:$fontLight;
   }
   ul{
     li{
-      color:white;
+      color:$font;
       list-style: none;
       margin:1em 0;
     }
@@ -309,7 +351,7 @@ label{
 .content{
   .btn{
     border: 2px solid $secondColour;
-    color: white;
+    color: $btnFont;
     text-transform: uppercase;
     background: transparent;
     font-size: 1em;
@@ -318,8 +360,9 @@ label{
   .order-btn{
     height:4em;
     width:100%;
-    background:$secondColour;
+    background:white;
     font-size:0.9em;
+    color:$secondColour;
     &:hover{
       opacity:0.7;
     }
@@ -328,12 +371,12 @@ label{
     }
   }
   .rowCard{
-    color:white;
+    color:$font;
     font-size:0.9em;
     padding:1em;
     margin:15px 0;
     &:first-child{
-      margin-bottom:0;
+      margin: 0;
       //border-bottom:2px solid $grey;
     }
     .details{
@@ -360,6 +403,8 @@ label{
   .card{
     background: $primaryS;
     padding:1em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     .search{
       margin:0;
       padding: 0;
@@ -367,7 +412,7 @@ label{
     .form-control{
       margin:0;
       border:5px solid $grey;
-      color:white;
+      color:$font;
       background: transparent;
       border-right: none;
       border-radius:1em;
@@ -388,11 +433,11 @@ label{
     }
   }
   h3{
-    color:white;
+    color:$font;
     padding:0.5em;
   }
   p{
-    color: white;
+    color: $font;
     font-weight: 200;
     padding: 1em;
   }
@@ -424,8 +469,9 @@ label{
     font-weight:100;
     background:$secondColour;
     margin-bottom:1em;
+    color:$fontLight;
     small{
-      color:white;
+      color:$fontLight;
     }
   }
   .lowStock{
@@ -435,15 +481,18 @@ label{
     max-height:9em;
     //Make div scrollable
     overflow-y:scroll;
-
     //Hide scroll bar
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
     &::-webkit-scrollbar {
       display: none;
     }
+
+    .details, i{
+     color:white;
+    }
     h5{
-      color:white;
+      color:$font;
     }
     .rowCard{
       padding: 0.5em 1em;
@@ -461,19 +510,19 @@ label{
         background: #f15050;
       }
       a{
-        color:white;
+        color:$aFont;
         &:hover{
           opacity:0.6;
         }
         &:focus, &:active{
-          color: white;
+          color: $font;
           opacity:0.7;
         }
       }
     }
   }
   .activity{
-    height:25em;
+    max-height:30em;
     //Make div scrollable
     overflow-y:scroll;
 
@@ -495,7 +544,7 @@ label{
     }
   }
   .suppliers{
-    height:34em;
+    max-height:44em;
     //Make div scrollable
     overflow-y:scroll;
 
@@ -534,7 +583,7 @@ label{
       display: none;
     }
 
-    color:white;
+    color:$font;
     .options{
       padding:1em 0;
       cursor:pointer;
@@ -550,7 +599,7 @@ label{
     padding: 0;
   }
   .qty {
-    margin-top: -2em !important;
+    margin-top: -1.3em !important;
     width: 60%;
   }
   .newQty {
@@ -564,7 +613,7 @@ label{
 .suppliersList {
   .rowCard{
     &:nth-child(even){
-      background: #40424c;
+      background: $evenColour;
     }
   }
 }
@@ -573,12 +622,13 @@ label{
 .stockList {
   .rowCard{
     &:nth-child(even){
-      background: #40424c;
+      background: $evenColour;
     }
   }
 }
 //7. ORDER LIST
 .orderList {
+  margin-top:1.5em;
   h5 {
     margin: 0;
     margin-top: 2em;
@@ -610,7 +660,7 @@ label{
       display: none;
     }
 
-    color:white;
+    color:$font;
     .options{
       padding:1em 0;
       cursor:pointer;
