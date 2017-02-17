@@ -125,25 +125,30 @@
           Stock On Hold: <strong>{{item.quantityOnHold}}</strong><br><br>
 
           <div class="form-group onHoldList">
-            <label for="onHold">On Hold</label>
-            <div class="col-sm-12 card">
-              {{#each item.reservedStock as |onHold|}}
-                <div class="rowCard">
-                  <div class="col-sm-4 details text-left">
-                    {{onHold.customerName}}
+            {{#if item.reservedStock}}
+              <label for="onHold">On Hold</label>
+              <div class="col-sm-12 card">
+                {{#each item.reservedStock as |onHold|}}
+                  <div class="rowCard">
+                    <div class="col-sm-4 details text-left">
+                      {{onHold.customerName}}
+                    </div>
+                    <div class="col-sm-4 details">
+                      {{onHold.ref}}
+                    </div>
+                    <div class="col-sm-2 details">
+                      <strong>{{onHold.quantity}}</strong>
+                    </div>
+                    <div class="col-sm-1 details">
+                      <a {{action "onHoldAccepted" onHold}}>{{fa-icon "check"}}</a>
+                    </div>
+                    <div class="col-sm-1 details text-right">
+                      <a {{action "deleteOnHold" onHold}}>{{fa-icon "times"}}</a>
+                    </div>
                   </div>
-                  <div class="col-sm-5 details">
-                    {{onHold.ref}}
-                  </div>
-                  <div class="col-sm-2 details">
-                    <strong>{{onHold.quantity}}</strong>
-                  </div>
-                  <div class="col-sm-1 details text-right">
-                    <a {{action "deleteOnHold" onHold}}>{{fa-icon "times"}}</a>
-                  </div>
-                </div>
-              {{/each}}
-            </div>
+                {{/each}}
+              </div>
+            {{/if}}
           </div>
         </p>
       {{else}}

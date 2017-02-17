@@ -23,6 +23,17 @@ export default Ember.Controller.extend({
     quantity: 0
   },
 
+  onHoldCheck: function(){
+    this.get("sortedModel").forEach(function(stock){
+      stock.get("reservedQuantity").foreach(function(onHold){
+        if(onHold.get("been24Hours")){
+          stock.get("reservedQuantity").removeObject(onHold);
+        }
+      });
+
+      stock.save();
+    });
+  }.observes("sortedModel"),
   generateBarcode: function(){
     var barcode = "";
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -79,6 +90,22 @@ export default Ember.Controller.extend({
         });
       }
     },
+    onHoldAccepted: function(onHold) {
+      if(confirm("About to update stock levels")) {
+        let controller = this;
+
+        //Update stock level
+        this.set("item.warehouseQuantity", this.get("item.warehouseQuantity") - onHold.get("quantity"));
+
+        //Remove from on hold
+        this.get("item.reservedStock").removeObject(onHold);
+
+        //Update object
+        this.get("item").save().then(function () {
+          controller.set("application.message", "Held Stock Released");
+        });
+      }
+    },
     selectItemForReserve: function(item){
       let controller = this;
       this.store.find("item", item).then(function(foundItem){
@@ -97,6 +124,7 @@ export default Ember.Controller.extend({
             ref: controller.get("reserve.ref"),
             customerName: controller.get("reserve.customerName"),
             quantity: controller.get("reserve.quantity"),
+            dateReserved: moment().unix()
           });
 
           this.get("reserve.item.reservedStock").pushObject(reserve);
