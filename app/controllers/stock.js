@@ -24,10 +24,12 @@ export default Ember.Controller.extend({
   },
 
   onHoldCheck: function(){
+    let controller = this;
     this.get("sortedModel").forEach(function(stock){
       stock.get("reservedQuantity").foreach(function(onHold){
         if(onHold.get("been24Hours")){
           stock.get("reservedQuantity").removeObject(onHold);
+          controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
         }
       });
 
@@ -87,6 +89,7 @@ export default Ember.Controller.extend({
         this.get("item.reservedStock").removeObject(onHold);
         this.get("item").save().then(function () {
           controller.set("application.message", "Held Stock Released");
+          controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
         });
       }
     },
@@ -103,6 +106,7 @@ export default Ember.Controller.extend({
         //Update object
         this.get("item").save().then(function () {
           controller.set("application.message", "Held Stock Released");
+          controller.get("activityController").set("Stock updated for " + controller.get("item.name"));
         });
       }
     },
@@ -130,13 +134,12 @@ export default Ember.Controller.extend({
           this.get("reserve.item.reservedStock").pushObject(reserve);
           this.get("reserve.item").save().then(function () {
             controller.set("application.message", "Selected stock put on hold");
+            controller.get("activityController").set("Stock put on hold for " + controller.get("reserve.item.name"));
           });
 
-          this.set("reserve", {
-            ref: "",
-            customerName: "",
-            quantity: "",
-          })
+          this.set("reserve.ref", "");
+          this.set("reserve.customerName", "");
+          this.set("reserve.quantity", "");
         }
       }
     },
