@@ -2,6 +2,11 @@
 
 University Assignment: The materials management system is designed for a fictitious bike company. The system stores and manages suppliers, stock, purchase requisitions and deliveries.
 
+**Data**
+<br/>
+All data is stored on a NoSQL database and cached locally. If there is no connection to the database, the application can still run with no issues. Once the connection has been re-established, the database and cache will update automatically.
+<br/>
+
 Status: **BETA**
 
 ![Alt text](http://www.giovannilenguito.co.uk/images/portfolio/MaterialManagementSystem.png "Material Management Screenshot")
