@@ -2,9 +2,9 @@
 
 University Assignment: The materials management is designed for a bike company, it stores and manages suppliers, stock, and deliveries.
 
-Status: **AlLPHA**
+Status: **BETA**
 
-![Alt text](http://www.giovannilenguito.co.uk/images/portfolio/MaterialManagement.png "Material Management Screenshot")
+![Alt text](http://www.giovannilenguito.co.uk/images/portfolio/MaterialManagementSystem.png "Material Management Screenshot")
 
 ## Prerequisites
 
