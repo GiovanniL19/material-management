@@ -56,4 +56,24 @@ export default Model.extend({
       }
     }
   }.property("status", "terminated"),
+  qualityPerformance: function(){
+    var totalPoints = 0;
+    var pointsScored = 0;
+
+    this.get("transactionHistory").forEach(function(order){
+      order.get("lines").forEach(function(item) {
+        totalPoints++;
+        if(item.get("isFulfilled")){
+          pointsScored++;
+        }
+      });
+    });
+
+    var percentage = pointsScored / totalPoints * 100;
+    if(totalPoints === 0){
+      return "0%";
+    }else{
+      return percentage.toFixed(2) + "%";
+    }
+  }.property("transactionHistory"),
 });

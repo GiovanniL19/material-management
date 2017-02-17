@@ -70,6 +70,10 @@
             Trading Name: <strong>{{supplier.tradingName}}</strong><br>
             Trading Address: <br><strong>{{supplier.tradingAddress}}</strong><br><br>
             Returns Address: <br><strong>{{#if supplier.returnsAddress}}{{supplier.returnsAddress}}{{else}}Same as trading address{{/if}}</strong><br>
+            <br>
+            Performance Score: {{supplier.qualityPerformance}}
+            <br>
+            <small>The higher the percentage, the better the supplier. The score is calculated on the deliveries, if deliveries from the supplier contains missing stock then the score will decrease.</small>
           </p>
           {{#unless supplier.terminated}}
             <div class="col-sm-12">
