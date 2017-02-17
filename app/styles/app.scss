@@ -241,7 +241,7 @@ label{
         padding: 1em 0;
         padding-left: 1em;
         a {
-          text-transform: uppercase;
+          //text-transform: uppercase;
           font-weight: 400;
           color: $menuFont;
           opacity:0.7;
@@ -657,8 +657,10 @@ label{
     .card{
       background: $secondColour;
       color:white;
-      box-shadow: none;
       padding: 1em 0.5em;
+    }
+    .noBoxShadow{
+      box-shadow: none;
     }
     strong{
       font-size:1.3em;
