@@ -1,6 +1,6 @@
 # Materials Management System
 
-University Assignment: The materials management is designed for a bike company, it stores and manages suppliers, stock, and deliveries.
+University Assignment: The materials management system is designed for a fictitious bike company. The system stores and manages suppliers, stock, purchase requisitions and deliveries.
 
 Status: **BETA**
 
