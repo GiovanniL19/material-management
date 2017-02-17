@@ -25,16 +25,19 @@ export default Ember.Controller.extend({
 
   onHoldCheck: function(){
     let controller = this;
-    this.get("sortedModel").forEach(function(stock){
-      stock.get("reservedQuantity").foreach(function(onHold){
-        if(onHold.get("been24Hours")){
-          stock.get("reservedQuantity").removeObject(onHold);
-          controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
+    if(this.get("model") !== undefined) {
+      this.get("model").forEach(function(item) {
+        if(item.get("reservedStock")) {
+          item.get("reservedStock").forEach(function (onHold) {
+            if (onHold.get("been24Hours")) {
+              item.get("reservedStock").removeObject(onHold);
+              controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
+              item.save();
+            }
+          });
         }
       });
-
-      stock.save();
-    });
+    }
   }.observes("sortedModel"),
   generateBarcode: function(){
     var barcode = "";
@@ -88,7 +91,7 @@ export default Ember.Controller.extend({
         let controller = this;
         this.get("item.reservedStock").removeObject(onHold);
         this.get("item").save().then(function () {
-          controller.set("application.message", "Held Stock Released");
+          controller.set("application.message", "Stock Updated");
           controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
         });
       }
@@ -191,47 +194,51 @@ export default Ember.Controller.extend({
 
       item.set("barcode", this.get("generateBarcode"));
 
-      if(this.get("newGroup")) {
-        var group = this.store.createRecord("group", {
-          name: controller.get("groupName"),
-        });
+      if(item.get("reOrderQty") && item.get("leadTime") && item.get("name") && item.get("warehouseQuantity") && item.get("minQuantity") &&  item.get("trade") && item.get("retail")){
+        if(this.get("newGroup")) {
+          var group = this.store.createRecord("group", {
+            name: controller.get("groupName"),
+          });
 
-        group.save().then(function(savedGroup){
+          group.save().then(function(savedGroup){
+            item.set("supplier", supplier);
+            item.set("group", savedGroup);
+            //Saved supplier and group id in item
+            item.save().then(function(savedItem) {
+              //Update group to save item id
+              savedGroup.get("items").pushObject(savedItem);
+              savedGroup.save().then(function(){
+                //Update supplier
+                supplier.get("stock").pushObject(savedItem);
+                supplier.save().then(function(){
+                  controller.set("application.message", "Item Saved & Group Added");
+                  controller.get("activityController").set(savedItem.get("name") + " added to stock");
+                  controller.get("activityController").set("Group " + savedGroup.get("name") + " has been created");
+                  controller.clear();
+                });
+              });
+            });
+          });
+        }else{
+          var group = this.get("selectedGroup");
+
           item.set("supplier", supplier);
-          item.set("group", savedGroup);
-          //Saved supplier and group id in item
-          item.save().then(function(savedItem) {
-            //Update group to save item id
-            savedGroup.get("items").pushObject(savedItem);
-            savedGroup.save().then(function(){
+          item.set("group", group);
+          item.save().then(function(savedItem){
+            group.get("items").pushObject(savedItem);
+            group.save().then(function(updatedGroup) {
               //Update supplier
               supplier.get("stock").pushObject(savedItem);
               supplier.save().then(function(){
-                controller.set("application.message", "Item Saved & Group Added");
+                controller.set("application.message", "Item Saved");
                 controller.get("activityController").set(savedItem.get("name") + " added to stock");
-                controller.get("activityController").set("Group " + savedGroup.get("name") + " has been created");
                 controller.clear();
               });
             });
           });
-        });
+        }
       }else{
-        var group = this.get("selectedGroup");
-
-        item.set("supplier", supplier);
-        item.set("group", group);
-        item.save().then(function(savedItem){
-          group.get("items").pushObject(savedItem);
-          group.save().then(function(updatedGroup) {
-            //Update supplier
-            supplier.get("stock").pushObject(savedItem);
-            supplier.save().then(function(){
-              controller.set("application.message", "Item Saved");
-              controller.get("activityController").set(savedItem.get("name") + " added to stock");
-              controller.clear();
-            });
-          });
-        });
+        this.set("application.message", "Please enter all the required fields");
       }
     },
 
@@ -265,71 +272,75 @@ export default Ember.Controller.extend({
       let controller = this;
       var item = this.get("item");
 
-      this.store.findRecord('supplier', item.get("supplier.id")).then(function(oldSupplier) {
-        oldSupplier.get("stock").removeObject(item);
-        oldSupplier.save().then(function(){
-          controller.store.findRecord('group', item.get("group.id")).then(function(oldGroup) {
-            oldGroup.get("items").removeObject(item);
-            oldGroup.save().then(function(){
-              //UPDATE ITEM
+      if (item.get("reOrderQty") && item.get("leadTime") && item.get("name") && item.get("warehouseQuantity") && item.get("minQuantity") && item.get("trade") && item.get("retail")) {
+        this.store.findRecord('supplier', item.get("supplier.id")).then(function (oldSupplier) {
+          oldSupplier.get("stock").removeObject(item);
+          oldSupplier.save().then(function () {
+            controller.store.findRecord('group', item.get("group.id")).then(function (oldGroup) {
+              oldGroup.get("items").removeObject(item);
+              oldGroup.save().then(function () {
+                //UPDATE ITEM
 
-              var supplier = controller.get("selectedSupplier");
+                var supplier = controller.get("selectedSupplier");
 
-              var item = controller.get("item");
+                var item = controller.get("item");
 
-              if(controller.get("newGroup")) {
-                var group = controller.store.createRecord("group", {
-                  name: controller.get("groupName"),
-                });
+                if (controller.get("newGroup")) {
+                  var group = controller.store.createRecord("group", {
+                    name: controller.get("groupName"),
+                  });
 
-                group.save().then(function(savedGroup){
+                  group.save().then(function (savedGroup) {
+                    item.set("supplier", supplier);
+                    item.set("group", savedGroup);
+                    //Saved supplier and group id in item
+                    item.save().then(function (savedItem) {
+                      //Update group to save item id
+                      savedGroup.get("items").pushObject(savedItem);
+                      savedGroup.save().then(function () {
+                        //Update supplier
+                        controller.store.findRecord('supplier', supplier.get("id")).then(function (supplier) {
+                          supplier.get("stock").pushObject(savedItem);
+                          supplier.save().then(function () {
+                            controller.clear();
+                            controller.get("activityController").set(savedItem.get("name") + " updated");
+                            controller.get("activityController").set("Group " + savedGroup.get("name") + " has been created");
+                            controller.set("application.message", "Item Saved & Group Updated");
+                          });
+                        });
+                      });
+                    });
+                  });
+                } else {
+                  var group = controller.get("selectedGroup");
+
                   item.set("supplier", supplier);
-                  item.set("group", savedGroup);
-                  //Saved supplier and group id in item
-                  item.save().then(function(savedItem) {
-                    //Update group to save item id
-                    savedGroup.get("items").pushObject(savedItem);
-                    savedGroup.save().then(function(){
-                      //Update supplier
-                      controller.store.findRecord('supplier', supplier.get("id")).then(function(supplier) {
-                        supplier.get("stock").pushObject(savedItem);
-                        supplier.save().then(function () {
-                          controller.clear();
-                          controller.get("activityController").set(savedItem.get("name") + " updated");
-                          controller.get("activityController").set("Group " + savedGroup.get("name") + " has been created");
-                          controller.set("application.message", "Item Saved & Group Updated");
+                  item.set("group", group);
+                  item.save().then(function (savedItem) {
+                    controller.store.findRecord('group', group.get("id")).then(function (group) {
+                      group.get("items").pushObject(savedItem);
+
+                      group.save().then(function (updatedGroup) {
+                        //Update supplier
+                        controller.store.findRecord('supplier', supplier.get("id")).then(function (supplier) {
+                          supplier.get("stock").pushObject(savedItem);
+                          supplier.save().then(function () {
+                            controller.clear();
+                            controller.get("activityController").set(savedItem.get("name") + " updated");
+                            controller.set("application.message", "Item Saved");
+                          });
                         });
                       });
                     });
                   });
-                });
-              }else{
-                var group = controller.get("selectedGroup");
-
-                item.set("supplier", supplier);
-                item.set("group", group);
-                item.save().then(function(savedItem){
-                  controller.store.findRecord('group', group.get("id")).then(function(group) {
-                    group.get("items").pushObject(savedItem);
-
-                    group.save().then(function(updatedGroup) {
-                      //Update supplier
-                      controller.store.findRecord('supplier', supplier.get("id")).then(function(supplier) {
-                        supplier.get("stock").pushObject(savedItem);
-                        supplier.save().then(function(){
-                          controller.clear();
-                          controller.get("activityController").set(savedItem.get("name") + " updated");
-                          controller.set("application.message", "Item Saved");
-                        });
-                      });
-                    });
-                  });
-                });
-              }
+                }
+              });
             });
           });
         });
-      });
+      }else{
+        this.set("application.message", "Please enter all required fields");
+      }
     }
   }
 });

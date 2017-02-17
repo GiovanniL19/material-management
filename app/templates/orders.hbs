@@ -3,7 +3,7 @@
     <div class="row sections">
       <div class="col-sm-12">
         <div class="col-sm-12 card">
-          <div class="col-sm-8"><h5>Purchase Requisitions</h5></div>
+          <div class="col-sm-8"><h4>Purchase Requisitions</h4></div>
           <div class="col-sm-4 right text-right">
             <button class="btn btn-default" {{action "new"}}>New Requisition</button>
           </div>
@@ -229,7 +229,7 @@
                       {{item.formattedTrade}}
                     </div>
                     <div class="col-sm-2 details {{if item.orderQuantity "green"}}">
-                      {{input type="number" class="form-control qty" value=item.orderQuantity placeholder="0"}}
+                      {{input type="number" class="form-control qty" value=item.orderQuantity placeholder="0" readonly=item.checked}}
                     </div>
                     <div class="col-sm-2 details" {{action "selectLine" item}}>
                       {{item.formattedTotal}}
@@ -238,10 +238,14 @@
                       {{item.quantity}}
                     </div>
                     <div class="col-sm-1 options text-right" {{action "selectLine" item}}>
-                      {{#if item.checked}}
-                        {{fa-icon "check"}}
-                      {{else}}
-                        {{fa-icon "square-o"}}
+                      {{#if item.orderQuantity}}
+                        {{#unless item.orderQuantityEmpty}}
+                          {{#if item.checked}}
+                            {{fa-icon "check"}}
+                          {{else}}
+                            {{fa-icon "square-o"}}
+                          {{/if}}
+                        {{/unless}}
                       {{/if}}
                     </div>
                   </div>

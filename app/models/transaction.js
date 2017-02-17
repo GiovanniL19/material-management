@@ -19,6 +19,7 @@ export default Model.extend({
   status: DS.attr("string", {defaultValue: "PROCESSING"}),
   note: DS.attr("string"),
   totalCost: DS.attr("string"),
+  rejectDelivery: DS.attr("boolean"),
   totalHuman: function(){
     return '£' + parseFloat(this.get("totalCost")).toFixed(2);
   }.property("totalCost"),
@@ -50,6 +51,15 @@ export default Model.extend({
     });
 
     return '£' + parseFloat(total).toFixed(2);
+  }.property("lines.@each.newQuantity"),
+  rawOrderedTotal: function(){
+    let total = 0;
+    this.get("lines").forEach(function(item) {
+      var cost = item.get("quantity") * item.get("price");
+      total += cost;
+    });
+
+    return total;
   }.property("lines.@each.newQuantity"),
 
   orderDateFormatted: function () {

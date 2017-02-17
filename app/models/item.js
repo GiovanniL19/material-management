@@ -20,8 +20,9 @@ export default Model.extend({
   group: DS.belongsTo("group", {async: true}),
   supplier: DS.belongsTo("supplier", {async: true}),
   bikes: DS.hasMany("bike", {async: true, defaultValue: []}),
-
   reservedStock: MF.fragmentArray("reserve"),
+  leadTime: DS.attr("string"),
+  reOrderQty: DS.attr("number"),
 
   quantityOnHold: function(){
     var totalOnHold = 0;
@@ -60,4 +61,12 @@ export default Model.extend({
       return '£0';
     }
   }.property("orderQuantity"),
+
+  orderQuantityEmpty: function(){
+    if(parseInt(this.get("orderQuantity")) === 0){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("orderQuantity")
 });

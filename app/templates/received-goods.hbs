@@ -1,9 +1,9 @@
 <div class="received-goods">
   {{#liquid-if view class="nextPage"}}
     <div class="row sections">
-      <div class="col-sm-12">
+      <div class="col-sm-9">
         <div class="col-sm-12 card">
-          <div class="col-sm-8"><h5>Goods Inwards</h5></div>
+          <div class="col-sm-8"><h4>Goods Inwards</h4></div>
           <div class="col-xs-12">
             {{#if sortedModel}}
               <div class="rowCard row">
@@ -47,6 +47,46 @@
           </div>
         </div>
       </div>
+      <div class="col-sm-3 text-right stats">
+        <div class="col-sm-12 card">
+          <div class="col-sm-12 card noBoxShadow">
+            <div class="col-sm-10 text-left">
+              Delivered
+            </div>
+            <div class="col-sm-2">
+              <strong>{{numberOfAccepted}}</strong>
+            </div>
+          </div>
+
+          <div class="col-sm-12 card noBoxShadow">
+            <div class="col-sm-10 text-left">
+              Missing Stock
+            </div>
+            <div class="col-sm-2">
+              <strong>{{numberWithMissing}}</strong>
+            </div>
+          </div>
+
+          <div class="col-sm-12 card noBoxShadow">
+            <div class="col-sm-10 text-left">
+              Rejected
+            </div>
+            <div class="col-sm-2">
+              <strong>{{numberOfRejected}}</strong>
+            </div>
+          </div>
+
+          <div class="col-sm-12 card noBoxShadow">
+            <div class="col-sm-10 text-left">
+              Processing
+            </div>
+            <div class="col-sm-2">
+              <strong>{{numberNotDelivered}}</strong>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
     </div>
   {{else}}
     <div class="row sections">
@@ -56,13 +96,16 @@
           <h3>{{transaction.formattedOrderedTotal}}</h3>
           <p>
             Supplier: <a {{action "goToSupplier" transaction.supplier}}>{{transaction.supplier.name}}</a><br>
-            Contact: {{transaction.supplier.contact}}<br>
+            Contact: <br><strong>{{transaction.supplier.contactName}} on {{transaction.supplier.contactNumber}} or {{transaction.supplier.contactEmail}}</strong><br><br>
             Order Lines: {{transaction.lines.length}}<br><br>
             ETA: <strong>{{transaction.etaHuman}}</strong><br><br>
             Note:<br><br>
-            {{textarea class="form-control" value=transaction.note}}
+            {{textarea class="form-control" value=transaction.note readonly=transaction.rejectDelivery}}
             <br><br>
-            <button class="btn btn-primary" {{action "updateSystem"}}>Update System</button>
+            {{#unless transaction.rejectDelivery}}
+              <button class="btn btn-danger" {{action "rejectDelivery" transaction}}>Rejected</button>
+              <button class="btn btn-primary" {{action "updateSystem"}}>Update System</button>
+            {{/unless}}
           </p>
         </div>
       </div>
@@ -107,8 +150,9 @@
                   <div class="col-sm-2 details">
                     {{line.name}}
                   </div>
-                  <div class="col-sm-3 details">
+                  <div class="col-sm-3 {{unless line.addedToStock "details"}}">
                     {{line.quantity}}
+                    {{#if line.addedToStock}}<br><small>{{line.addedToStock}} added to stock</small><{{/if}}
                   </div>
                   <div class="col-sm-3 details">
                     {{line.formattedPrice}}
@@ -117,11 +161,15 @@
                     {{line.formattedTotal}}
                   </div>
                   <div class="col-sm-2 details">
-                    {{#if line.isFulfilled}}
-                      <a {{action "clearReceivedQuantity" line}}>Fulfilled</a>
-                    {{else}}
-                      {{input type="number" class="form-control qty" value=line.receivedQuantity placeholder="0"}}
-                    {{/if}}
+                  {{#if transaction.rejectDelivery}}
+                    Rejected
+                  {{else}}
+                      {{#if line.isFulfilled}}
+                        <a {{action "clearReceivedQuantity" line}}>Fulfilled</a>
+                      {{else}}
+                        {{input type="number" class="form-control qty" value=line.receivedQuantity placeholder="0" max=line.quantity}}
+                      {{/if}}
+                  {{/if}}
                   </div>
                 </div>
               {{/each}}

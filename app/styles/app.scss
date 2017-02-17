@@ -16,7 +16,7 @@ $primaryS: white;
 $evenColour: #ecf0f1;
 $secondColour: #373f52;
 $font: #444;
-$aFont: $secondColour;
+$aFont: #5b80d8;
 $btnFont: $secondColour;
 $menuFont: #222;
 
@@ -241,7 +241,7 @@ label{
         padding: 1em 0;
         padding-left: 1em;
         a {
-          text-transform: uppercase;
+          //text-transform: uppercase;
           font-weight: 400;
           color: $menuFont;
           opacity:0.7;
@@ -303,15 +303,15 @@ label{
 
 //1.3 HEADER
 .header{
-  //background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
+  background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
   //background:url('https://static.pexels.com/photos/132695/pexels-photo-132695.jpeg') center no-repeat;
   //background:url('https://static.pexels.com/photos/145397/pexels-photo-145397.jpeg') center no-repeat;
-  background:url('https://static.pexels.com/photos/383/summer-sport-bikes-bicycles.jpg') center no-repeat;
+  //background:url('https://static.pexels.com/photos/383/summer-sport-bikes-bicycles.jpg') center no-repeat;
   background-size: cover;
   width: 102.6%;
-  height: 20vh;
+  height: 30vh;
   margin: -1em;
-  margin-bottom: -5em;
+  margin-bottom: -10em;
   margin-left: -1.1em;
 }
 
@@ -653,6 +653,19 @@ label{
 
 //8. RECEIVED GOODS
 .received-goods{
+  .stats{
+    .card{
+      background: $secondColour;
+      color:white;
+      padding: 1em 0.5em;
+    }
+    .noBoxShadow{
+      box-shadow: none;
+    }
+    strong{
+      font-size:1.3em;
+    }
+  }
   .rowCard {
     padding: 0 1em;
     &:nth-child(even) {
