@@ -51,7 +51,7 @@
   {{else}}
     <div class="row sections">
       <div class="col-sm-4 hidden-xs col-md-4">
-        <div class="col-sm-12 card {{if transaction.isMissingItems "orangeBack"}} {{if transaction.isComplete "greenBack"}}">
+        <div class="col-sm-12 card {{if transaction.isProcessing "redBack"}}{{if transaction.isMissingItems "orangeBack"}} {{if transaction.isComplete "greenBack"}}">
           <h5>{{transaction.transactionID}}</h5>
           <h3>{{transaction.formattedOrderedTotal}}</h3>
           <p>

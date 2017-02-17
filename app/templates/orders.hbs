@@ -172,12 +172,14 @@
                     <div class="col-sm-3 details">
                       <strong>Ordered</strong>
                     </div>
-                    <div class="col-sm-2 details">
+                    <div class="col-sm-2 details {{unless transaction.canCancel "col-sm-3 text-right"}}">
                       <strong>Total</strong>
                     </div>
-                    <div class="col-sm-1 options text-right">
-                      <strong>Selected</strong>
-                    </div>
+                    {{#if transaction.canCancel}}
+                      <div class="col-sm-1 options text-right">
+                        <strong>Selected</strong>
+                      </div>
+                    {{/if}}
                   </div>
                 {{/if}}
               {{/unless}}
@@ -197,16 +199,19 @@
                         {{input type="number" class="form-control newQty" value=item.newQuantity placeholder="0"}}
                       {{/if}}
                     </div>
-                    <div class="col-sm-2 details">
+                    <div class="col-sm-2 details {{unless transaction.canCancel "col-sm-3 text-right"}}">
                       {{item.formattedTotal}}
                     </div>
-                    <div class="col-sm-1 options text-right" {{action "selectLine" item}}>
-                      {{#if item.checked}}
-                        {{fa-icon "check"}}
-                      {{else}}
-                        {{fa-icon "square-o"}}
-                      {{/if}}
-                    </div>
+
+                    {{#if transaction.canCancel}}
+                      <div class="col-sm-1 options text-right" {{action "selectLine" item}}>
+                        {{#if item.checked}}
+                          {{fa-icon "check"}}
+                        {{else}}
+                          {{fa-icon "square-o"}}
+                        {{/if}}
+                      </div>
+                    {{/if}}
                   </div>
                 {{else}}
                   <h5>Order Will Be Canceled</h5>

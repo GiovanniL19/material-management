@@ -104,6 +104,16 @@ textarea{
   }
 }
 
+.redBack{
+  border-top: 5px solid $red !important;
+  a{
+    color:$aFont !important;
+  }
+  .btn{
+    border-color:$aFont !important;
+  }
+}
+
 h4{
   color:$font;
 }
@@ -295,12 +305,12 @@ label{
   //background:url('https://static.pexels.com/photos/132781/pexels-photo-132781.jpeg') center no-repeat;
   //background:url('https://static.pexels.com/photos/132695/pexels-photo-132695.jpeg') center no-repeat;
   //background:url('https://static.pexels.com/photos/145397/pexels-photo-145397.jpeg') center no-repeat;
-  background:url('https://images.pexels.com/photos/24325/pexels-photo-24325.jpg?w=1260&h=750&auto=compress&cs=tinysrgb') center no-repeat;
+  background:url('https://static.pexels.com/photos/383/summer-sport-bikes-bicycles.jpg') center no-repeat;
   background-size: cover;
-  width: 104%;
-  height: 25em;
+  width: 102.6%;
+  height: 20vh;
   margin: -1em;
-  margin-bottom: -21em;
+  margin-bottom: -5em;
   margin-left: -1.1em;
 }
 

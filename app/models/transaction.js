@@ -97,6 +97,14 @@ export default Model.extend({
     }else{
       return false;
     }
+  }.property("status"),
+
+  isProcessing: function(){
+    if(this.get("status") === "PROCESSING") {
+      return true;
+    }else{
+      return false;
+    }
   }.property("status")
 
 });
