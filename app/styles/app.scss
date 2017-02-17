@@ -653,6 +653,17 @@ label{
 
 //8. RECEIVED GOODS
 .received-goods{
+  .stats{
+    .card{
+      background: $secondColour;
+      color:white;
+      box-shadow: none;
+      padding: 1em 0.5em;
+    }
+    strong{
+      font-size:1.3em;
+    }
+  }
   .rowCard {
     padding: 0 1em;
     &:nth-child(even) {

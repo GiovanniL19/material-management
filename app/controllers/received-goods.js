@@ -8,8 +8,25 @@ export default Ember.Controller.extend({
   sortDesc: ['dateCreated:desc'],
   sortedModel: Ember.computed.sort('model', 'sortDesc'),
   view: true,
+  numberOfAccepted: 0,
+  numberOfRejected: 0,
+  numberWithMissing: 0,
+  numberNotDelivered: 0,
 
-
+  count: function(){
+    let controller = this;
+    this.get("model").forEach(function(delivery){
+      if(delivery.get("rejectDelivery")){
+        controller.set("numberOfRejected", controller.get("numberOfRejected") + 1);
+      }else if(delivery.get("isComplete")){
+        controller.set("numberOfAccepted", controller.get("numberOfAccepted") + 1);
+      }else if(delivery.get("isMissingItems")){
+        controller.set("numberWithMissing", controller.get("numberWithMissing") + 1);
+      }else{
+        controller.set("numberNotDelivered", controller.get("numberNotDelivered") + 1);
+      }
+    })
+  }.observes("model"),
   clear: function(){
     this.set("view", true);
     this.set("transaction", null);
