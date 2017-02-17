@@ -25,6 +25,5 @@ export default MF.Fragment.extend({
       return false;
     }
   }.property("quantity", "receivedQuantity"),
-  isComplete: DS.attr("boolean", {defaultValue: false}),
-
+  isComplete: DS.attr("boolean", {defaultValue: false})
 });

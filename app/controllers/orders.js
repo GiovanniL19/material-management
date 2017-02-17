@@ -203,7 +203,7 @@ export default Ember.Controller.extend({
           let newFragmentLine = this.store.createFragment("line", {
             name: item.get("name"),
             quantity: item.get("orderQuantity"),
-            item: item,
+            item: item.get("id"),
             price: item.get("trade")
           });
 
