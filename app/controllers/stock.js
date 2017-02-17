@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
     item: null,
     ref: "",
     customerName: "",
-    quantity: 0
+    quantity: ""
   },
 
   onHoldCheck: function(){
@@ -131,6 +131,12 @@ export default Ember.Controller.extend({
           this.get("reserve.item").save().then(function () {
             controller.set("application.message", "Selected stock put on hold");
           });
+
+          this.set("reserve", {
+            ref: "",
+            customerName: "",
+            quantity: "",
+          })
         }
       }
     },

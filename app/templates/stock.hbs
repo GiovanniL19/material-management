@@ -97,7 +97,11 @@
           </div>
 
           <div class="form-group">
-            <label for="holdQty">Quantity To Put On Hold*</label>
+            <label for="holdQty">
+              <small>Quantity Available: {{reserve.item.quantity}}</small>
+              <br>
+              Quantity To Put On Hold*
+            </label>
             {{input type="number" class="form-control" id="holdQty" placeholder="0" value=reserve.quantity}}
           </div>
 
