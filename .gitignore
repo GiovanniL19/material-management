@@ -20,4 +20,4 @@ testem.log
 /electron-builds/*
 
 # Webstorm
-.idea
+.idea/
