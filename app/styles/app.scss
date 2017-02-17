@@ -74,7 +74,6 @@ body{
   margin: 0;
   -webkit-overflow-scrolling: touch;
 }
-
 a, button, .btn, .form-control, .input-group-addon{
   -webkit-app-region: no-drag;
   -webkit-transition: ease 0.4s;
@@ -512,9 +511,6 @@ label{
     .rowCard{
       padding: 0.5em 1em;
       line-height: 0em;
-      &:first-child{
-        padding-top:1em;
-      }
       &:last-child{
         margin-top:0em;
       }

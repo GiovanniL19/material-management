@@ -3,9 +3,9 @@
     <div class="row sections">
       <div class="col-sm-12">
         <div class="col-sm-12 card">
-          <div class="col-sm-8"><h5>Orders</h5></div>
+          <div class="col-sm-8"><h5>Purchase Requisitions</h5></div>
           <div class="col-sm-4 right text-right">
-            <button class="btn btn-default" {{action "new"}}>New Order</button>
+            <button class="btn btn-default" {{action "new"}}>Send Requisition</button>
           </div>
           <div class="col-xs-12">
             {{#if sortedModel}}
@@ -57,7 +57,7 @@
             {{else}}
               <div class="rowCard row">
                 <div class="col-sm-12 details">
-                  <small>No Orders Found</small>
+                  <small>No Requisitions Found</small>
                 </div>
               </div>
             {{/each}}
@@ -69,10 +69,11 @@
     <div class="row sections">
       <div class="col-sm-4 hidden-xs col-md-4">
         <div class="col-sm-12 card">
-          {{#unless editMode}}<h3>New Order</h3>{{else}}<h3>{{transaction.transactionID}}</h3>{{/unless}}
+          {{#unless editMode}}<h3>Send Requisition</h3>{{else}}<h3>{{transaction.transactionID}}</h3>{{/unless}}
           {{#if editMode}}
             <h3>{{transaction.formattedTotal}}</h3>
             <p>
+              Status: <strong>{{transaction.status}}</strong><br>
               Supplier: <a {{action "goToSupplier" transaction.supplier}}>{{transaction.supplier.name}}</a><br>
               Contact: {{transaction.supplier.contact}}<br>
               Order Lines: {{transaction.lines.length}}<br><br>
@@ -91,7 +92,7 @@
           {{else}}
             <h3>{{total}}</h3>
             <p>
-              You first need to select a supplier to order from. Once you have chosen a supplier, the list on the right will show all stock from that supplier. You can select the items you would like to order with a quantity. Once you have completed adding lines and quantities, click the send order button to send the purchase requisition to the finance department.
+              You first need to select a supplier to order materials from. Once you have chosen a supplier, the list on the right will show all stock from that supplier. You can select the items you would like to order with a quantity. Once you have completed adding lines and quantities, click the send order button to send the purchase requisition to the finance department.
             </p>
 
             <div class="form-group {{if selectedSupplier 'green'}} {{unless selectedSupplier 'red'}}">
@@ -119,7 +120,7 @@
               </div>
 
               <div class="col-sm-6 text-right buttons">
-                <button class="btn btn-primary" {{action "placeOrder"}}>Send Order</button>
+                <button class="btn btn-primary" {{action "placeOrder"}}>Send</button>
               </div>
             </div>
           {{/if}}
@@ -129,8 +130,8 @@
       <div class="col-xs-12 col-sm-8 col-md-8">
         <div class="col-sm-12 card nonScroll">
           <div class="col-sm-12 right text-right">
-            {{#if editMode}}<button class="btn btn-primary" {{action "goToDelivery" transaction}}>Go To Delivery</button>{{/if}}
-            <button class="btn btn-default" {{action "back"}}>Orders</button>
+            {{#if editMode}}<button class="btn btn-primary" {{action "goToDelivery" transaction}}>Goods Received</button>{{/if}}
+            <button class="btn btn-default" {{action "back"}}>Purchase Requisitions</button>
           </div>
           <div class="col-xs-12">
             <form class="cards">
@@ -214,7 +215,7 @@
                     {{/if}}
                   </div>
                 {{else}}
-                  <h5>Order Will Be Canceled</h5>
+                  <h5>Requisition Will Be Canceled</h5>
                   <br>
                   <small>To save these changes, click the update button on the left</small>
                 {{/each}}
