@@ -1,0 +1,134 @@
+<div class="received-goods">
+  {{#liquid-if view class="nextPage"}}
+    <div class="row sections">
+      <div class="col-sm-12">
+        <div class="col-sm-12 card">
+          <div class="col-sm-8"><h5>Goods Inwards</h5></div>
+          <div class="col-xs-12">
+            {{#if sortedModel}}
+              <div class="rowCard row">
+                <div class="col-sm-3 details">
+                  <strong>Transaction ID</strong>
+                </div>
+                <div class="col-sm-3 details">
+                  <strong>Delivery Date</strong>
+                </div>
+                <div class="col-sm-3 details">
+                  <strong>Supplier</strong>
+                </div>
+                <div class="col-sm-3 options text-right">
+                  <strong>Status</strong>
+                </div>
+              </div>
+            {{/if}}
+
+            {{#each sortedModel as |transaction|}}
+              <div class="rowCard row">
+                <div class="col-sm-3 details">
+                  <a {{action "select" transaction}}>{{transaction.transactionID}}</a>
+                </div>
+                <div class="col-sm-3 details">
+                  {{transaction.etaFormatted}}
+                </div>
+                <div class="col-sm-3 details">
+                  {{transaction.supplier.name}}
+                </div>
+                <div class="col-sm-3 options text-right">
+                  {{transaction.status}}
+                </div>
+              </div>
+            {{else}}
+              <div class="rowCard row">
+                <div class="col-sm-12 details">
+                  <small>No Orders Found</small>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="row sections">
+      <div class="col-sm-4 hidden-xs col-md-4">
+        <div class="col-sm-12 card {{if transaction.isProcessing "redBack"}}{{if transaction.isMissingItems "orangeBack"}} {{if transaction.isComplete "greenBack"}}">
+          <h5>{{transaction.transactionID}}</h5>
+          <h3>{{transaction.formattedOrderedTotal}}</h3>
+          <p>
+            Supplier: <a {{action "goToSupplier" transaction.supplier}}>{{transaction.supplier.name}}</a><br>
+            Contact: {{transaction.supplier.contact}}<br>
+            Order Lines: {{transaction.lines.length}}<br><br>
+            ETA: <strong>{{transaction.etaHuman}}</strong><br><br>
+            Note:<br><br>
+            {{textarea class="form-control" value=transaction.note}}
+            <br><br>
+            <button class="btn btn-primary" {{action "updateSystem"}}>Update System</button>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-8 col-md-8">
+        <div class="col-sm-12 card nonScroll">
+          <div class="col-sm-6 text-left">
+            <h5>Delivery Items</h5>
+          </div>
+          <div class="col-sm-6 right text-right">
+            <button class="btn btn-primary" {{action "goToOrder" transaction}}>Go To Requisition</button>
+            <button class="btn btn-default" {{action "back"}}>Deliveries</button>
+          </div>
+          <div class="col-xs-12">
+            <form class="cards">
+              <h5>{{selectedSupplier.name}}</h5>
+              <div class="rowCard row">
+                <div class="col-sm-2 details">
+                  <strong>Name</strong>
+                </div>
+                <div class="col-sm-3 details">
+                  <strong>Quantity ordered</strong>
+                </div>
+                <div class="col-sm-3 details">
+                  <strong>Price Per Unit</strong>
+                </div>
+                <div class="col-sm-2 details">
+                  <strong>Total Cost</strong>
+                </div>
+                <div class="col-sm-2 text-right details">
+                  <strong>
+                    {{#if line.isFulfilled}}
+                      Status
+                    {{else}}
+                      Delivered Quantity
+                    {{/if}}
+                  </strong>
+                </div>
+              </div>
+              {{#each transaction.lines as |line|}}
+                <div class="rowCard row">
+                  <div class="col-sm-2 details">
+                    {{line.name}}
+                  </div>
+                  <div class="col-sm-3 details">
+                    {{line.quantity}}
+                  </div>
+                  <div class="col-sm-3 details">
+                    {{line.formattedPrice}}
+                  </div>
+                  <div class="col-sm-2 details">
+                    {{line.formattedTotal}}
+                  </div>
+                  <div class="col-sm-2 details">
+                    {{#if line.isFulfilled}}
+                      <a {{action "clearReceivedQuantity" line}}>Fulfilled</a>
+                    {{else}}
+                      {{input type="number" class="form-control qty" value=line.receivedQuantity placeholder="0"}}
+                    {{/if}}
+                  </div>
+                </div>
+              {{/each}}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/liquid-if}}
+</div>

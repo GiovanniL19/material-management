@@ -4,7 +4,7 @@
       <div class="col-sm-12 card">
         <div class="col-sm-8"><h5>Suppliers</h5></div>
         <div class="col-sm-4 right text-right">
-          <button class="btn btn-primary" {{action "new"}}>New Supplier</button>
+          <button class="btn btn-default" {{action "new"}}>New Supplier</button>
         </div>
         <div class="col-xs-12">
           {{#if sortedModel}}
@@ -61,22 +61,55 @@
 {{else}}
   <div class="row sections">
     <div class="col-sm-4 hidden-xs col-md-4">
-      <div class="col-sm-12 card">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}</div>
+      <div class="col-sm-12 card">{{#unless editMode}}<h3>New Supplier</h3>{{else}}<h3>{{supplier.name}}</h3>{{/unless}}
+      </div>
       <div class="col-sm-12 card">
         {{#if editMode}}
           <p>
+            {{#if supplier.terminated}}<strong class="red">TERMINATED (READ ONLY)</strong><br>{{/if}}
             Trading Name: <strong>{{supplier.tradingName}}</strong><br>
-            Trading Address: <strong>{{supplier.tradingAddress}}</strong><br>
-            Returns Address: <strong>{{supplier.returnsAddress}}</strong><br>
+            Trading Address: <br><strong>{{supplier.tradingAddress}}</strong><br><br>
+            Returns Address: <br><strong>{{#if supplier.returnsAddress}}{{supplier.returnsAddress}}{{else}}Same as trading address{{/if}}</strong><br>
           </p>
-          <div class="col-sm-12">
-            <button class="btn btn-default {{if supplier.isOk "selected"}}" {{action "updateStatus" "OK"}}>OK</button>
-            <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON HOLD</button>
-            <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD</button>
+          {{#unless supplier.terminated}}
+            <div class="col-sm-12">
+              <button class="btn btn-default {{if supplier.isOk "selected"}}" {{action "updateStatus" "OK"}}>OK</button>
+              <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON
+                HOLD
+              </button>
+              <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD
+              </button>
+            </div>
+          {{/unless}}
+
+          <div class="col-sm-12 card orderList">
+            {{#if supplier.transactionHistory}}
+              <h5>Orders</h5>
+            {{/if}}
+            {{#each supplier.transactionHistory as |transaction|}}
+              <div class="rowCard row">
+                <div class="col-sm-6 details">
+                  <a {{action "selectOrder" transaction}}>{{transaction.transactionID}}</a>
+                </div>
+                <div class="col-sm-3 details">
+                  {{transaction.orderDateFormatted}}
+                </div>
+                <div class="col-sm-3 details text-center">
+                  {{transaction.totalHuman}}
+                </div>
+              </div>
+            {{else}}
+              <div class="rowCard row">
+                <div class="col-sm-12 details">
+                  <small>No Orders Found</small>
+                </div>
+              </div>
+            {{/each}}
           </div>
         {{else}}
           <p>
-            When adding a new supplier, you need to fill in all the reqiured fields. The returns address is optional, if you leave it blank the default returns address will be the same as the trading address.
+            When adding a new supplier, you need to fill in all the required fields. The returns address is optional, if
+            you leave it blank the default returns address will be the same as the trading address.
           </p>
         {{/if}}
       </div>
@@ -85,44 +118,62 @@
     <div class="col-sm-8 col-md-8">
       <div class="col-sm-12 card">
         <div class="col-sm-12 right text-right">
-          <button class="btn btn-primary" {{action "back"}}>Back</button>
+          <button class="btn btn-default" {{action "back"}}>Suppliers</button>
         </div>
         <div class="col-xs-12">
           <form>
             <div class="form-group {{if supplier.name 'green'}} {{unless supplier.name 'red'}}">
               <label for="name">Name*</label>
-              {{input type="text" class="form-control" id="name" placeholder="Name" value=supplier.name}}
+              {{input type="text" class="form-control" id="name" placeholder="Name" value=supplier.name readonly=supplier.terminated}}
             </div>
 
             <hr>
             <div class="form-group {{if supplier.tradingName 'green'}} {{unless supplier.tradingName 'red'}}">
               <label for="tName">Trading Name*</label>
-              {{input type="text" class="form-control" id="tName" placeholder="Trading Name" value=supplier.tradingName}}
+              {{input type="text" class="form-control" id="tName" placeholder="Trading Name"value=supplier.tradingName readonly=supplier.terminated}}
             </div>
 
             <div class="form-group {{if supplier.tradingAddress 'green'}} {{unless supplier.tradingAddress 'red'}}">
               <label for="tAddress">Trading Address*</label>
-              {{input type="text" class="form-control" id="tAddress" placeholder="Trading Address" value=supplier.tradingAddress}}
+              {{input type="text" class="form-control" id="tAddress" placeholder="Trading Address" value=supplier.tradingAddress readonly=supplier.terminated}}
             </div>
-
-            <hr>
+            <br>
             <div class="form-group {{if supplier.returnsAddress 'green'}}">
               <label for="rAddress">Returns Address (Leave blank if same as trading address)</label>
-              {{input type="text" class="form-control" id="rAddress" placeholder="Returns Address" value=supplier.returnsAddress}}
+              {{input type="text" class="form-control" id="rAddress" placeholder="Returns Address"
+                      value=supplier.returnsAddress}}
             </div>
+            <br>
+            <br>
+            <div class="form-group  {{if supplier.contactName 'green'}} {{unless supplier.contactName 'red'}}">
+              <label for="contactName">Contact Name*</label>
+              {{input type="text" class="form-control" id="contactName" placeholder="Name" value=supplier.contactName readonly=supplier.terminated}}
+            </div>
+            <div class="form-group  {{if supplier.contactEmail 'green'}} {{unless supplier.contactEmail 'red'}}">
+              <label for="contactEmail">Contact Email*</label>
+              {{input type="email" class="form-control" id="contactEmail" placeholder="Email" value=supplier.contactEmail readonly=supplier.terminated}}
+            </div>
+            <div class="form-group  {{if supplier.contactNumber 'green'}} {{unless supplier.contactNumber 'red'}}">
+              <label for="contactNumber">Contact Number*</label>
+              {{input type="number" class="form-control" id="contactNumber" placeholder="Contact Number" value=supplier.contactNumber readonly=supplier.terminated}}
+            </div>
+            <br>
 
-            <hr>
-            <div class="form-group  {{if supplier.contact 'green'}} {{unless supplier.contact 'red'}}">
-              <label for="contact">Contact Number*</label>
-              {{input type="number" class="form-control" id="contact" placeholder="Contact Number" value=supplier.contact}}
-            </div>
-            <div class="col-sm-12 text-right buttons">
+            {{#unless supplier.terminated}}
               {{#if editMode}}
-                <button class="btn btn-default" {{action "update"}}>Update</button>
+                <div class="col-sm-6 buttons">
+                  <button class="btn btn-danger" {{action "delete" supplier}}>Terminate</button>
+                </div>
+
+                <div class="col-sm-6 text-right  buttons">
+                  <button class="btn btn-primary" {{action "update"}}>Update</button>
+                </div>
               {{else}}
-                <button class="btn btn-default" {{action "save"}}>Add Supplier</button>
+                <div class="col-sm-12 text-right buttons">
+                  <button class="btn btn-primary" {{action "save"}}>Add Supplier</button>
+                </div>
               {{/if}}
-            </div>
+            {{/unless}}
           </form>
         </div>
       </div>

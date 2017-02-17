@@ -5,19 +5,22 @@ export default Ember.Controller.extend({
   orders: Ember.inject.controller(),
   stock: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
+  suppliersController: Ember.inject.controller("suppliers"),
   suppliers: [],
   activities: [],
   lowStock: [],
   sortDesc: ['time:desc'],
   sortedActivities: Ember.computed.sort('activities', 'sortDesc'),
+  sortDescSup: ['name:desc'],
+  sortedSuppliers: Ember.computed.sort('suppliers', 'sortDescSup'),
 
   setUp: function(){
     let controller = this;
 
     this.store.findAll("supplier").then(function(suppliers){
-      controller.set("suppliers", suppliers.toArray().reverse());
+      controller.set("suppliers", suppliers);
       controller.store.findAll("activity").then(function(activities){
-        controller.set("activities", activities.toArray().reverse());
+        controller.set("activities", activities);
 
         controller.set("lowStock", []);
         controller.store.findAll("item").then(function(stock){
@@ -31,6 +34,10 @@ export default Ember.Controller.extend({
     });
   },
   actions: {
+    goToSupplier: function(supplier){
+      this.get("suppliersController").selectedItem(supplier);
+      this.transitionToRoute("suppliers");
+    },
     order: function(supplier){
       this.set("orders.sentSupplier", supplier);
       this.get("orders").load();

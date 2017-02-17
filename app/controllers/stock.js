@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
+  suppliersController: Ember.inject.controller("suppliers"),
   view: true,
   editMode: false,
   item: null,
@@ -14,6 +15,27 @@ export default Ember.Controller.extend({
   selectedSupplier: null,
   sortAsc: ['name:asc'],
   sortedModel: Ember.computed.sort('model', 'sortAsc'),
+
+  reserve: {
+    item: null,
+    ref: "",
+    customerName: "",
+    quantity: ""
+  },
+
+  onHoldCheck: function(){
+    let controller = this;
+    this.get("sortedModel").forEach(function(stock){
+      stock.get("reservedQuantity").foreach(function(onHold){
+        if(onHold.get("been24Hours")){
+          stock.get("reservedQuantity").removeObject(onHold);
+          controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
+        }
+      });
+
+      stock.save();
+    });
+  }.observes("sortedModel"),
   generateBarcode: function(){
     var barcode = "";
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -31,12 +53,12 @@ export default Ember.Controller.extend({
     this.load();
   },
   clear: function(){
+    this.set("view", true);
     if(this.get("item")) {
       if (!this.get("item.id")) {
         this.get("item").deleteRecord();
       }
     }
-    this.set("view", true);
     this.set("item", null);
     this.set("groupName", null);
     this.set("editMode", false);
@@ -61,6 +83,80 @@ export default Ember.Controller.extend({
     });
   },
   actions:{
+    deleteOnHold: function(onHold) {
+      if(confirm("About to release stock")) {
+        let controller = this;
+        this.get("item.reservedStock").removeObject(onHold);
+        this.get("item").save().then(function () {
+          controller.set("application.message", "Held Stock Released");
+          controller.get("activityController").set("On hold stock released for " + controller.get("item.name"));
+        });
+      }
+    },
+    onHoldAccepted: function(onHold) {
+      if(confirm("About to update stock levels")) {
+        let controller = this;
+
+        //Update stock level
+        this.set("item.warehouseQuantity", this.get("item.warehouseQuantity") - onHold.get("quantity"));
+
+        //Remove from on hold
+        this.get("item.reservedStock").removeObject(onHold);
+
+        //Update object
+        this.get("item").save().then(function () {
+          controller.set("application.message", "Held Stock Released");
+          controller.get("activityController").set("Stock updated for " + controller.get("item.name"));
+        });
+      }
+    },
+    selectItemForReserve: function(item){
+      let controller = this;
+      this.store.find("item", item).then(function(foundItem){
+        controller.set("reserve.item", foundItem);
+      });
+    },
+    reserve: function(){
+      let controller = this;
+      if(this.get("reserve.customerName") === ""){
+        controller.set("application.message", "Please enter customer name");
+      }else {
+        if (parseInt(this.get("reserve.quantity")) > parseInt(this.get("reserve.item.quantity"))) {
+          this.set("application.message", "There is not enough stock to reserve");
+        } else {
+          var reserve = this.store.createFragment("reserve", {
+            ref: controller.get("reserve.ref"),
+            customerName: controller.get("reserve.customerName"),
+            quantity: controller.get("reserve.quantity"),
+            dateReserved: moment().unix()
+          });
+
+          this.get("reserve.item.reservedStock").pushObject(reserve);
+          this.get("reserve.item").save().then(function () {
+            controller.set("application.message", "Selected stock put on hold");
+            controller.get("activityController").set("Stock put on hold for " + controller.get("reserve.item.name"));
+          });
+
+          this.set("reserve.ref", "");
+          this.set("reserve.customerName", "");
+          this.set("reserve.quantity", "");
+        }
+      }
+    },
+    goToSupplier: function(supplier){
+      this.get("suppliersController").selectedItem(supplier);
+      this.transitionToRoute("suppliers");
+    },
+    orderComplete: function(){
+      let controller = this;
+
+      this.set("item.warehouseQuantity", this.get("item.warehouseQuantity") - this.get("item.quantityOnHold"));
+      this.set("item.quantityOnHold", "");
+
+      this.get("item").save().then(function(){
+        controller.set("application.message", "Quantity changed");
+      });
+    },
     selectGroup: function(group){
       let controller = this;
       this.get("groups").forEach(function(item){

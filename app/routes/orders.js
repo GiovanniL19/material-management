@@ -14,10 +14,14 @@ export default Ember.Route.extend({
       deliveries: false,
       stock: false,
       orders: true,
-      bikes: false
+      bikes: false,
+      receivedGoods: false
     });
   },
   deactivate: function(){
-    this.controllerFor("orders").clear();
+    let controller = this;
+    setTimeout(function(){
+      controller.controllerFor("orders").clear();
+    },1000);
   }
 });

@@ -2,29 +2,26 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model() {
-    return this.store.findAll('item');
+    return this.store.findAll('transaction');
   },
   setupController: function(controller, model) {
-    document.title = "Stock";
-
+    document.title = "Received Goods";
     controller.set("model", model);
-    controller.set("application.page", {
+    controller.set("application.page",{
       dashboard: false,
       orders: false,
       suppliers: false,
       deliveries: false,
-      stock: true,
+      stock: false,
       orders: false,
       bikes: false,
-      receivedGoods: false
+      receivedGoods: true
     });
-
-    controller.set("reserve.item", controller.get("sortedModel.firstObject"));
   },
   deactivate: function(){
     let controller = this;
     setTimeout(function(){
-      controller.controllerFor("stock").clear();
+      controller.controllerFor("received-goods").clear();
     },1000);
   }
 });

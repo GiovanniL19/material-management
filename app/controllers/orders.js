@@ -4,6 +4,8 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   stock: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
+  suppliersController: Ember.inject.controller("suppliers"),
+  receivedGoods: Ember.inject.controller(),
   view: true,
   editMode: false,
   transaction: null,
@@ -91,7 +93,7 @@ export default Ember.Controller.extend({
       this.store.findRecord('supplier', transaction.get("supplier.id")).then(function(supplier) {
         supplier.get("transactionHistory").removeObject(transaction);
         supplier.save().then(function(){
-          controller.get("activityController").set("Order " + transaction.get("transactionID") + " canceled");
+          controller.get("activityController").set("Requisition " + transaction.get("transactionID") + " canceled");
           transaction.destroyRecord().then(function(){
             controller.set("application.message", "Order has been canceled");
             controller.clear();
@@ -101,6 +103,14 @@ export default Ember.Controller.extend({
     }
   },
   actions:{
+    goToDelivery: function(transaction){
+      this.get("receivedGoods").selectedItem(transaction);
+      this.transitionToRoute("received-goods");
+    },
+    goToSupplier: function(supplier){
+      this.get("suppliersController").selectedItem(supplier);
+      this.transitionToRoute("suppliers");
+    },
     update: function(){
       let controller = this;
       var updatedLines = [];
@@ -142,8 +152,8 @@ export default Ember.Controller.extend({
             line.set("checked", true);
           });
 
-          controller.get("activityController").set("Order " + controller.get("transaction.transactionID") + " has been updated");
-          controller.set("application.message", "Order has been updated");
+          controller.get("activityController").set("Requisition " + controller.get("transaction.transactionID") + " has been updated");
+          controller.set("application.message", "Requisition has been updated");
 
         });
       }
@@ -159,12 +169,12 @@ export default Ember.Controller.extend({
           controller.get("selectedSupplier.transactionHistory").pushObject(savedTransaction);
           controller.get("selectedSupplier").save().then(function(){
             controller.set("application.message", "Order has been placed");
-            controller.get("activityController").set("Order " + savedTransaction.get("transactionID") + " created");
+            controller.get("activityController").set("Requisition " + savedTransaction.get("transactionID") + " created");
             controller.clear();
           });
         });
       }else{
-        this.set("application.message", "To create an order, you need to add at least one line");
+        this.set("application.message", "To create a requisition, you need to add at least one line");
       }
     },
     delete: function(transaction){

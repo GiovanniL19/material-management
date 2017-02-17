@@ -4,13 +4,16 @@
       <div class="col-sm-12 card">
         <div class="col-sm-8"><h5>Bikes</h5></div>
         <div class="col-sm-4 right text-right">
-          <button class="btn btn-primary" {{action "new"}}>New Bike</button>
+          <button class="btn btn-default" {{action "new"}}>New Bike</button>
         </div>
         <div class="col-xs-12">
           {{#if sortedModel}}
             <div class="rowCard row">
-              <div class="col-sm-5 details">
+              <div class="col-sm-3 details">
                 <strong>Name</strong>
+              </div>
+              <div class="col-sm-2 details">
+                <strong>Assembly</strong>
               </div>
               <div class="col-sm-2 details">
                 <strong>Quantity</strong>
@@ -29,8 +32,11 @@
 
           {{#each sortedModel as |bike|}}
             <div class="rowCard row">
-              <div class="col-sm-5 details">
+              <div class="col-sm-3 details">
                 <strong><a {{action "select" bike}}>{{bike.name}}</a></strong>
+              </div>
+              <div class="col-sm-2 details">
+                {{bike.assemblyTime}}
               </div>
               <div class="col-sm-2 details">
                 {{bike.quantity}}
@@ -64,6 +70,7 @@
         {{#if editMode}}
           <h3>{{bike.formattedRetail}}</h3>
           <p>
+            Assembly Time: <strong>{{bike.assemblyTime}}</strong><br>
             Sold: <strong>{{bike.amountSold}}</strong><br>
             Manufacturing Cost (Ex Labour): <strong>{{bike.formattedPrice}}</strong><br>
             No. Components: <strong>{{bike.components.length}}</strong><br><br>
@@ -91,12 +98,17 @@
                 {{input type="text" class="form-control" id="name" placeholder="Name" value=bike.name}}
               </div>
               <br>
+              <div class="form-group {{if bike.assemblyTime 'green'}} {{unless bike.assemblyTime 'red'}}">
+                <label for="assemblyTime">Assembly Time*</label>
+                {{input type="text" class="form-control" id="assemblyTime" placeholder="Assembly Time" value=bike.assemblyTime}}
+              </div>
+              <br>
               <div class="form-group {{if bike.retail 'green'}} {{unless bike.retail 'red'}}">
                 <label for="rP">Retail Price*</label>
                 {{input type="number" class="form-control" id="rP" placeholder="Retail" value=bike.retail}}
               </div>
               <div class="col-sm-12 text-right buttons">
-                <button class="btn btn-default" {{action "createBike"}}>Create Bike</button>
+                <button class="btn btn-primary" {{action "createBike"}}>Create Bike</button>
               </div>
             </div>
           </form>
@@ -107,7 +119,7 @@
     <div class="col-xs-12 col-sm-8 col-md-8">
       <div class="col-sm-12 card">
         <div class="col-sm-12 right text-right">
-          <button class="btn btn-primary" {{action "back"}}>Back</button>
+          <button class="btn btn-default" {{action "back"}}>Bikes</button>
         </div>
         <div class="col-xs-12">
           {{#unless editMode}}

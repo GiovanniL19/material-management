@@ -1,11 +1,11 @@
 <div class="side-menu">
-  <h3>M<strong>M</strong></h3>
+  <div class="topTaskBar logo"><h3>{{material-design-icon name='directions-bike'}}</h3></div>
   <ul>
-    <li class="{{if page.dashboard "active"}}">{{#link-to "dashboard"}}Dashboard{{/link-to}}</li>
-    <li class="{{if page.suppliers "active"}}">{{#link-to "suppliers"}}Suppliers{{/link-to}}</li>
-    <li class="{{if page.stock "active"}}">{{#link-to "stock"}}Component Stock{{/link-to}}</li>
-    <li class="{{if page.bikes "active"}}">{{#link-to "bikes"}}Bikes{{/link-to}}</li>
-    <li class="{{if page.orders "active"}}">{{#link-to "orders"}}Orders{{/link-to}}</li>
-    <li class="bottomLink"><a>Received Goods</a></li>
+    <li class="{{if page.dashboard "active"}}">{{#link-to "dashboard"}}{{material-design-icon name='dashboard'}} Dashboard{{/link-to}}</li>
+    <li class="{{if page.suppliers "active"}}">{{#link-to "suppliers"}}{{material-design-icon name='contact-mail'}} Suppliers{{/link-to}}</li>
+    <li class="{{if page.stock "active"}}">{{#link-to "stock"}}{{material-design-icon name='store'}} Stock Control{{/link-to}}</li>
+    <li class="{{if page.bikes "active"}}">{{#link-to "bikes"}}{{material-design-icon name='directions-bike'}} Bikes{{/link-to}}</li>
+    <li class="{{if page.orders "active"}}">{{#link-to "orders"}}{{material-design-icon name='send'}} Purchase Requisitions{{/link-to}}</li>
+    <li class="{{if page.receivedGoods "active"}}">{{#link-to "received-goods"}}{{material-design-icon name='local-shipping'}} Goods Inwards{{/link-to}}</li>
   </ul>
 </div>

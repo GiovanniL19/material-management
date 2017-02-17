@@ -40,27 +40,71 @@ export default Model.extend({
     });
     return '£' + parseFloat(total).toFixed(2);
   }.property("lines.@each.newQuantity"),
+
+  formattedOrderedTotal: function(){
+    let total = 0;
+    this.get("lines").forEach(function(item) {
+      var cost = item.get("quantity") * item.get("price");
+      item.set("total", cost);
+      total += cost;
+    });
+
+    return '£' + parseFloat(total).toFixed(2);
+  }.property("lines.@each.newQuantity"),
+
   orderDateFormatted: function () {
     return moment.unix(this.get("dateCreated")).format("DD/MM/YYYY");
   }.property("dateCreated"),
 
   etaFormatted: function () {
-    return moment.unix(this.get("eta")).format("DD/MM/YYYY HH:mm");
+    return moment.unix(this.get("eta")).format("DD/MM/YYYY");
   }.property("eta"),
 
+
   canCancel: function(){
-    if(moment.unix() > moment.unix(this.get("dateCreated")).add(2, "days")){
+    if(moment(Date.now()).unix() > moment.unix(this.get("dateCreated")).add(2, "days").unix()){
       return false;
     }else{
-      return true;
+      if(this.get("status") === "PROCESSING"){
+        return true;
+      }else {
+        return false;
+      }
     }
   }.property("dateCreated", "eta"),
 
   etaHuman: function(){
-    if(this.get("status") === "DONE") {
+    if(this.get("status") === "DELIVERED") {
       return "DELIVERED";
+    }else if(this.get("status") === "MISSING ITEMS") {
+      return "MISSING ITEMS"
     }else{
       return moment.unix(this.get("eta")).fromNow();
     }
-  }.property("eta", "status")
+  }.property("eta", "status"),
+
+  isComplete: function(){
+    if(this.get("status") === "DELIVERED") {
+      return true;
+    }else{
+      return false;
+    }
+  }.property("status"),
+
+  isMissingItems: function(){
+    if(this.get("status") === "MISSING ITEMS") {
+      return true;
+    }else{
+      return false;
+    }
+  }.property("status"),
+
+  isProcessing: function(){
+    if(this.get("status") === "PROCESSING") {
+      return true;
+    }else{
+      return false;
+    }
+  }.property("status")
+
 });

@@ -1,24 +1,13 @@
-<div class="header">
-</div>
 <div class="row sections dashboard">
-  <h3>Material<strong>Management</strong> <small>for BikeIt Ltd <br><small>by Giovanni Lenguito</small></small></h3>
+  <!--<h3>Material<strong>Management</strong></h3>-->
     <div class="col-sm-6">
       {{#if lowStock}}
         <div class="col-sm-12 card lowStock">
           {{#each lowStock as |item|}}
             <div class="rowCard row">
               <a {{action "selectStockItem" item}}>
-                <div class="col-sm-3 details">
-                  <strong>{{item.name}}</strong>
-                </div>
-                <div class="col-sm-3 details">
-                  Stock: <strong>{{item.quantity}}</strong>
-                </div>
-                <div class="col-sm-4 details">
-                  <strong>{{item.supplier.name}}</strong>
-                </div>
-                <div class="col-sm-2 options text-right">
-                  {{fa-icon "ellipsis-h"}}
+                <div class="col-sm-12 details">
+                  {{fa-icon "bell"}} <strong>{{item.name}}</strong> is low on stock (<strong>{{item.quantity}}</strong>). Supplied by <strong>{{item.supplier.name}}</strong>
                 </div>
               </a>
             </div>
@@ -59,10 +48,10 @@
   <div class="col-sm-6">
     <div class="col-sm-12 card suppliers">
       <h5>Top Suppliers</h5>
-      {{#each suppliers as |supplier|}}
+      {{#each sortedSuppliers as |supplier|}}
         <div class="rowCard row">
           <div class="col-sm-7 details">
-            {{supplier.name}}
+            <a {{action "goToSupplier" supplier}}>{{supplier.name}}</a>
           </div>
           <div class="col-sm-5 details text-right">
             {{#if supplier.canOrder}}

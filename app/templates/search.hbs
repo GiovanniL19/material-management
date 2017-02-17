@@ -1,0 +1,96 @@
+<div class="row card search topTaskBar">
+  <div class="col-xm-12 col-sm-10 col-md-10 search">
+    <div class="input-group {{if searchMode "searchMode"}}">
+      {{input class="form-control" type="text" placeholder="Search stock, supplier or order..." aria-describedby="input" value=searchInput}}
+      <span class="input-group-addon" id="input"><button class="btn-search" {{action "doSearch"}}>{{fa-icon "search"}}</button></span>
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2 hidden-xs">
+    <button class="btn order-btn" {{action "goToOrders"}}>Requisitions</button>
+  </div>
+</div>
+
+{{#if searchMode}}
+  <div class="searchResults">
+    <div class="col-sm-12 text-right searchOptions">
+      <button class="btn btn-danger" {{action "closeSearch"}}>Close Search</button>
+    </div>
+  <ul>
+    <h4>Results in Suppliers</h4>
+    {{#each supplierResults as |supplier|}}
+      <li>
+        <div class="col-sm-12 result">
+          <div class="col-sm-2">
+            <a {{action "goTo" "supplier" supplier}}>{{supplier.name}}</a>
+          </div>
+          <div class="col-sm-8 text-center">
+            Address: <strong>{{supplier.tradingAddress}}</strong>
+          </div>
+          <div class="col-sm-2 text-right">
+            Status: <strong>{{supplier.status}}</strong>
+          </div>
+        </div>
+      </li>
+    {{else}}
+      <h5>No supplier matches your input</h5>
+    {{/each}}
+
+    <hr>
+
+    <h4>Results in Stock</h4>
+    {{#each itemResults as |item|}}
+      <div class="col-sm-12 result">
+        <div class="col-sm-4">
+          <a {{action "goTo" "item" item}}>{{item.name}}</a>
+        </div>
+        <div class="col-sm-4 text-center">
+          Group: <strong>{{item.group.name}}</strong>
+        </div>
+        <div class="col-sm-4 text-right">
+          Quantity: <strong>{{item.quantity}}</strong>
+        </div>
+      </div>
+    {{else}}
+      <h5>No stock item matches your input</h5>
+    {{/each}}
+
+    <hr>
+
+    <h4>Results in Purchase Requisitions</h4>
+    {{#each orderResults as |order|}}
+      <div class="col-sm-12 result">
+        <div class="col-sm-4">
+          <a {{action "goTo" "order" order}}>{{order.transactionID}}</a>
+        </div>
+        <div class="col-sm-4 text-center">
+          Supplier: <strong>{{order.supplier.name}}</strong>
+        </div>
+        <div class="col-sm-4 text-right">
+          Cost: <strong>{{order.totalHuman}}</strong>
+        </div>
+      </div>
+    {{else}}
+      <h5>No order matches your input</h5>
+    {{/each}}
+
+    <hr>
+
+    <h4>Results in Bikes</h4>
+    {{#each bikeResults as |bike|}}
+      <div class="col-sm-12 result">
+        <div class="col-sm-4">
+          <a {{action "goTo" "bike" bike}}>{{bike.name}}</a>
+        </div>
+        <div class="col-sm-4 text-center">
+          Cost To Manufacture: <strong>{{bike.formattedPrice}}</strong>
+        </div>
+        <div class="col-sm-4 text-right">
+          Retail Price: <strong>{{bike.formattedRetail}}</strong>
+        </div>
+      </div>
+    {{else}}
+      <h5>No bike matches your input</h5>
+    {{/each}}
+  </ul>
+  </div>
+{{/if}}

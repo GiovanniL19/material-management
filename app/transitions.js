@@ -6,8 +6,6 @@ export default function(){
 
   this.transition(
     this.hasClass('nextPage'),
-    this.toValue(true),
-    this.use('toRight'),
-    this.reverse('toLeft')
+    this.use('fade', {duration: 250})
   );
 };
