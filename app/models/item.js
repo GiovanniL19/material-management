@@ -60,4 +60,12 @@ export default Model.extend({
       return '£0';
     }
   }.property("orderQuantity"),
+
+  orderQuantityEmpty: function(){
+    if(parseInt(this.get("orderQuantity")) === 0){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("orderQuantity")
 });

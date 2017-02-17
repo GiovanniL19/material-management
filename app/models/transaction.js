@@ -51,6 +51,15 @@ export default Model.extend({
 
     return '£' + parseFloat(total).toFixed(2);
   }.property("lines.@each.newQuantity"),
+  rawOrderedTotal: function(){
+    let total = 0;
+    this.get("lines").forEach(function(item) {
+      var cost = item.get("quantity") * item.get("price");
+      total += cost;
+    });
+
+    return total;
+  }.property("lines.@each.newQuantity"),
 
   orderDateFormatted: function () {
     return moment.unix(this.get("dateCreated")).format("DD/MM/YYYY");

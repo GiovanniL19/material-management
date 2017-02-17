@@ -14,7 +14,6 @@ export default Ember.Controller.extend({
   sentSupplier: null,
   sortDesc: ['dateCreated:desc'],
   sortedModel: Ember.computed.sort('model', 'sortDesc'),
-
   generateTransactionID: function(){
     var id = "";
     let characters = moment.unix() + this.get("selectedSupplier.name");
@@ -41,7 +40,7 @@ export default Ember.Controller.extend({
           });
         }
       });
-      this.set("transaction.totalCost",total);
+      this.set("transaction.totalCost", total);
     }
     return '£' + parseFloat(total).toFixed(2);
   }.property("transaction.lines.length", "selectedSupplier.stock.@each.orderQuantity"),
@@ -113,49 +112,54 @@ export default Ember.Controller.extend({
     },
     update: function(){
       let controller = this;
-      var updatedLines = [];
+      if(this.get("transaction.rawOrderedTotal") !== 0) {
+        var updatedLines = [];
 
-      var containLines = false;
-      this.get("transaction.lines").forEach(function(line) {
-        if (line.get("checked") === true) {
-          containLines = true;
-        }
-      });
+        var containLines = false;
 
-      if(!containLines) {
-        this.deleteTransaction(this.get("transaction"));
-      }else{
-        var total = 0;
-        this.get("transaction.lines").forEach(function(line){
-          if(line.get("checked") === true){
-            var newLine = controller.store.createFragment("line",{
-              name: line.get("name"),
-              item: line.get("item"),
-              price: line.get("price")
-            });
-
-            if(line.get("newQuantity") !== 0){
-              newLine.set("quantity", line.get("newQuantity"));
-            }else{
-              newLine.set("quantity", line.get("quantity"));
-            }
-
-            newLine.set("total", line.get("price") * newLine.get("quantity"));
-            updatedLines.pushObject(newLine);
-            total += newLine.get("total");
+        this.get("transaction.lines").forEach(function (line) {
+          if (line.get("checked") === true) {
+            containLines = true;
           }
         });
-        this.set("transaction.totalCost", total);
-        this.set("transaction.lines", updatedLines);
-        this.get("transaction").save().then(function(){
-          controller.get("transaction.lines").forEach(function(line) {
-            line.set("checked", true);
+
+        if (!containLines) {
+          this.deleteTransaction(this.get("transaction"));
+        } else {
+          var total = 0;
+          this.get("transaction.lines").forEach(function (line) {
+            if (line.get("checked") === true) {
+              var newLine = controller.store.createFragment("line", {
+                name: line.get("name"),
+                item: line.get("item"),
+                price: line.get("price")
+              });
+
+              if (line.get("newQuantity")) {
+                newLine.set("quantity", line.get("newQuantity"));
+              } else {
+                newLine.set("quantity", line.get("quantity"));
+              }
+
+              newLine.set("total", line.get("price") * newLine.get("quantity"));
+              updatedLines.pushObject(newLine);
+              total += newLine.get("total");
+            }
           });
+          this.set("transaction.totalCost", total);
+          this.set("transaction.lines", updatedLines);
+          this.get("transaction").save().then(function () {
+            controller.get("transaction.lines").forEach(function (line) {
+              line.set("checked", true);
+            });
 
-          controller.get("activityController").set("Requisition " + controller.get("transaction.transactionID") + " has been updated");
-          controller.set("application.message", "Requisition has been updated");
+            controller.get("activityController").set("Requisition " + controller.get("transaction.transactionID") + " has been updated");
+            controller.set("application.message", "Requisition has been updated");
 
-        });
+          });
+        }
+      }else{
+        controller.set("application.message", "Please check each line has a quantity");
       }
     },
     placeOrder: function(){
