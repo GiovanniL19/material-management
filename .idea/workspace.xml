@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cb652ee-ce22-410c-8e32-c38cb0bcfe89" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/orders.js" afterPath="$PROJECT_DIR$/app/controllers/orders.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/app.scss" afterPath="$PROJECT_DIR$/app/styles/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/dashboard.hbs" afterPath="$PROJECT_DIR$/app/templates/dashboard.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/menu.hbs" afterPath="$PROJECT_DIR$/app/templates/menu.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/orders.hbs" afterPath="$PROJECT_DIR$/app/templates/orders.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/received-goods.hbs" afterPath="$PROJECT_DIR$/app/templates/received-goods.hbs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/search.hbs" afterPath="$PROJECT_DIR$/app/templates/search.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -47,7 +40,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/styles/app.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
@@ -57,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search.hbs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="search.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/templates/search.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="58" lean-forward="false" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+            <state relative-caret-position="180">
+              <caret line="58" column="40" lean-forward="false" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -102,7 +95,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="524">
               <caret line="101" column="14" lean-forward="false" selection-start-line="101" selection-start-column="14" selection-end-line="101" selection-end-column="14" />
-              <folding />
+              <folding>
+                <marker date="1487324868000" expanded="true" signature="179:2913" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -138,7 +133,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>material mana</find>
       <find>headerfontLight</find>
       <find>h4</find>
       <find>h5</find>
@@ -168,6 +162,7 @@
       <find>rec</find>
       <find>order</find>
       <find>fa-</find>
+      <find>dashboard</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -214,13 +209,13 @@
         <option value="$PROJECT_DIR$/app/templates/application.hbs" />
         <option value="$PROJECT_DIR$/app/models/transaction.js" />
         <option value="$PROJECT_DIR$/app/templates/suppliers.hbs" />
-        <option value="$PROJECT_DIR$/app/templates/search.hbs" />
         <option value="$PROJECT_DIR$/app/templates/received-goods.hbs" />
         <option value="$PROJECT_DIR$/app/templates/menu.hbs" />
         <option value="$PROJECT_DIR$/app/controllers/orders.js" />
         <option value="$PROJECT_DIR$/app/templates/orders.hbs" />
         <option value="$PROJECT_DIR$/app/templates/dashboard.hbs" />
         <option value="$PROJECT_DIR$/app/styles/app.scss" />
+        <option value="$PROJECT_DIR$/app/templates/search.hbs" />
       </list>
     </option>
   </component>
@@ -568,12 +563,12 @@
       <workItem from="1487063277720" duration="496000" />
       <workItem from="1487242543218" duration="2014000" />
       <workItem from="1487258510955" duration="22828000" />
-      <workItem from="1487322364113" duration="4661000" />
+      <workItem from="1487322364113" duration="5059000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115707000" />
+    <option name="totallyTimeSpent" value="116105000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="832" extended-state="6" />
@@ -904,7 +899,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
           <caret line="101" column="14" lean-forward="false" selection-start-line="101" selection-start-column="14" selection-end-line="101" selection-end-column="14" />
-          <folding />
+          <folding>
+            <marker date="1487324868000" expanded="true" signature="179:2913" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -912,14 +909,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="62" column="45" lean-forward="false" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/search.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="58" lean-forward="false" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
           <folding />
         </state>
       </provider>
@@ -968,6 +957,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="512" column="23" lean-forward="false" selection-start-line="512" selection-start-column="23" selection-end-line="512" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/search.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="58" column="40" lean-forward="false" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
           <folding />
         </state>
       </provider>
