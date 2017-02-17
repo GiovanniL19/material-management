@@ -18,6 +18,8 @@ export default Ember.Route.extend({
       bikes: false,
       receivedGoods: false
     });
+
+    controller.set("reserve.item", controller.get("sortedModel.firstObject"));
   },
   deactivate: function(){
     let controller = this;

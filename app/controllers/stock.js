@@ -15,6 +15,14 @@ export default Ember.Controller.extend({
   selectedSupplier: null,
   sortAsc: ['name:asc'],
   sortedModel: Ember.computed.sort('model', 'sortAsc'),
+
+  reserve: {
+    item: null,
+    ref: "",
+    customerName: "",
+    quantity: 0
+  },
+
   generateBarcode: function(){
     var barcode = "";
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -62,6 +70,42 @@ export default Ember.Controller.extend({
     });
   },
   actions:{
+    deleteOnHold: function(onHold) {
+      if(confirm("About to release stock")) {
+        let controller = this;
+        this.get("item.reservedStock").removeObject(onHold);
+        this.get("item").save().then(function () {
+          controller.set("application.message", "Held Stock Released");
+        });
+      }
+    },
+    selectItemForReserve: function(item){
+      let controller = this;
+      this.store.find("item", item).then(function(foundItem){
+        controller.set("reserve.item", foundItem);
+      });
+    },
+    reserve: function(){
+      let controller = this;
+      if(this.get("reserve.customerName") === ""){
+        controller.set("application.message", "Please enter customer name");
+      }else {
+        if (parseInt(this.get("reserve.quantity")) > parseInt(this.get("reserve.item.quantity"))) {
+          this.set("application.message", "There is not enough stock to reserve");
+        } else {
+          var reserve = this.store.createFragment("reserve", {
+            ref: controller.get("reserve.ref"),
+            customerName: controller.get("reserve.customerName"),
+            quantity: controller.get("reserve.quantity"),
+          });
+
+          this.get("reserve.item.reservedStock").pushObject(reserve);
+          this.get("reserve.item").save().then(function () {
+            controller.set("application.message", "Selected stock put on hold");
+          });
+        }
+      }
+    },
     goToSupplier: function(supplier){
       this.get("suppliersController").selectedItem(supplier);
       this.transitionToRoute("suppliers");

@@ -695,3 +695,14 @@ label{
     width: 60%;
   }
 }
+
+.onHoldList{
+  .rowCard{
+    &:first-child{
+      margin:-1em;
+      margin-bottom:1em;
+    }
+    margin:-1em;
+    margin-bottom:1em;
+  }
+}

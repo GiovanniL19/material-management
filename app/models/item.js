@@ -1,5 +1,6 @@
 import Model from 'ember-pouch/model';
 import DS from 'ember-data';
+import MF from 'model-fragments';
 
 const {
   attr,
@@ -14,13 +15,22 @@ export default Model.extend({
   name: DS.attr("string"),
   warehouseQuantity: DS.attr("number"),
   minQuantity: DS.attr("number"),
-  quantityOnHold: DS.attr("number"),
   trade: DS.attr("number"),
   retail: DS.attr("number"),
   group: DS.belongsTo("group", {async: true}),
   supplier: DS.belongsTo("supplier", {async: true}),
   bikes: DS.hasMany("bike", {async: true, defaultValue: []}),
 
+  reservedStock: MF.fragmentArray("reserve"),
+
+  quantityOnHold: function(){
+    var totalOnHold = 0;
+    this.get("reservedStock").forEach(function(reserve) {
+      totalOnHold += reserve.get("quantity");
+    });
+
+    return totalOnHold;
+  }.property("reservedStock.@each.quantity"),
   lowStock: function(){
     let min = this.get('minQuantity') + 5;
     if(this.get('warehouseQuantity') < min){
