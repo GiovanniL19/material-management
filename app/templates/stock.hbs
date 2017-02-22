@@ -182,6 +182,10 @@
                 <label for="name">Name*</label>
                 {{input type="text" class="form-control" id="name" placeholder="Name" value=item.name}}
               </div>
+              <div class="form-group {{if item.description 'green'}} {{unless item.description 'red'}}">
+                <label for="description">Description</label>
+                {{input type="textarea" class="form-control" id="description" placeholder="Description" value=item.description}}
+              </div>
               <br>
             </div>
 

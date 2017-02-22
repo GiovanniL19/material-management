@@ -24,6 +24,7 @@ export default Model.extend({
   leadTime: DS.attr("string"),
   reOrderQty: DS.attr("number"),
   quotedQuantity: DS.attr("number", {defaultValue: 0}),
+  description: DS.attr("string"),
 
   quantityOnHold: function(){
     var totalOnHold = 0;
