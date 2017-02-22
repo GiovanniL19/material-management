@@ -306,7 +306,7 @@ label{
   position: fixed;
   z-index: 99999;
   left: 0;
-  top: 6em;
+  top: 5.9em;
   overflow: scroll;
   .searchOptions{
     padding-top:1em;
@@ -332,6 +332,7 @@ label{
     color:$fontLight;
   }
   ul{
+    padding-left:0;
     li{
       color:$font;
       list-style: none;
@@ -692,6 +693,10 @@ label{
 }
 
 .onHoldList{
+  label{
+    padding-left:0;
+    margin-top:1em;
+  }
   .rowCard{
     &:first-child{
       margin:-1em;

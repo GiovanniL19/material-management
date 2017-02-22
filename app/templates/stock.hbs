@@ -73,7 +73,7 @@
 
       <div class="col-sm-4">
         <div class="card">
-          <h4>Reserve Stock For Order<br><small>Stock can only be put on hold for 24 hours</small></h4>
+          <h4>Reserve Stock<br><small>Stock will only be put on hold for 24 hours</small></h4>
           <br>
           <div class="form-group">
             <label for="orderID">Item*</label>
@@ -128,8 +128,8 @@
           Available Stock: <strong>{{item.quantity}}</strong><br>
           Stock On Hold: <strong>{{item.quantityOnHold}}</strong><br><br>
 
-          Re-Order Quantity: <strong>{{item.reOrderQty}}</strong><br>
-          Lead Time: <strong>{{item.leadTime}}</strong><br>
+          {{#if item.reOrderQty}}Re-Order Quantity: <strong>{{item.reOrderQty}}</strong><br>{{/if}}
+          {{#if item.leadTime}}Lead Time: <strong>{{item.leadTime}}</strong><br>{{/if}}
 
           <div class="form-group onHoldList">
             {{#if item.reservedStock}}
@@ -249,6 +249,7 @@
             </div>
             <div class="col-sm-6">
               <div class="form-group {{if item.leadTime 'green'}} {{unless item.leadTime 'red'}}">
+
                 <label for="lT">Lead Time*</label>
                 {{input type="text" class="form-control" id="lT" placeholder="Lead Time" value=item.leadTime}}
               </div>
@@ -284,7 +285,7 @@
                   <button class="btn btn-danger" {{action "delete" item}}>Delete</button>
                 </div>
                 <div class="col-sm-6 text-right buttons">
-                  <button class="btn btn-primary" {{action "update"}}>Update</button>
+                  <button class="btn btn-primary" {{action "update" item}}>Update</button>
                 </div>
               {{else}}
                 <div class="col-sm-12 text-right buttons">

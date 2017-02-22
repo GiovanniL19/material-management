@@ -96,7 +96,7 @@
           <h3>{{transaction.formattedOrderedTotal}}</h3>
           <p>
             Supplier: <a {{action "goToSupplier" transaction.supplier}}>{{transaction.supplier.name}}</a><br>
-            Contact: <br><strong>{{transaction.supplier.contactName}} on {{transaction.supplier.contactNumber}} or {{transaction.supplier.contactEmail}}</strong><br><br>
+            {{#if transaction.supplier.contactName}}Contact: <br><strong>{{transaction.supplier.contactName}} on {{transaction.supplier.contactNumber}} or {{transaction.supplier.contactEmail}}</strong><br><br>{{/if}}
             Order Lines: {{transaction.lines.length}}<br><br>
             ETA: <strong>{{transaction.etaHuman}}</strong><br><br>
             Note:<br><br>
