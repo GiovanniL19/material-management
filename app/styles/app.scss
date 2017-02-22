@@ -13,7 +13,7 @@ $fontLight: white;
 $menuColour: white;
 $primary: #ecf0f1;
 $primaryS: white;
-$evenColour: #ecf0f1;
+$evenColour:#fbfbfb;
 $secondColour: #373f52;
 $font: #444;
 $aFont: #5b80d8;
@@ -49,6 +49,7 @@ $menuFont: white;
 // 6: STOCK
 // 7: ORDER LIST
 // 8: RECEIVED GOODS
+// 9: QUOTES
 */
 
 
@@ -438,19 +439,17 @@ label{
     font-weight: 200;
     padding: 1em;
   }
-  form{
-    .green > .form-control{
-      border: none !important;
-      border-bottom: 4px solid rgba(23, 179, 98, 0.37) !important;
-    }
-    .red > .form-control{
-      border: none !important;
-      border-bottom: 4px solid $red !important;
-    }
-    .form-control{
-      border: none !important;
-      border-bottom: 4px solid $grey !important
-    }
+  .red > .form-control{
+    border: none !important;
+    border-bottom: 4px solid $red !important;
+  }
+  .green > .form-control{
+    border: none !important;
+    border-bottom: 4px solid rgba(23, 179, 98, 0.37) !important;
+  }
+  .form-control{
+    border: none !important;
+    border-bottom: 4px solid $grey !important
   }
 }
 
@@ -706,3 +705,49 @@ label{
     margin-bottom:1em;
   }
 }
+
+//9. QUOTES
+.quotes{
+  .rowCard {
+    padding: 0 1em;
+    &:nth-child(even) {
+      background: $evenColour;
+    }
+  }
+  .nonScroll{
+    height:45em;
+    //Make div scrollable
+    overflow-y:scroll;
+
+    //Hide scroll bar
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    color:$font;
+    .options{
+      padding:1em 0;
+      cursor:pointer;
+    }
+  }
+  .buttons{
+    margin-top:2em;
+  }
+  .checked {
+    //background: #494c56;
+  }
+  .details {
+    padding: 0;
+  }
+  .qty {
+    margin-top: -1.3em !important;
+    width: 60%;
+  }
+  .newQty {
+    margin-top: 1em;
+    width: 60%;
+  }
+}
+

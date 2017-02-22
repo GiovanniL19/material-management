@@ -23,15 +23,17 @@ export default Model.extend({
   reservedStock: MF.fragmentArray("reserve"),
   leadTime: DS.attr("string"),
   reOrderQty: DS.attr("number"),
+  quotedQuantity: DS.attr("number", {defaultValue: 0}),
 
   quantityOnHold: function(){
     var totalOnHold = 0;
     this.get("reservedStock").forEach(function(reserve) {
       totalOnHold += reserve.get("quantity");
     });
+    totalOnHold += this.get("quotedQuantity");
 
     return totalOnHold;
-  }.property("reservedStock.@each.quantity"),
+  }.property("reservedStock.@each.quantity", "quotedQuantity"),
   lowStock: function(){
     let min = this.get('minQuantity') + 5;
     if(this.get('warehouseQuantity') < min){
@@ -68,5 +70,12 @@ export default Model.extend({
     }else{
       return false;
     }
-  }.property("orderQuantity")
+  }.property("orderQuantity"),
+  quoteQuantityEmpty: function(){
+    if(parseInt(this.get("quoteQuantity")) === 0){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("quoteQuantity")
 });

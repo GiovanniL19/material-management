@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('bikes');
   this.route('search');
   this.route('received-goods');
+  this.route('quotations');
 });
 
 export default Router;

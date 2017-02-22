@@ -1,0 +1,325 @@
+<div class="quotes">
+  {{#liquid-if view class="nextPage"}}
+    <div class="row sections">
+      <div class="col-sm-12">
+        <div class="col-sm-12 card">
+          <div class="col-sm-8"><h4>Quotations</h4></div>
+          <div class="col-sm-4 right text-right">
+            <button class="btn btn-default" {{action "new"}}>New Quote</button>
+          </div>
+          <div class="col-xs-12">
+            {{#if sortedModel}}
+              <div class="rowCard row">
+                <div class="col-sm-2 details">
+                  <strong>Quote ID</strong>
+                </div>
+                <div class="col-sm-2 details">
+                  <strong>Created</strong>
+                </div>
+                <div class="col-sm-3 details">
+                  <strong>CustomerName</strong>
+                </div>
+                <div class="col-sm-3 details">
+                  <strong>Customer Number</strong>
+                </div>
+                <div class="col-sm-1 details text-center">
+                  <strong>Total</strong>
+                </div>
+                <div class="col-sm-1 options text-right">
+                  <strong>Cancel</strong>
+                </div>
+              </div>
+            {{/if}}
+
+            {{#each sortedModel as |quote|}}
+              <div class="rowCard row">
+                <div class="col-sm-2 details">
+                  <a {{action "select" quote}}>{{quote.quoteID}}</a>
+                </div>
+                <div class="col-sm-2 details">
+                  {{quote.createdDateFormatted}}
+                </div>
+                <div class="col-sm-3 details">
+                  {{quote.customerName}}
+                </div>
+                <div class="col-sm-3 details">
+                  {{quote.customerNumber}}
+                </div>
+                <div class="col-sm-1 details text-center">
+                  {{quote.totalFormatted}}
+                </div>
+                <div class="col-sm-1 options text-right">
+                  {{#unless quote.confirmedQuote}}
+                    <a {{action "delete" quote}}>{{fa-icon "times"}}</a>
+                  {{/unless}}
+                </div>
+              </div>
+            {{else}}
+              <div class="rowCard row">
+                <div class="col-sm-12 details">
+                  <small>No Quotes Made</small>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="row sections">
+      <div class="col-xs-12 col-sm-3 col-md-3">
+        <div class="col-sm-12 card">
+          {{#unless editMode}}<h3>Create Quote</h3>{{else}}<h3>{{quote.quoteID}}</h3>{{/unless}}
+          {{#if editMode}}
+            <h3>{{quote.totalFormatted}}</h3>
+            <p>
+              Customer Name: <strong>{{quote.customerName}}</strong><br>
+              Customer Phone: <strong>{{quote.customerNumber}}</strong><br>
+              Customer Email: <strong>{{quote.customerEmail}}</strong><br>
+              <br>
+              Stock Lines: <strong>{{quote.stockLines.length}}</strong><br>
+              Bike Lines: <strong>{{quote.bikeLines.length}}</strong><br><br>
+              Note:<br>
+              {{textarea class="form-control" value=quote.note readonly=true}}
+            </p>
+            {{#unless quote.confirmedQuote}}
+              <div class="col-sm-6 buttons">
+                <button class="btn btn-danger" {{action "delete" quote}}>Delete</button>
+              </div>
+              <div class="col-sm-6 text-right buttons">
+                <button class="btn btn-primary" {{action "confirmed"}}>Confirmed*</button>
+              </div>
+              <div class="col-md-12">
+                <br>
+                <small>*Will deducted quoted stock from quantities</small>
+              </div>
+            {{/unless}}
+          {{else}}
+            <h3>{{total}}</h3>
+
+            <div class="form-group">
+              <div class="form-group red {{if quote.customerName "green"}}">
+                <label>Customer Name*</label>
+                {{input type="text" class="form-control" value=quote.customerName}}
+              </div>
+              <div class="form-group red {{if quote.customerNumber "green"}}">
+                <label>Customer Number*</label>
+                {{input type="text" class="form-control " value=quote.customerNumber}}
+              </div>
+              <div class="form-group red {{if quote.customerEmail "green"}}">
+                <label>Customer Email*</label>
+                {{input type="text" class="form-control" value=quote.customerEmail}}
+              </div>
+
+              <div class="form-group {{if quote.note "green"}}">
+                <label>Note</label>
+                {{input type="text" class="form-control note" value=quote.note}}
+              </div>
+              <div class="col-sm-12 text-right buttons">
+                <button class="btn btn-primary" {{action "createQuote"}}>Create*</button>
+              </div>
+              <div class="col-md-12">
+                <br>
+                <small>*Will put quantities selected on hold</small>
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="col-sm-12 card nonScroll">
+          <div class="col-sm-12 right text-left">
+            <h4>Bikes</h4>
+          </div>
+          <div class="col-xs-12">
+            <form class="cards">
+              {{#unless editMode}}
+                <div class="rowCard row">
+                  <div class="col-sm-5 details">
+                    <strong>Name</strong>
+                  </div>
+                  <div class="col-sm-4 details">
+                    <strong>Qty</strong>
+                  </div>
+                  <div class="col-sm-2 details">
+                    <strong>Stock</strong>
+                  </div>
+                  <div class="col-sm-1 options text-right">
+
+                  </div>
+                </div>
+              {{else}}
+                {{#if quote.bikeLines}}
+                  <div class="rowCard row">
+                    <div class="col-sm-5 details">
+                      <strong>Name</strong>
+                    </div>
+                    <div class="col-sm-6 details">
+                      <strong>Qty</strong>
+                    </div>
+                    {{#unless quote.confirmedQuote}}
+                      <div class="col-sm-1 options text-right">
+                      </div>
+                    {{/unless}}
+                  </div>
+                {{/if}}
+              {{/unless}}
+
+              {{#if editMode}}
+                {{#each quote.bikeLines as |item|}}
+                  <div class="rowCard row {{if item.checked "checked"}}">
+                    <div class="col-sm-5 details">
+                      {{item.name}}
+                      <br>
+                      {{item.formattedPrice}}
+                    </div>
+                    <div class="col-sm-6 details">
+                      {{item.quantity}}
+                    </div>
+                    <div class="col-sm-1 options text-right">
+                      {{fa-icon "check"}}
+                    </div>
+                  </div>
+                {{else}}
+                  <h5>Quote Will Be Canceled</h5>
+                  <br>
+                  <small>To save these changes, click the update button on the left</small>
+                {{/each}}
+              {{else}}
+                {{#each allBikes as |item|}}
+                  <div class="rowCard row {{if item.checked "checked"}}">
+                    <div class="col-sm-5 details">
+                      {{item.name}}<br>{{item.formattedRetail}}
+                    </div>
+                    <div class="col-sm-4 details {{if item.quoteQuantity "green"}}">
+                      {{input type="number" class="form-control qty" value=item.quoteQuantity  placeholder="0" readonly=item.checked}}
+                    </div>
+                    <div class="col-sm-2 details">
+                      {{item.quantity}}
+                    </div>
+                      {{#if item.quoteQuantity}}
+                        {{#unless item.quoteQuantityEmpty}}
+                          <div class="col-sm-1 options text-right" {{action "selectLine" "bike" item}}>
+                            {{#if item.checked}}
+                              {{fa-icon "check"}}
+                            {{else}}
+                              {{fa-icon "square-o"}}
+                            {{/if}}
+                          </div>
+                        {{/unless}}
+                      {{/if}}
+                  </div>
+                {{else}}
+                  <h5>No Bikes Found</h5>
+                {{/each}}
+              {{/if}}
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-5 col-md-5">
+        <div class="col-sm-12 card nonScroll">
+          <div class="col-sm-6 text-left">
+            <h4>Stock</h4>
+          </div>
+          <div class="col-sm-6 right text-right">
+            <button class="btn btn-default" {{action "back"}}>Quotations</button>
+          </div>
+          <div class="col-xs-12">
+            <form class="cards">
+              {{#unless editMode}}
+                <div class="rowCard row">
+                  <div class="col-sm-3 details">
+                    <strong>Name</strong>
+                  </div>
+                  <div class="col-sm-2 details">
+                    <strong>Price</strong>
+                  </div>
+                  <div class="col-sm-4 details">
+                    <strong>Qty</strong>
+                  </div>
+                  <div class="col-sm-2 details">
+                    <strong>Stock</strong>
+                  </div>
+                  <div class="col-sm-1 options text-right">
+
+                  </div>
+                </div>
+              {{else}}
+                {{#if quote.stockLines}}
+                  <div class="rowCard row">
+                    <div class="col-sm-5 details">
+                      <strong>Name</strong>
+                    </div>
+                    <div class="col-sm-6 details">
+                      <strong>Qty</strong>
+                    </div>
+                    {{#unless quote.confirmedQuote}}
+                      <div class="col-sm-1 options text-right">
+
+                      </div>
+                    {{/unless}}
+                  </div>
+                {{/if}}
+              {{/unless}}
+
+              {{#if editMode}}
+                {{#each quote.stockLines as |item|}}
+                  <div class="rowCard row {{if item.checked "checked"}}">
+                    <div class="col-sm-5 details">
+                      {{item.name}}
+                      <br>
+                      {{item.formattedPrice}}
+                    </div>
+                    <div class="col-sm-6 details">
+                      {{item.quantity}}
+                    </div>
+                    <div class="col-sm-1 options text-right">
+                      {{fa-icon "check"}}
+                    </div>
+                  </div>
+                {{else}}
+                  <h5>Quote Will Be Canceled</h5>
+                  <br>
+                  <small>To save these changes, click the update button on the left</small>
+                {{/each}}
+              {{else}}
+
+                {{#each allStock as |item|}}
+                  <div class="rowCard row {{if item.checked "checked"}}">
+                    <div class="col-sm-3 details">
+                      {{item.name}}
+                    </div>
+                    <div class="col-sm-2 details">
+                      {{item.formattedRetail}}
+                    </div>
+                    <div class="col-sm-4 details {{if item.quoteQuantity "green"}}">
+                      {{input type="number" class="form-control qty" value=item.quoteQuantity placeholder="0" readonly=item.checked}}
+                    </div>
+                    <div class="col-sm-2 details">
+                      {{item.quantity}}
+                    </div>
+                    {{#if item.quoteQuantity }}
+                      {{#unless item.quoteQuantityEmpty}}
+                        <div class="col-sm-1 options text-right" {{action "selectLine" "stock" item}}>
+                          {{#if item.checked}}
+                            {{fa-icon "check"}}
+                          {{else}}
+                            {{fa-icon "square-o"}}
+                          {{/if}}
+                        </div>
+                      {{/unless}}
+                    {{/if}}
+                  </div>
+                {{else}}
+                  <h5>No Stock Found</h5>
+                {{/each}}
+              {{/if}}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/liquid-if}}
+</div>

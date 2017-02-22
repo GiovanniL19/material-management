@@ -16,6 +16,14 @@ export default Model.extend({
   retail: DS.attr("number"),
   amountSold: DS.attr("number", {defaultValue: 0}),
   assemblyTime: DS.attr("string"),
+  quotedQuantity: DS.attr("number", {defaultValue: 0}),
+
+  quantityOnHold: function(){
+    var totalOnHold = 0;
+    totalOnHold += this.get("quotedQuantity");
+
+    return totalOnHold;
+  }.property("quotedQuantity"),
   formattedPrice: function(){
     if(!this.get("price")){
       return '£' + parseFloat(0).toFixed(2);
@@ -37,5 +45,13 @@ export default Model.extend({
       stockLevels.push(item.get("quantity"));
     });
     return Math.min.apply(Math, stockLevels);
-  }.property("components.@each.quantity")
+  }.property("components.@each.quantity"),
+
+  quoteQuantityEmpty: function(){
+    if(parseInt(this.get("quoteQuantity")) === 0){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("quoteQuantity")
 });

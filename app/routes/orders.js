@@ -15,7 +15,8 @@ export default Ember.Route.extend({
       stock: false,
       orders: true,
       bikes: false,
-      receivedGoods: false
+      receivedGoods: false,
+      quotations: false
     });
   },
   deactivate: function(){
