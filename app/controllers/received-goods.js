@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
         controller.set("numberOfAccepted", controller.get("numberOfAccepted") + 1);
       }else if(delivery.get("isMissingItems")){
         controller.set("numberWithMissing", controller.get("numberWithMissing") + 1);
-      }else{
+      }else if(delivery.get("isProcessing")){
         controller.set("numberNotDelivered", controller.get("numberNotDelivered") + 1);
       }
     })

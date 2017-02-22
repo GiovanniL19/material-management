@@ -85,10 +85,11 @@ export default Ember.Controller.extend({
       this.selectedItem(supplier);
     },
     update: function(){
+      let supplier = this.get("supplier");
       let controller = this;
 
       if(controller.get("supplier.name") && controller.get("supplier.tradingName") && controller.get("supplier.tradingAddress") && controller.get("supplier.contactNumber") && controller.get("supplier.contactName") && controller.get("supplier.contactEmail")){
-        this.get("supplier").save().then(function () {
+        supplier.save().then(function () {
           controller.set("application.message", "Updated Supplier");
           controller.get("activityController").set("Updated " + controller.get("supplier.name"));
         });
