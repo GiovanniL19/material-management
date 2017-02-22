@@ -122,6 +122,47 @@ export default Ember.Controller.extend({
     delete: function(quote){
       this.deleteQuote(quote);
     },
+    confirmed: function(){
+      if(confirm("You are about to confirm this quote, thus updating warehouse stock levels")) {
+        let controller = this;
+        let quote = this.get("quote");
+
+        quote.get("stockLines").forEach(function (line) {
+          controller.store.find("item", line.get("item")).then(function (item) {
+            //Add the quantity to the item quotedQuantity property
+            item.set("quotedQuantity", item.get("quotedQuantity") - line.get("quantity"));
+            item.set("warehouseQuantity", item.get("warehouseQuantity") - line.get("quantity"));
+            item.save();
+          });
+        });
+
+        quote.get("bikeLines").forEach(function (line) {
+          controller.store.find("bike", line.get("item")).then(function (bike) {
+            //Add the quantity to the item quotedQuantity property
+            bike.set("quotedQuantity", bike.get("quotedQuantity") - line.get("quantity"));
+
+            bike.get("components").then(function(components){
+              components.forEach(function(item){
+                controller.store.findRecord('item', item.get("id")).then(function(item) {
+                  item.set("warehouseQuantity", item.get("warehouseQuantity") - line.get("quantity"));
+                  item.save();
+                });
+              });
+              bike.set("amountSold", bike.get("amountSold") + line.get("quantity"));
+              bike.save().then(function(){
+                controller.get("activityController").set(bike.get("name") + " sold");
+              });
+            });
+          });
+        });
+
+        quote.set("confirmedQuote", true);
+        quote.save().then(function () {
+          controller.get("activityController").set("Quote " + quote.get("quoteID") + " has been confirmed");
+          controller.set("application.message", "Quote has been updated");
+        });
+      }
+    },
     createQuote: function(){
       let controller = this;
       if(this.get("quote.customerName") && this.get("quote.customerNumber") && this.get("quote.customerEmail")) {
@@ -145,7 +186,7 @@ export default Ember.Controller.extend({
               });
             });
             controller.set("application.message", "Quote created");
-            controller.get("activityController").set("Quote" + savedQuote.get("transactionID") + " created");
+            controller.get("activityController").set("Quote " + savedQuote.get("quoteID") + " created");
             controller.clear();
           });
         } else {
@@ -157,7 +198,7 @@ export default Ember.Controller.extend({
     },
     selectLine: function(type, item) {
       let controller = this;
-      if(item.get("quoteQuantity") > 0) {
+      if(item.get("quoteQuantity") > 0 && !(item.get("quoteQuantity") > item.get("quantity"))) {
         if (!controller.get("editMode")) {
           if (item.get("checked")) {
             this.get("quote." + type + "Lines").forEach(function (line) {
@@ -192,8 +233,8 @@ export default Ember.Controller.extend({
     back: function(){
       this.clear();
     },
-    select: function(transaction){
-      this.selectedItem(transaction);
+    select: function(quote){
+      this.selectedItem(quote);
     }
   }
 });

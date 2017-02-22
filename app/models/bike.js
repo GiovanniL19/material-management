@@ -39,13 +39,23 @@ export default Model.extend({
     }
   }.property("retail"),
 
-  quantity: function(){
+  warehouseStock: function(){
     var stockLevels = [];
     this.get("components").forEach(function(item){
       stockLevels.push(item.get("quantity"));
     });
     return Math.min.apply(Math, stockLevels);
   }.property("components.@each.quantity"),
+  quantity: function(){
+    var stockLevels = [];
+    this.get("components").forEach(function(item){
+      stockLevels.push(item.get("quantity"));
+    });
+
+    let total = Math.min.apply(Math, stockLevels);
+    total -= this.get("quotedQuantity");
+    return total;
+  }.property("components.@each.quantity", "quotedQuantity"),
 
   quoteQuantityEmpty: function(){
     if(parseInt(this.get("quoteQuantity")) === 0){

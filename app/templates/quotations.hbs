@@ -81,13 +81,17 @@
               Bike Lines: <strong>{{quote.bikeLines.length}}</strong><br><br>
               Note:<br>
               {{textarea class="form-control" value=quote.note readonly=true}}
+              <br>
+              {{#if quote.confirmedQuote}}
+                <h5>Quote has been confirmed (Sold)</h5>
+              {{/if}}
             </p>
             {{#unless quote.confirmedQuote}}
               <div class="col-sm-6 buttons">
                 <button class="btn btn-danger" {{action "delete" quote}}>Delete</button>
               </div>
               <div class="col-sm-6 text-right buttons">
-                <button class="btn btn-primary" {{action "confirmed"}}>Confirmed*</button>
+                <button class="btn btn-primary" {{action "confirmed"}}>Sold*</button>
               </div>
               <div class="col-md-12">
                 <br>
@@ -182,9 +186,7 @@
                     </div>
                   </div>
                 {{else}}
-                  <h5>Quote Will Be Canceled</h5>
-                  <br>
-                  <small>To save these changes, click the update button on the left</small>
+                  <h5>No Biked Selected</h5>
                 {{/each}}
               {{else}}
                 {{#each allBikes as |item|}}
@@ -280,9 +282,7 @@
                     </div>
                   </div>
                 {{else}}
-                  <h5>Quote Will Be Canceled</h5>
-                  <br>
-                  <small>To save these changes, click the update button on the left</small>
+                  <h5>No Stock Selected</h5>
                 {{/each}}
               {{else}}
 

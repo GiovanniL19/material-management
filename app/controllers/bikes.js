@@ -68,7 +68,7 @@ export default Ember.Controller.extend({
         bike.get("components").then(function(components){
           components.forEach(function(item){
             controller.store.findRecord('item', item.get("id")).then(function(item) {
-              item.set("quantity", item.get("quantity") - 1);
+              item.set("warehouseQuantity", item.get("warehouseQuantity") - 1);
               item.save();
             });
           });

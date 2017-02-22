@@ -20,7 +20,7 @@ export default Model.extend({
   note: DS.attr("string"),
 
   totalCost: DS.attr("string"),
-  confirmedQuote: DS.attr("string"),
+  confirmedQuote: DS.attr("boolean"),
 
   customerName: DS.attr("string"),
   customerEmail: DS.attr("string"),
@@ -41,7 +41,7 @@ export default Model.extend({
     });
 
     return '£' + parseFloat(total).toFixed(2);
-  }.property("lines.@each.newQuantity"),
+  }.property("bikeLines.@each.newQuantity", "stockLines.@each.newQuantity"),
 
   createdDateFormatted: function () {
     return moment.unix(this.get("dateCreated")).format("DD/MM/YYYY");
