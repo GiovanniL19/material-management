@@ -13,7 +13,6 @@ export default Ember.Route.extend({
       suppliers: false,
       deliveries: false,
       stock: false,
-      orders: true,
       bikes: false,
       receivedGoods: false,
       quotations: false

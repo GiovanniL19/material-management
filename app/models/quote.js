@@ -1,31 +1,35 @@
 import Model from 'ember-pouch/model';
 import DS from 'ember-data';
 import MF from 'model-fragments';
+import moment from 'moment';
 
 const {
-  attr,
-  hasMany,
-  belongsTo
+  attr
 } = DS;
 
+const {
+  fragmentArray
+} = MF;
+
 export default Model.extend({
-  type: DS.attr("string", {defaultValue: 'Quote'}),
-  rev: DS.attr("string"),
-  bikeLines: MF.fragmentArray('line', {async: true}),
-  stockLines: MF.fragmentArray('line', {async: true}),
+  type: attr("string", {defaultValue: 'Quote'}),
+  rev: attr("string"),
+  bikeLines: fragmentArray('line', {async: true}),
+  stockLines: fragmentArray('line', {async: true}),
 
-  quoteID: DS.attr("string"),
+  quoteID: attr("string"),
 
-  dateCreated: DS.attr("number"),
-  note: DS.attr("string"),
+  dateCreated: attr("number"),
+  note: attr("string"),
 
-  totalCost: DS.attr("string"),
+  totalCost: attr("string"),
   confirmedQuote: DS.attr("boolean"),
 
-  customerName: DS.attr("string"),
-  customerEmail: DS.attr("string"),
-  customerNumber: DS.attr("string"),
+  customerName: attr("string"),
+  customerEmail: attr("string"),
+  customerNumber: attr("string"),
 
+  //Computed Properties
   totalFormatted: function(){
     let total = 0;
     this.get("stockLines").forEach(function(item) {
@@ -42,11 +46,9 @@ export default Model.extend({
 
     return '£' + parseFloat(total).toFixed(2);
   }.property("bikeLines.@each.newQuantity", "stockLines.@each.newQuantity"),
-
   createdDateFormatted: function () {
     return moment.unix(this.get("dateCreated")).format("DD/MM/YYYY");
   }.property("dateCreated"),
-
   etaFormatted: function () {
     return moment.unix(this.get("eta")).format("DD/MM/YYYY");
   }.property("eta"),

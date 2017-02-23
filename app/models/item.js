@@ -8,24 +8,39 @@ const {
   belongsTo
 } = DS;
 
-export default Model.extend({
-  type: DS.attr("string", {defaultValue: 'Item'}),
-  rev: DS.attr("string"),
-  barcode: DS.attr("string"),
-  name: DS.attr("string"),
-  warehouseQuantity: DS.attr("number"),
-  minQuantity: DS.attr("number"),
-  trade: DS.attr("number"),
-  retail: DS.attr("number"),
-  group: DS.belongsTo("group", {async: true}),
-  supplier: DS.belongsTo("supplier", {async: true}),
-  bikes: DS.hasMany("bike", {async: true, defaultValue: []}),
-  reservedStock: MF.fragmentArray("reserve"),
-  leadTime: DS.attr("string"),
-  reOrderQty: DS.attr("number"),
-  quotedQuantity: DS.attr("number", {defaultValue: 0}),
-  description: DS.attr("string"),
+const {
+  fragmentArray
+} = MF;
 
+export default Model.extend({
+  type: attr("string", {defaultValue: 'Item'}),
+  rev: attr("string"),
+  barcode: attr("string"),
+
+  //Details
+  name: attr("string"),
+  description: attr("string"),
+
+  //Quantity
+  warehouseQuantity: attr("number"),
+  minQuantity: attr("number"),
+  reOrderQty: attr("number"),
+  quotedQuantity: attr("number", {defaultValue: 0}),
+  reservedStock: fragmentArray("reserve"),
+
+  //Prices
+  trade: attr("number"),
+  retail: attr("number"),
+
+  //Groups, suppliers and bikes
+  group: belongsTo("group", {async: true}),
+  supplier: belongsTo("supplier", {async: true}),
+  bikes: hasMany("bike", {async: true, defaultValue: []}),
+
+  //Delivery
+  leadTime: attr("string"),
+
+  //Computed Properties
   quantityOnHold: function(){
     var totalOnHold = 0;
     this.get("reservedStock").forEach(function(reserve) {
@@ -43,18 +58,15 @@ export default Model.extend({
       return false;
     }
   }.property("minQuantity", "warehouseQuantity"),
-
   quantity: function(){
     return this.get("warehouseQuantity") - this.get("quantityOnHold");
   }.property("quantityOnHold", "warehouseQuantity"),
-
   formattedRetail: function(){
     return '£' + parseFloat(this.get("retail")).toFixed(2);
   }.property("retail"),
   formattedTrade: function(){
     return '£' + parseFloat(this.get("trade")).toFixed(2);
   }.property("trade"),
-
   //Used for ordering
   formattedTotal: function(){
     let total = this.get("trade") * this.get("orderQuantity");
@@ -64,7 +76,6 @@ export default Model.extend({
       return '£0';
     }
   }.property("orderQuantity"),
-
   orderQuantityEmpty: function(){
     if(parseInt(this.get("orderQuantity")) === 0){
       return true;

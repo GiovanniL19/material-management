@@ -1,17 +1,17 @@
 import Model from 'ember-pouch/model';
 import DS from 'ember-data';
+import moment from 'moment';
 
 const {
   attr,
-  hasMany,
-  belongsTo
 } = DS;
 
 export default Model.extend({
-  rev: DS.attr("string"),
-  time: DS.attr("number"),
-  result: DS.attr("string"),
+  rev: attr("string"),
+  time: attr("number"),
+  result: attr("string"),
 
+  //Computed Properties
   timeFormatted: function(){
     return moment.unix(this.get("time")).fromNow();
   }.property("time")

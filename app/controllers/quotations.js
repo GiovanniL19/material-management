@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
@@ -198,7 +199,9 @@ export default Ember.Controller.extend({
     },
     selectLine: function(type, item) {
       let controller = this;
-      if(item.get("quoteQuantity") > 0 && !(item.get("quoteQuantity") > item.get("quantity"))) {
+      let quoteIsMoreThanQuantity = (item.get("quoteQuantity") > item.get("quantity"));
+
+      if(item.get("quoteQuantity") > 0 && quoteIsMoreThanQuantity === false) {
         if (!controller.get("editMode")) {
           if (item.get("checked")) {
             this.get("quote." + type + "Lines").forEach(function (line) {

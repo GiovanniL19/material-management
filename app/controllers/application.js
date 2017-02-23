@@ -7,7 +7,6 @@ export default Ember.Controller.extend({
     suppliers: false,
     deliveries: false,
     stock: false,
-    orders: false,
     receivedGoods: false,
     quotations: false
   },

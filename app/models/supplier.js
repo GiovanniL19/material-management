@@ -3,48 +3,46 @@ import DS from 'ember-data';
 
 const {
   attr,
-  hasMany,
-  belongsTo
+  hasMany
 } = DS;
 
 export default Model.extend({
-  type: DS.attr("string", {defaultValue: 'Supplier'}),
-  rev: DS.attr("string"),
-  name: DS.attr("string"),
-  tradingName: DS.attr("string"),
-  tradingAddress: DS.attr("string"),
-  returnsAddress: DS.attr("string"),
-  contactName: DS.attr("string"),
-  contactEmail: DS.attr("string"),
-  contactNumber: DS.attr("string"),
-  status: DS.attr("string", {defaultValue: 'OK'}),
-  transactionHistory: DS.hasMany("transactions", {async: true, defaultValue: []}),
-  stock: DS.hasMany("item", {async: true, defaultValue: []}),
-  terminated: DS.attr("boolean", {defaultValue: false}),
+  type: attr("string", {defaultValue: 'Supplier'}),
+  rev: attr("string"),
+  name: attr("string"),
+  tradingName: attr("string"),
+  tradingAddress: attr("string"),
+  returnsAddress: attr("string"),
+  contactName: attr("string"),
+  contactEmail: attr("string"),
+  contactNumber: attr("string"),
+  status: attr("string", {defaultValue: 'OK'}),
+  transactionHistory: hasMany("transactions", {async: true, defaultValue: []}),
+  stock: hasMany("item", {async: true, defaultValue: []}),
+  terminated: attr("boolean", {defaultValue: false}),
+
+  //Computed properties
   isOk: function(){
     if(this.get("status") === "OK"){
-      return true
+      return true;
     }else{
-      return false
+      return false;
     }
   }.property("status"),
-
   onHold: function(){
     if(this.get("status") === "ON HOLD"){
-      return true
+      return true;
     }else{
-      return false
+      return false;
     }
   }.property("status"),
-
   bard: function(){
     if(this.get("status") === "BARD"){
-      return true
+      return true;
     }else{
-      return false
+      return false;
     }
   }.property("status"),
-
   canOrder: function(){
     if(this.get("status") === "BARD" || this.get("status") === "ON HOLD"){
       return false;

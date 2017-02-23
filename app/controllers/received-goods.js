@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
       }else if(delivery.get("isProcessing")){
         controller.set("numberNotDelivered", controller.get("numberNotDelivered") + 1);
       }
-    })
+    });
   }.observes("model"),
   clear: function(){
     this.set("view", true);

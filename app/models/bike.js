@@ -3,21 +3,21 @@ import DS from 'ember-data';
 
 const {
   attr,
-  hasMany,
-  belongsTo
+  hasMany
 } = DS;
 
 export default Model.extend({
-  type: DS.attr("string", {defaultValue: 'Bike'}),
-  rev: DS.attr("string"),
-  name: DS.attr("string"),
-  components: DS.hasMany("item",  {async: true, defaultValue: []}),
-  price: DS.attr("number"),
-  retail: DS.attr("number"),
-  amountSold: DS.attr("number", {defaultValue: 0}),
-  assemblyTime: DS.attr("string"),
-  quotedQuantity: DS.attr("number", {defaultValue: 0}),
+  type: attr("string", {defaultValue: 'Bike'}),
+  rev: attr("string"),
+  name: attr("string"),
+  components: hasMany("item",  {async: true, defaultValue: []}),
+  price: attr("number"),
+  retail: attr("number"),
+  amountSold: attr("number", {defaultValue: 0}),
+  assemblyTime: attr("string"),
+  quotedQuantity: attr("number", {defaultValue: 0}),
 
+  //Computed properties
   quantityOnHold: function(){
     var totalOnHold = 0;
     totalOnHold += this.get("quotedQuantity");
@@ -38,7 +38,6 @@ export default Model.extend({
       return '£' + parseFloat(this.get("retail")).toFixed(2);
     }
   }.property("retail"),
-
   warehouseStock: function(){
     var stockLevels = [];
     this.get("components").forEach(function(item){
@@ -56,7 +55,6 @@ export default Model.extend({
     total -= this.get("quotedQuantity");
     return total;
   }.property("components.@each.quantity", "quotedQuantity"),
-
   quoteQuantityEmpty: function(){
     if(parseInt(this.get("quoteQuantity")) === 0){
       return true;

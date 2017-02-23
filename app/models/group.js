@@ -3,13 +3,12 @@ import DS from 'ember-data';
 
 const {
   attr,
-  hasMany,
-  belongsTo
+  hasMany
 } = DS;
 
 export default Model.extend({
-  type: DS.attr("string", {defaultValue: 'Group'}),
-  rev: DS.attr("string"),
-  name: DS.attr("string"),
-  items: DS.hasMany("item",  {async: true, defaultValue: []})
+  type: attr("string", {defaultValue: 'Group'}),
+  rev: attr("string"),
+  name: attr("string"),
+  items: hasMany("item",  {async: true, defaultValue: []})
 });
