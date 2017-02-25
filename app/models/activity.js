@@ -7,6 +7,7 @@ const {
 } = DS;
 
 export default Model.extend({
+  type: attr("string"),
   rev: attr("string"),
   time: attr("number"),
   result: attr("string"),

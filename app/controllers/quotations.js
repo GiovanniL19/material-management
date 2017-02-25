@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   stock: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
   suppliersController: Ember.inject.controller("suppliers"),
+
   view: true,
   editMode: false,
   quote: null,
@@ -13,7 +14,6 @@ export default Ember.Controller.extend({
   sortedModel: Ember.computed.sort('model', 'sortDesc'),
   allStock: [],
   allBikes: [],
-
   total: function(){
     var total = 0;
     if(this.get("quote")) {
@@ -48,7 +48,6 @@ export default Ember.Controller.extend({
     }
     return '£' + parseFloat(total).toFixed(2);
   }.property("quote.stockLines.length", "quote.bikeLines.length", "allStock.@each.quoteQuantity", "allBikes.@each.quoteQuantity"),
-
   generateQuotationID: function(){
     var id = "";
     let characters = moment.unix() + "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";

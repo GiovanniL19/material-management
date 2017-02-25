@@ -2,7 +2,7 @@ import Model from 'ember-pouch/model';
 import DS from 'ember-data';
 import MF from 'model-fragments';
 import moment from 'moment';
-
+s
 const {
   attr
 } = DS;

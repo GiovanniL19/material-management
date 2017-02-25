@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
+
   bike: null,
   view: true,
   editMode: false,

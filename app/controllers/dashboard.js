@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   stock: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
   suppliersController: Ember.inject.controller("suppliers"),
+
   suppliers: [],
   activities: [],
   lowStock: [],

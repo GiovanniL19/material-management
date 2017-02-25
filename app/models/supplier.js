@@ -17,9 +17,9 @@ export default Model.extend({
   contactEmail: attr("string"),
   contactNumber: attr("string"),
   status: attr("string", {defaultValue: 'OK'}),
-  transactionHistory: hasMany("transactions", {async: true, defaultValue: []}),
   stock: hasMany("item", {async: true, defaultValue: []}),
   terminated: attr("boolean", {defaultValue: false}),
+  transactionHistory: hasMany("transaction", {async: true, defaultValue: []}),
 
   //Computed properties
   isOk: function(){
@@ -73,5 +73,5 @@ export default Model.extend({
     }else{
       return percentage.toFixed(2) + "%";
     }
-  }.property("transactionHistory"),
+  }.property("transactionHistory")
 });

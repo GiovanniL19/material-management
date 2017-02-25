@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
   suppliersController: Ember.inject.controller("suppliers"),
+
   view: true,
   editMode: false,
   item: null,
@@ -16,15 +17,24 @@ export default Ember.Controller.extend({
   selectedSupplier: null,
   sortAsc: ['name:asc'],
   sortedModel: Ember.computed.sort('model', 'sortAsc'),
-
   reserve: {
     item: null,
     ref: "",
     customerName: "",
     quantity: ""
   },
+  generateBarcode: function(){
+    var barcode = "";
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-  onHoldCheck: function(){
+    for(var i = 0; i < 20; i++){
+      barcode += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    return barcode.replace(/\s/g, '').toUpperCase();
+  }.property(),
+
+  onHoldCheckObserver: function(){
     let controller = this;
     if(this.get("model") !== undefined) {
       this.get("model").forEach(function(item) {
@@ -40,16 +50,6 @@ export default Ember.Controller.extend({
       });
     }
   }.observes("sortedModel"),
-  generateBarcode: function(){
-    var barcode = "";
-    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    for(var i = 0; i < 20; i++){
-      barcode += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-
-    return barcode.replace(/\s/g, '').toUpperCase();
-  }.property(),
 
   selectedItem: function(item){
     this.set("item", item);

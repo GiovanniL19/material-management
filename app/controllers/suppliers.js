@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
   orders: Ember.inject.controller(),
+
   view: true,
   editMode: false,
   supplier: null,
