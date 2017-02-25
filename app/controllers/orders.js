@@ -137,7 +137,7 @@ export default Ember.Controller.extend({
           var total = 0;
           this.get("transaction.lines").forEach(function (line) {
             if (line.get("checked") === true) {
-              var newLine = controller.store.createFragment("line", {
+              var newLine = controller.store.createFragment("line-fragment", {
                 name: line.get("name"),
                 item: line.get("item"),
                 price: line.get("price")
@@ -208,7 +208,7 @@ export default Ember.Controller.extend({
             }
           });
         }else {
-          let newFragmentLine = this.store.createFragment("line", {
+          let newFragmentLine = this.store.createFragment("line-fragment", {
             name: item.get("name"),
             quantity: item.get("orderQuantity"),
             item: item.get("id"),

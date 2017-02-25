@@ -128,7 +128,7 @@ export default Ember.Controller.extend({
         if (parseInt(this.get("reserve.quantity")) > parseInt(this.get("reserve.item.quantity"))) {
           this.set("application.message", "There is not enough stock to reserve");
         } else {
-          var reserve = this.store.createFragment("reserve", {
+          var reserve = this.store.createFragment("reserve-fragment", {
             ref: controller.get("reserve.ref"),
             customerName: controller.get("reserve.customerName"),
             quantity: controller.get("reserve.quantity"),

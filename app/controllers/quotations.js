@@ -210,7 +210,7 @@ export default Ember.Controller.extend({
               }
             });
           } else {
-            let newFragmentLine = this.store.createFragment("line", {
+            let newFragmentLine = this.store.createFragment("line-fragment", {
               name: item.get("name"),
               quantity: item.get("quoteQuantity"),
               item: item.get("id"),

@@ -26,7 +26,7 @@ export default Model.extend({
   minQuantity: attr("number"),
   reOrderQty: attr("number"),
   quotedQuantity: attr("number", {defaultValue: 0}),
-  reservedStock: fragmentArray("reserve"),
+  reservedStock: fragmentArray("reserve-fragment"),
 
   //Prices
   trade: attr("number"),

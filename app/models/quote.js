@@ -2,7 +2,7 @@ import Model from 'ember-pouch/model';
 import DS from 'ember-data';
 import MF from 'model-fragments';
 import moment from 'moment';
-s
+
 const {
   attr
 } = DS;
@@ -14,8 +14,8 @@ const {
 export default Model.extend({
   type: attr("string", {defaultValue: 'Quote'}),
   rev: attr("string"),
-  bikeLines: fragmentArray('line', {async: true}),
-  stockLines: fragmentArray('line', {async: true}),
+  bikeLines: fragmentArray('line-fragment', {async: true}),
+  stockLines: fragmentArray('line-fragment', {async: true}),
 
   quoteID: attr("string"),
 

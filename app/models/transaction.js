@@ -15,7 +15,7 @@ const {
 export default Model.extend({
   type: attr("string", {defaultValue: 'Transaction'}),
   rev: attr("string"),
-  lines: fragmentArray('line', {async: true}),
+  lines: fragmentArray('line-fragment', {async: true}),
   transactionID: attr("string"),
   supplier: belongsTo("supplier", {async: true}),
   dateCreated: attr("number"),
