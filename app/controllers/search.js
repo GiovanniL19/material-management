@@ -73,7 +73,7 @@ export default Ember.Controller.extend({
     });
 
 
-    //Orders
+    //Bikes
     this.store.query('bike',  {
       filter: {
         type: "Bike",
