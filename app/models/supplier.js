@@ -44,7 +44,7 @@ export default Model.extend({
     }
   }.property("status"),
   canOrder: function(){
-    if(this.get("status") === "BARD" || this.get("status") === "ON HOLD"){
+    if(this.get("status") === "BARRED" || this.get("status") === "ON HOLD"){
       return false;
     }else{
       if(this.get("terminated")){
