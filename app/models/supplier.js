@@ -36,8 +36,8 @@ export default Model.extend({
       return false;
     }
   }.property("status"),
-  bard: function(){
-    if(this.get("status") === "BARD"){
+  barred: function(){
+    if(this.get("status") === "BARRED"){
       return true;
     }else{
       return false;

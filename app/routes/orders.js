@@ -9,7 +9,7 @@ export default Ember.Route.extend({
     controller.set("model", model);
     controller.set("application.page",{
       dashboard: false,
-      orders: false,
+      orders: true,
       suppliers: false,
       deliveries: false,
       stock: false,
