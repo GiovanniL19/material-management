@@ -7,8 +7,7 @@ const {
 } = DS;
 
 export default Model.extend({
-  type: attr("string", {defaultValue: 'Group'}),
-  rev: attr("string"),
+  type: attr("string", {defaultValue: 'group'}),
   name: attr("string"),
   items: hasMany("item",  {async: true, defaultValue: []})
 });

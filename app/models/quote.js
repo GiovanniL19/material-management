@@ -12,8 +12,7 @@ const {
 } = MF;
 
 export default Model.extend({
-  type: attr("string", {defaultValue: 'Quote'}),
-  rev: attr("string"),
+  type: attr("string", {defaultValue: 'quote'}),
   bikeLines: fragmentArray('line-fragment', {async: true}),
   stockLines: fragmentArray('line-fragment', {async: true}),
 

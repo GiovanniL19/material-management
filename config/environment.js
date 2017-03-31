@@ -8,7 +8,7 @@ module.exports = function(environment) {
     locationType: 'hash',
     emberPouch: {
       localDb: 'bikesystem',
-      remoteDb: 'http://localhost:5984/bikesystem'
+      remoteDb: 'http://10.205.202.190:5984/bikesystem'
     },
     EmberENV: {
       FEATURES: {

@@ -7,8 +7,7 @@ const {
 } = DS;
 
 export default Model.extend({
-  type: attr("string", {defaultValue: 'Supplier'}),
-  rev: attr("string"),
+  type: attr("string", {defaultValue: 'supplier'}),
   name: attr("string"),
   tradingName: attr("string"),
   tradingAddress: attr("string"),

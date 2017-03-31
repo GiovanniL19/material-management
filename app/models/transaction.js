@@ -13,8 +13,7 @@ const {
 } = MF;
 
 export default Model.extend({
-  type: attr("string", {defaultValue: 'Transaction'}),
-  rev: attr("string"),
+  type: attr("string", {defaultValue: 'transaction'}),
   lines: fragmentArray('line-fragment', {async: true}),
   transactionID: attr("string"),
   supplier: belongsTo("supplier", {async: true}),
