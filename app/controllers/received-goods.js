@@ -5,15 +5,16 @@ export default Ember.Controller.extend({
   activityController: Ember.inject.controller(),
   suppliersController: Ember.inject.controller("suppliers"),
   orders: Ember.inject.controller(),
-  sortDesc: ['dateCreated:desc'],
-  sortedModel: Ember.computed.sort('model', 'sortDesc'),
+
   view: true,
   numberOfAccepted: 0,
   numberOfRejected: 0,
   numberWithMissing: 0,
   numberNotDelivered: 0,
+  sortDesc: ['dateCreated:desc'],
+  sortedModel: Ember.computed.sort('model', 'sortDesc'),
 
-  count: function(){
+  countObserver: function(){
     let controller = this;
     this.get("model").forEach(function(delivery){
       if(delivery.get("rejectDelivery")){
@@ -25,8 +26,9 @@ export default Ember.Controller.extend({
       }else if(delivery.get("isProcessing")){
         controller.set("numberNotDelivered", controller.get("numberNotDelivered") + 1);
       }
-    })
+    });
   }.observes("model"),
+
   clear: function(){
     this.set("view", true);
     this.set("transaction", null);

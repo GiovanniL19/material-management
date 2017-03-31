@@ -2,11 +2,18 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model() {
-    return this.store.findAll('transaction');
+    return this.store.findAll('quote');
   },
   setupController: function(controller, model) {
-    document.title = "Received Goods";
     controller.set("model", model);
+    document.title = "Quotations";
+
+    let stock = this.store.findAll('item');
+    let bikes = this.store.findAll('bike');
+
+    controller.set("allStock", stock);
+    controller.set("allBikes", bikes);
+
     controller.set("application.page",{
       dashboard: false,
       orders: false,
@@ -14,14 +21,14 @@ export default Ember.Route.extend({
       deliveries: false,
       stock: false,
       bikes: false,
-      receivedGoods: true,
-      quotations: false
+      receivedGoods: false,
+      quotations: true
     });
   },
   deactivate: function(){
     let controller = this;
     setTimeout(function(){
-      controller.controllerFor("received-goods").clear();
+      controller.controllerFor("quotations").clear();
     },1000);
   }
 });

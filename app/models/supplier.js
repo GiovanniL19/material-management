@@ -3,50 +3,47 @@ import DS from 'ember-data';
 
 const {
   attr,
-  hasMany,
-  belongsTo
+  hasMany
 } = DS;
 
 export default Model.extend({
-  type: DS.attr("string", {defaultValue: 'Supplier'}),
-  rev: DS.attr("string"),
-  name: DS.attr("string"),
-  tradingName: DS.attr("string"),
-  tradingAddress: DS.attr("string"),
-  returnsAddress: DS.attr("string"),
-  contactName: DS.attr("string"),
-  contactEmail: DS.attr("string"),
-  contactNumber: DS.attr("string"),
-  status: DS.attr("string", {defaultValue: 'OK'}),
-  transactionHistory: DS.hasMany("transactions", {async: true, defaultValue: []}),
-  stock: DS.hasMany("item", {async: true, defaultValue: []}),
-  terminated: DS.attr("boolean", {defaultValue: false}),
+  type: attr("string", {defaultValue: 'supplier'}),
+  name: attr("string"),
+  tradingName: attr("string"),
+  tradingAddress: attr("string"),
+  returnsAddress: attr("string"),
+  contactName: attr("string"),
+  contactEmail: attr("string"),
+  contactNumber: attr("string"),
+  status: attr("string", {defaultValue: 'OK'}),
+  stock: hasMany("item", {async: true, defaultValue: []}),
+  terminated: attr("boolean", {defaultValue: false}),
+  transactionHistory: hasMany("transaction", {async: true, defaultValue: []}),
+
+  //Computed properties
   isOk: function(){
     if(this.get("status") === "OK"){
-      return true
+      return true;
     }else{
-      return false
+      return false;
     }
   }.property("status"),
-
   onHold: function(){
     if(this.get("status") === "ON HOLD"){
-      return true
+      return true;
     }else{
-      return false
+      return false;
     }
   }.property("status"),
-
-  bard: function(){
-    if(this.get("status") === "BARD"){
-      return true
+  barred: function(){
+    if(this.get("status") === "BARRED"){
+      return true;
     }else{
-      return false
+      return false;
     }
   }.property("status"),
-
   canOrder: function(){
-    if(this.get("status") === "BARD" || this.get("status") === "ON HOLD"){
+    if(this.get("status") === "BARRED" || this.get("status") === "ON HOLD"){
       return false;
     }else{
       if(this.get("terminated")){
@@ -75,5 +72,5 @@ export default Model.extend({
     }else{
       return percentage.toFixed(2) + "%";
     }
-  }.property("transactionHistory"),
+  }.property("transactionHistory")
 });

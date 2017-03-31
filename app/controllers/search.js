@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   suppliers: Ember.inject.controller(),
   stock: Ember.inject.controller(),
   bikes: Ember.inject.controller(),
+
   searchInput: "",
   searchMode: false,
   supplierResults: [],
@@ -72,7 +73,7 @@ export default Ember.Controller.extend({
     });
 
 
-    //Orders
+    //Bikes
     this.store.query('bike',  {
       filter: {
         type: "Bike",

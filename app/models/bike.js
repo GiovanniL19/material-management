@@ -3,19 +3,26 @@ import DS from 'ember-data';
 
 const {
   attr,
-  hasMany,
-  belongsTo
+  hasMany
 } = DS;
 
 export default Model.extend({
-  type: DS.attr("string", {defaultValue: 'Bike'}),
-  rev: DS.attr("string"),
-  name: DS.attr("string"),
-  components: DS.hasMany("item",  {async: true, defaultValue: []}),
-  price: DS.attr("number"),
-  retail: DS.attr("number"),
-  amountSold: DS.attr("number", {defaultValue: 0}),
-  assemblyTime: DS.attr("string"),
+  type: attr("string", {defaultValue: 'bike'}),
+  name: attr("string"),
+  components: hasMany("item",  {async: true, defaultValue: []}),
+  price: attr("number"),
+  retail: attr("number"),
+  amountSold: attr("number", {defaultValue: 0}),
+  assemblyTime: attr("string"),
+  quotedQuantity: attr("number", {defaultValue: 0}),
+
+  //Computed properties
+  quantityOnHold: function(){
+    var totalOnHold = 0;
+    totalOnHold += this.get("quotedQuantity");
+
+    return totalOnHold;
+  }.property("quotedQuantity"),
   formattedPrice: function(){
     if(!this.get("price")){
       return '£' + parseFloat(0).toFixed(2);
@@ -30,12 +37,28 @@ export default Model.extend({
       return '£' + parseFloat(this.get("retail")).toFixed(2);
     }
   }.property("retail"),
-
-  quantity: function(){
+  warehouseStock: function(){
     var stockLevels = [];
     this.get("components").forEach(function(item){
       stockLevels.push(item.get("quantity"));
     });
     return Math.min.apply(Math, stockLevels);
-  }.property("components.@each.quantity")
+  }.property("components.@each.quantity"),
+  quantity: function(){
+    var stockLevels = [];
+    this.get("components").forEach(function(item){
+      stockLevels.push(item.get("quantity"));
+    });
+
+    let total = Math.min.apply(Math, stockLevels);
+    total -= this.get("quotedQuantity");
+    return total;
+  }.property("components.@each.quantity", "quotedQuantity"),
+  quoteQuantityEmpty: function(){
+    if(parseInt(this.get("quoteQuantity")) === 0){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("quoteQuantity")
 });

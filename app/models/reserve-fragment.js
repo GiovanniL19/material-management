@@ -1,11 +1,17 @@
 import DS from 'ember-data';
 import MF from 'model-fragments';
+import moment from 'moment';
+
+const {
+  attr
+} = DS;
 
 export default MF.Fragment.extend({
-  orderID:  DS.attr("string"),
-  customerName:  DS.attr("string"),
-  quantity: DS.attr("number"),
-  dateReserved: DS.attr("number"),
+  orderID:  attr("string"),
+  customerName:  attr("string"),
+  quantity: attr("number"),
+  dateReserved: attr("number"),
+
   been24Hours: function(){
     if(parseInt(moment().add(1, "days").unix()) > parseInt(this.get("dateReserved"))){
       return false;

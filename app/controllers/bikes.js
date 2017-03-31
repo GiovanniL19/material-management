@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
+
   bike: null,
   view: true,
   editMode: false,
@@ -68,7 +69,7 @@ export default Ember.Controller.extend({
         bike.get("components").then(function(components){
           components.forEach(function(item){
             controller.store.findRecord('item', item.get("id")).then(function(item) {
-              item.set("quantity", item.get("quantity") - 1);
+              item.set("warehouseQuantity", item.get("warehouseQuantity") - 1);
               item.save();
             });
           });

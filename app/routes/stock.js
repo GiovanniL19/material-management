@@ -14,9 +14,9 @@ export default Ember.Route.extend({
       suppliers: false,
       deliveries: false,
       stock: true,
-      orders: false,
       bikes: false,
-      receivedGoods: false
+      receivedGoods: false,
+      quotations: false
     });
 
     controller.set("reserve.item", controller.get("sortedModel.firstObject"));

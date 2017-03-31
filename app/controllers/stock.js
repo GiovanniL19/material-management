@@ -1,9 +1,11 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   activityController: Ember.inject.controller(),
   suppliersController: Ember.inject.controller("suppliers"),
+
   view: true,
   editMode: false,
   item: null,
@@ -15,15 +17,24 @@ export default Ember.Controller.extend({
   selectedSupplier: null,
   sortAsc: ['name:asc'],
   sortedModel: Ember.computed.sort('model', 'sortAsc'),
-
   reserve: {
     item: null,
     ref: "",
     customerName: "",
     quantity: ""
   },
+  generateBarcode: function(){
+    var barcode = "";
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-  onHoldCheck: function(){
+    for(var i = 0; i < 20; i++){
+      barcode += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    return barcode.replace(/\s/g, '').toUpperCase();
+  }.property(),
+
+  onHoldCheckObserver: function(){
     let controller = this;
     if(this.get("model") !== undefined) {
       this.get("model").forEach(function(item) {
@@ -39,16 +50,6 @@ export default Ember.Controller.extend({
       });
     }
   }.observes("sortedModel"),
-  generateBarcode: function(){
-    var barcode = "";
-    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    for(var i = 0; i < 20; i++){
-      barcode += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-
-    return barcode.replace(/\s/g, '').toUpperCase();
-  }.property(),
 
   selectedItem: function(item){
     this.set("item", item);
@@ -127,7 +128,7 @@ export default Ember.Controller.extend({
         if (parseInt(this.get("reserve.quantity")) > parseInt(this.get("reserve.item.quantity"))) {
           this.set("application.message", "There is not enough stock to reserve");
         } else {
-          var reserve = this.store.createFragment("reserve", {
+          var reserve = this.store.createFragment("reserve-fragment", {
             ref: controller.get("reserve.ref"),
             customerName: controller.get("reserve.customerName"),
             quantity: controller.get("reserve.quantity"),
@@ -171,7 +172,7 @@ export default Ember.Controller.extend({
     selectSupplier: function(supplier){
       let controller = this;
       this.get("suppliers").forEach(function(item){
-        if(item.get("id") == supplier){
+        if(item.get("id") === supplier){
           controller.set("selectedSupplier", item);
         }
       });
@@ -195,8 +196,9 @@ export default Ember.Controller.extend({
       item.set("barcode", this.get("generateBarcode"));
 
       if(item.get("reOrderQty") && item.get("leadTime") && item.get("name") && item.get("warehouseQuantity") && item.get("minQuantity") &&  item.get("trade") && item.get("retail")){
+        var group = null;
         if(this.get("newGroup")) {
-          var group = this.store.createRecord("group", {
+          group = this.store.createRecord("group", {
             name: controller.get("groupName"),
           });
 
@@ -220,13 +222,13 @@ export default Ember.Controller.extend({
             });
           });
         }else{
-          var group = this.get("selectedGroup");
+          group = this.get("selectedGroup");
 
           item.set("supplier", supplier);
           item.set("group", group);
           item.save().then(function(savedItem){
             group.get("items").pushObject(savedItem);
-            group.save().then(function(updatedGroup) {
+            group.save().then(function() {
               //Update supplier
               supplier.get("stock").pushObject(savedItem);
               supplier.save().then(function(){
@@ -278,6 +280,7 @@ export default Ember.Controller.extend({
           oldSupplier.save().then(function () {
             controller.store.findRecord('group', item.get("group.id")).then(function (oldGroup) {
               oldGroup.get("items").removeObject(item);
+              var group = null;
               oldGroup.save().then(function () {
                 //UPDATE ITEM
 
@@ -286,7 +289,7 @@ export default Ember.Controller.extend({
                 var item = controller.get("item");
 
                 if (controller.get("newGroup")) {
-                  var group = controller.store.createRecord("group", {
+                  group = controller.store.createRecord("group", {
                     name: controller.get("groupName"),
                   });
 
@@ -312,7 +315,7 @@ export default Ember.Controller.extend({
                     });
                   });
                 } else {
-                  var group = controller.get("selectedGroup");
+                  group = controller.get("selectedGroup");
 
                   item.set("supplier", supplier);
                   item.set("group", group);
@@ -320,7 +323,7 @@ export default Ember.Controller.extend({
                     controller.store.findRecord('group', group.get("id")).then(function (group) {
                       group.get("items").pushObject(savedItem);
 
-                      group.save().then(function (updatedGroup) {
+                      group.save().then(function () {
                         //Update supplier
                         controller.store.findRecord('supplier', supplier.get("id")).then(function (supplier) {
                           supplier.get("stock").pushObject(savedItem);

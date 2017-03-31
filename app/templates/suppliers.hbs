@@ -13,7 +13,7 @@
                 <strong>Name</strong>
               </div>
               <div class="col-sm-4 details">
-                <strong>Trading Name</strong>
+                <strong>Address</strong>
               </div>
               <div class="col-sm-2 details">
                 <strong>Status</strong>
@@ -81,7 +81,7 @@
               <button class="btn btn-default {{if supplier.onHold "selected"}}" {{action "updateStatus" "ON HOLD"}}>ON
                 HOLD
               </button>
-              <button class="btn btn-default {{if supplier.bard "selected"}}" {{action "updateStatus" "BARD"}}>BARD
+              <button class="btn btn-default {{if supplier.barred "selected"}}" {{action "updateStatus" "BARRED"}}>BARRED
               </button>
             </div>
           {{/unless}}
