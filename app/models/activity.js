@@ -7,7 +7,7 @@ const {
 } = DS;
 
 export default Model.extend({
-  type: attr("string", {defaultValue: "activity"}),
+  type: attr("string", {defaultValue: "Activity"}),
   time: attr("number"),
   result: attr("string"),
 

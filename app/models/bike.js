@@ -7,7 +7,7 @@ const {
 } = DS;
 
 export default Model.extend({
-  type: attr("string", {defaultValue: 'bike'}),
+  type: attr("string", {defaultValue: 'Bike'}),
   name: attr("string"),
   components: hasMany("item",  {async: true, defaultValue: []}),
   price: attr("number"),

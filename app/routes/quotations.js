@@ -22,7 +22,8 @@ export default Ember.Route.extend({
       stock: false,
       bikes: false,
       receivedGoods: false,
-      quotations: true
+      quotations: true,
+      awaitingMaterials: false
     });
   },
   deactivate: function(){

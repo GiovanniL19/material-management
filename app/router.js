@@ -15,6 +15,7 @@ Router.map(function() {
   this.route('search');
   this.route('received-goods');
   this.route('quotations');
+  this.route('awaiting-materials');
 });
 
 export default Router;

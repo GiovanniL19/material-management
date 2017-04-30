@@ -13,7 +13,7 @@ const {
 } = MF;
 
 export default Model.extend({
-  type: attr("string", {defaultValue: 'material'}),
+  type: attr("string", {defaultValue: 'Material'}),
   barcode: attr("string"),
 
   //Details

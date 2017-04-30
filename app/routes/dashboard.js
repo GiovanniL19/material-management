@@ -14,7 +14,8 @@ export default Ember.Route.extend({
       stock: false,
       bikes: false,
       receivedGoods: false,
-      quotations: false
+      quotations: false,
+      awaitingMaterials: false
     });
   }
 });

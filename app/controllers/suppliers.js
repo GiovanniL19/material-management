@@ -55,7 +55,6 @@ export default Ember.Controller.extend({
         if(controller.get("supplier.returnsAddress") === ""){
           controller.set("supplier.returnsAddress", controller.get("supplier.tradingAddress"));
         }
-
         this.get("supplier").save().then(function(){
           controller.set("application.message", "Success!");
           controller.get("activityController").set("Added " + controller.get("supplier.name"));
@@ -86,11 +85,10 @@ export default Ember.Controller.extend({
       this.selectedItem(supplier);
     },
     update: function(){
-      let supplier = this.get("supplier");
       let controller = this;
 
       if(controller.get("supplier.name") && controller.get("supplier.tradingName") && controller.get("supplier.tradingAddress") && controller.get("supplier.contactNumber") && controller.get("supplier.contactName") && controller.get("supplier.contactEmail")){
-        supplier.save().then(function () {
+        this.get("supplier").save().then(function () {
           controller.set("application.message", "Updated Supplier");
           controller.get("activityController").set("Updated " + controller.get("supplier.name"));
         });

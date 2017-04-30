@@ -23,6 +23,7 @@ export default Ember.Controller.extend({
     customerName: "",
     quantity: ""
   },
+
   generateBarcode: function(){
     var barcode = "";
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -56,6 +57,7 @@ export default Ember.Controller.extend({
     this.set("editMode", true);
     this.load();
   },
+
   clear: function(){
     this.set("view", true);
     if(this.get("item")) {
@@ -68,6 +70,7 @@ export default Ember.Controller.extend({
     this.set("editMode", false);
     this.set("newGroup", false);
   },
+
   load: function(){
     let controller = this;
     this.store.findAll("supplier"). then(function(suppliers){
@@ -86,6 +89,7 @@ export default Ember.Controller.extend({
       });
     });
   },
+
   actions:{
     deleteOnHold: function(onHold) {
       if(confirm("About to release stock")) {
@@ -97,6 +101,7 @@ export default Ember.Controller.extend({
         });
       }
     },
+
     onHoldAccepted: function(onHold) {
       if(confirm("About to update stock levels")) {
         let controller = this;
@@ -114,12 +119,14 @@ export default Ember.Controller.extend({
         });
       }
     },
+
     selectItemForReserve: function(item){
       let controller = this;
       this.store.find("item", item).then(function(foundItem){
         controller.set("reserve.item", foundItem);
       });
     },
+
     reserve: function(){
       let controller = this;
       if(this.get("reserve.customerName") === ""){
@@ -147,10 +154,12 @@ export default Ember.Controller.extend({
         }
       }
     },
+
     goToSupplier: function(supplier){
       this.get("suppliersController").selectedItem(supplier);
       this.transitionToRoute("suppliers");
     },
+
     orderComplete: function(){
       let controller = this;
 
@@ -161,6 +170,7 @@ export default Ember.Controller.extend({
         controller.set("application.message", "Quantity changed");
       });
     },
+
     selectGroup: function(group){
       let controller = this;
       this.get("groups").forEach(function(item){
@@ -169,6 +179,7 @@ export default Ember.Controller.extend({
         }
       });
     },
+
     selectSupplier: function(supplier){
       let controller = this;
       this.get("suppliers").forEach(function(item){
@@ -177,13 +188,16 @@ export default Ember.Controller.extend({
         }
       });
     },
+
     toggleNewGroup: function(){
       this.set("newGroup", !this.get("newGroup"));
     },
+
     new: function(){
       this.load();
       this.set("item", this.store.createRecord("item"));
     },
+
     back: function(){
       this.clear();
     },

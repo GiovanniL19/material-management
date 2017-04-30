@@ -1,0 +1,121 @@
+{{#liquid-if view class="nextPage"}}
+  <div class="row sections">
+    <div class="col-sm-12">
+      <div class="col-sm-12 card">
+        <div class="col-sm-8"><h4>Orders Awaiting Materials</h4></div>
+        <div class="col-xs-12">
+          {{#if model}}
+            <div class="rowCard row">
+              <div class="col-sm-3 details">
+                <strong>Transaction ID</strong>
+              </div>
+              <div class="col-sm-2 details">
+                <strong>Created</strong>
+              </div>
+              <div class="col-sm-2 details">
+                <strong>ETA</strong>
+              </div>
+              <div class="col-sm-3 details">
+                <strong>Bike Type</strong>
+              </div>
+              <div class="col-sm-2 options text-right">
+                <strong>Options</strong>
+              </div>
+            </div>
+          {{/if}}
+
+          {{#each model as |order|}}
+            <div class="rowCard col-md-12">
+              <div class="col-sm-3 details">
+                <a {{action "select" order}}>{{order.transactionID}}</a>
+              </div>
+              <div class="col-sm-2 details">
+                {{order.orderDateFormatted}}
+              </div>
+              <div class="col-sm-2 details">
+                {{order.etaFormatted}}
+              </div>
+              <div class="col-sm-3 details">
+                {{order.bikeType}}
+              </div>
+              <div class="col-sm-2 options text-right">
+                {{#unless order.missingItems}}
+                  <a {{action "fulfilled" order}}>Materials Fulfilled</a>
+                {{/unless}}
+              </div>
+            </div>
+          {{else}}
+            <div class="rowCard row">
+              <div class="col-sm-12 details">
+                <small>No Orders Awaiting Materials</small>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="row sections">
+    <div class="col-sm-4 hidden-xs col-md-4">
+      <div class="col-sm-12 card">
+        <h3>{{order.transactionID}}</h3>
+          <h3>{{order.formattedTotal}}</h3>
+          <p>
+            Status: <strong>{{order.status}}</strong><br>
+            Bike Type: <strong>{{order.bikeType}}</strong><br>
+            Customer: {{order.customer}}<br>
+            Parts: {{order.manifest.parts.length}}<br><br>
+            ETA: <strong>{{order.etaFormatted}}</strong><br><br>
+          </p>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-8 col-md-8">
+      <div class="col-sm-12 card nonScroll text-right right">
+        {{#unless order.missingItems}}
+            <button class="btn btn-primary" {{action "fulfilled" order}}>Order Fulfilled</button>
+        {{/unless}}
+        <button class="btn btn-default" {{action "back"}}>Back To Orders</button>
+      </div>
+        <div class="col-xs-12 card">
+          <form class="cards">
+            {{#if order.lines}}
+              <h5>{{selectedSupplier.name}}</h5>
+              <div class="rowCard row">
+                <div class="col-sm-6 details">
+                  <strong>Part</strong>
+                </div>
+                <div class="col-sm-4 details">
+                  <strong>Quantity</strong>
+                </div>
+                <div class="col-sm-2 options text-right">
+                  <strong>Acquired</strong>
+                </div>
+              </div>
+            {{/if}}
+
+            {{#each order.manifest.parts as |item|}}
+              <div class="rowCard row {{if item.checked "checked"}}">
+                <div class="col-sm-6 details" {{action "selectLine" item}}>
+                  {{item.part}}
+                </div>
+                <div class="col-sm-4 details" {{action "selectLine" item}}>
+                  {{item.quantity}}
+                </div>
+                <div class="col-sm-2 options text-right" {{action "selectLine" item}}>
+                  {{#unless (line-required this item.quantity item.liveQuantity)}}
+                    {{fa-icon "check"}}
+                  {{else}}
+                    {{fa-icon "square-o"}}
+                  {{/unless}}
+                </div>
+              </div>
+            {{else}}
+              <h5>No Parts In Manifest</h5>
+            {{/each}}
+          </form>
+        </div>
+    </div>
+  </div>
+{{/liquid-if}}

@@ -32,28 +32,30 @@
             {{/if}}
 
             {{#each sortedModel as |transaction|}}
-              <div class="rowCard row">
-                <div class="col-sm-3 details">
-                  <a {{action "select" transaction}}>{{transaction.transactionID}}</a>
+              {{#if transaction.supplierRequisition}}
+                <div class="rowCard row">
+                  <div class="col-sm-3 details">
+                    <a {{action "select" transaction}}>{{transaction.transactionID}}</a>
+                  </div>
+                  <div class="col-sm-2 details">
+                    {{transaction.orderDateFormatted}}
+                  </div>
+                  <div class="col-sm-2 details">
+                    {{transaction.etaFormatted}}
+                  </div>
+                  <div class="col-sm-3 details">
+                    {{transaction.supplier.name}}
+                  </div>
+                  <div class="col-sm-1 details text-center">
+                    {{transaction.totalHuman}}
+                  </div>
+                  <div class="col-sm-1 options text-right">
+                    {{#if transaction.canCancel}}
+                      <a {{action "delete" transaction}}>{{fa-icon "times"}}</a>
+                    {{/if}}
+                  </div>
                 </div>
-                <div class="col-sm-2 details">
-                  {{transaction.orderDateFormatted}}
-                </div>
-                <div class="col-sm-2 details">
-                  {{transaction.etaFormatted}}
-                </div>
-                <div class="col-sm-3 details">
-                  {{transaction.supplier.name}}
-                </div>
-                <div class="col-sm-1 details text-center">
-                  {{transaction.totalHuman}}
-                </div>
-                <div class="col-sm-1 options text-right">
-                  {{#if transaction.canCancel}}
-                    <a {{action "delete" transaction}}>{{fa-icon "times"}}</a>
-                  {{/if}}
-                </div>
-              </div>
+              {{/if}}
             {{else}}
               <div class="rowCard row">
                 <div class="col-sm-12 details">
@@ -131,7 +133,7 @@
         <div class="col-sm-12 card nonScroll">
           <div class="col-sm-12 right text-right">
             {{#if editMode}}<button class="btn btn-primary" {{action "goToDelivery" transaction}}>Goods Received</button>{{/if}}
-            <button class="btn btn-default" {{action "back"}}>Purchase Requisitions</button>
+            <button class="btn btn-default" {{action "back"}}>Back To Purchase Requisitions</button>
           </div>
           <div class="col-xs-12">
             <form class="cards">

@@ -91,17 +91,19 @@
               <h5>Orders</h5>
             {{/if}}
             {{#each supplier.transactionHistory as |transaction|}}
-              <div class="rowCard row">
-                <div class="col-sm-6 details">
-                  <a {{action "selectOrder" transaction}}>{{transaction.transactionID}}</a>
+              {{#if transaction.supplierRequisition}}
+                <div class="rowCard row">
+                  <div class="col-sm-6 details">
+                    <a {{action "selectOrder" transaction}}>{{transaction.transactionID}}</a>
+                  </div>
+                  <div class="col-sm-3 details">
+                    {{transaction.orderDateFormatted}}
+                  </div>
+                  <div class="col-sm-3 details text-center">
+                    {{transaction.totalHuman}}
+                  </div>
                 </div>
-                <div class="col-sm-3 details">
-                  {{transaction.orderDateFormatted}}
-                </div>
-                <div class="col-sm-3 details text-center">
-                  {{transaction.totalHuman}}
-                </div>
-              </div>
+              {{/if}}
             {{else}}
               <div class="rowCard row">
                 <div class="col-sm-12 details">
@@ -122,13 +124,13 @@
     <div class="col-sm-8 col-md-8">
       <div class="col-sm-12 card">
         <div class="col-sm-12 right text-right">
-          <button class="btn btn-default" {{action "back"}}>Suppliers</button>
+          <button class="btn btn-default" {{action "back"}}>Back To Suppliers</button>
         </div>
         <div class="col-xs-12">
           <form>
             <div class="form-group {{if supplier.name 'green'}} {{unless supplier.name 'red'}}">
-              <label for="name">Name*</label>
-              {{input type="text" class="form-control" id="name" placeholder="Name" value=supplier.name readonly=supplier.terminated}}
+              <label for="supplierName">Name*</label>
+              {{input type="text" class="form-control" id="supplierName" placeholder="Name" value=supplier.name readonly=supplier.terminated}}
             </div>
 
             <hr>

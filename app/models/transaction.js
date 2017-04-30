@@ -13,7 +13,8 @@ const {
 } = MF;
 
 export default Model.extend({
-  type: attr("string", {defaultValue: 'transaction'}),
+  type: attr("string", {defaultValue: 'Transaction'}),
+  supplierRequisition: attr("boolean", {defaultValue: true}),
   lines: fragmentArray('line-fragment', {async: true}),
   transactionID: attr("string"),
   supplier: belongsTo("supplier", {async: true}),
@@ -22,6 +23,7 @@ export default Model.extend({
   status: attr("string", {defaultValue: "PROCESSING"}),
   note: attr("string"),
   totalCost: attr("string"),
+  customer: attr("string"),
   rejectDelivery: attr("boolean"),
 
   //Computed Properties

@@ -8,7 +8,8 @@ export default Ember.Controller.extend({
     deliveries: false,
     stock: false,
     receivedGoods: false,
-    quotations: false
+    quotations: false,
+    awaitingMaterials: false
   },
   message: "",
   messageObserver: function(){

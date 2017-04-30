@@ -23,20 +23,22 @@
             {{/if}}
 
             {{#each sortedModel as |transaction|}}
-              <div class="rowCard row">
-                <div class="col-sm-3 details">
-                  <a {{action "select" transaction}}>{{transaction.transactionID}}</a>
+              {{#if transaction.supplierRequisition}}
+                <div class="rowCard row">
+                  <div class="col-sm-3 details">
+                    <a {{action "select" transaction}}>{{transaction.transactionID}}</a>
+                  </div>
+                  <div class="col-sm-3 details">
+                    {{transaction.etaFormatted}}
+                  </div>
+                  <div class="col-sm-3 details">
+                    {{transaction.supplier.name}}
+                  </div>
+                  <div class="col-sm-3 options text-right">
+                    {{transaction.status}}
+                  </div>
                 </div>
-                <div class="col-sm-3 details">
-                  {{transaction.etaFormatted}}
-                </div>
-                <div class="col-sm-3 details">
-                  {{transaction.supplier.name}}
-                </div>
-                <div class="col-sm-3 options text-right">
-                  {{transaction.status}}
-                </div>
-              </div>
+              {{/if}}
             {{else}}
               <div class="rowCard row">
                 <div class="col-sm-12 details">
@@ -119,7 +121,7 @@
           </div>
           <div class="col-sm-6 right text-right">
             <button class="btn btn-primary" {{action "goToOrder" transaction}}>Go To Requisition</button>
-            <button class="btn btn-default" {{action "back"}}>Deliveries</button>
+            <button class="btn btn-default" {{action "back"}}>Back To Deliveries</button>
           </div>
           <div class="col-xs-12">
             <form class="cards">
