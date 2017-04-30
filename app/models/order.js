@@ -13,7 +13,7 @@ export default Model.extend({
   status: attr("string"),
   dateCreated: attr("number"),
   eta: attr("number"),
-  customer: attr("string"),
+  customer: belongsTo("customer"),
   manifest: belongsTo('manifest', {async: true}),
 
   orderDateFormatted: function () {
