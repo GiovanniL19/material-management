@@ -72,11 +72,16 @@
     </div>
 
     <div class="col-xs-12 col-sm-8 col-md-8">
-      <div class="col-sm-12 card nonScroll text-right right">
-        {{#unless order.missingItems}}
+      <div class="col-sm-12 card nonScroll">
+        <div class="col-sm-4 col-md-4 text-left left">
+          <h4>Order Manifest</h4>
+        </div>
+        <div class="col-md-8 col-xm-8 text-right right">
+          {{#unless order.missingItems}}
             <button class="btn btn-primary" {{action "fulfilled" order}}>Order Fulfilled</button>
-        {{/unless}}
-        <button class="btn btn-default" {{action "back"}}>Back To Orders</button>
+          {{/unless}}
+          <button class="btn btn-default" {{action "back"}}>Back To Orders</button>
+        </div>
       </div>
         <div class="col-xs-12 card">
           <form class="cards">
