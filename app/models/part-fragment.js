@@ -3,11 +3,12 @@ import MF from 'model-fragments';
 
 
 const {
-  attr
+  attr,
+  belongsTo
 } = DS;
 
 export default MF.Fragment.extend({
   part: attr("string"),
   quantity: attr("number"),
-  item: attr("string")
+  item: belongsTo("item", {async: true})
 });

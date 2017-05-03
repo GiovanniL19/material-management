@@ -7,6 +7,11 @@ export default Ember.Route.extend({
   setupController: function(controller, model) {
     document.title = "Orders Awaiting Materials";
     controller.set("model", model);
+
+    controller.store.findAll('item').then(function(items){
+      controller.set("items", items);
+    });
+
     controller.set("application.page",{
       dashboard: false,
       orders: false,

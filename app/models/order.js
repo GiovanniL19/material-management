@@ -15,6 +15,7 @@ export default Model.extend({
   eta: attr("number"),
   customer: belongsTo("customer"),
   manifest: belongsTo('manifest', {async: true}),
+  forWeek: attr("number"),
 
   orderDateFormatted: function () {
     return moment.unix(this.get("dateCreated")).format("DD/MM/YYYY");

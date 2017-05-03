@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
 
   view: true,
   order: null,
+  items: [],
 
   clear: function(){
     this.set("view", true);
@@ -28,12 +29,12 @@ export default Ember.Controller.extend({
       order.set("missingItems", false);
       order.get("manifest").then(function(manifest){
         manifest.get("parts").forEach(function(part){
-          controller.store.query("item", {itemName: part.get("part")}).then(function(items){
-            if(items.get("firstObject.quantity") !== undefined) {
-              if(!(items.get("firstObject.quantity") >= part.get("quantity"))) {
+          controller.get("items").forEach(function(item){
+            if(item.get("quantity") !== undefined) {
+              if(!(item.get("quantity") >= part.get("quantity"))) {
                order.set("missingItems", true);
               }
-              part.set("liveQuantity", items.get("firstObject.quantity"));
+              part.set("liveQuantity", item.get("quantity"));
             }else{
               order.set("missingItems", true);
             }
@@ -41,7 +42,7 @@ export default Ember.Controller.extend({
         });
       });
     });
-  }.observes("model", "application.page"),
+  }.observes("model", "application.page", "items"),
 
   actions: {
     fulfilled(order){
@@ -52,7 +53,7 @@ export default Ember.Controller.extend({
 
         controller.set("application.message", "Updating Material Quantities");
         order.get("manifest.parts").forEach(function(part){
-          controller.store.findRecord("item", part.get("item")).then(function(item){
+          controller.get("items").forEach(function(item){
             item.set("warehouseQuantity", item.get("warehouseQuantity") - part.get("quantity"));
             item.save();
           });
